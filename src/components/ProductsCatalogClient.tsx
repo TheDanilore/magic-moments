@@ -34,6 +34,8 @@ const QUICK_THEMES = [
   "Aniversario",
   "Spotify",
   "Girasoles",
+  "Peluches",
+  "Chocolates",
 ] as const
 
 const PRICE_RANGES: Array<{
@@ -170,7 +172,7 @@ export function ProductsCatalogClient({
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Buscar cajas, cuadros, ramos..."
+                  placeholder="Buscar cajas, peluches, chocolates, cuadros..."
                   aria-label="Buscar productos"
                   className="h-12 w-full rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] pr-4 pl-10 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]"
                 />

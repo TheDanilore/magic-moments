@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Instagram, MapPin, MessageCircle } from "lucide-react"
+import { productCategories } from "@/data/catalog"
 import { buildWhatsAppUrl, getWhatsAppDisplayPhone } from "@/lib/whatsapp"
 
 export default function Footer() {
@@ -69,54 +70,16 @@ export default function Footer() {
               Categorías
             </h3>
             <ul className="space-y-1 text-sm">
-              <li>
-                <Link
-                  href="/productos?categoria=cajas-sorpresa"
-                  className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
-                >
-                  Cajas Personalizadas
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/productos?categoria=cuadros-3d-led"
-                  className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
-                >
-                  Cuadros 3D LED
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/productos?categoria=ramos-tematicos"
-                  className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
-                >
-                  Ramos Temáticos
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/productos?categoria=llaveros"
-                  className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
-                >
-                  Llaveros Acrílicos
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/productos?categoria=tarjetas"
-                  className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
-                >
-                  Tarjetas 3D
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/productos?categoria=kits-regalo"
-                  className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
-                >
-                  Kits de Regalo
-                </Link>
-              </li>
+              {productCategories.map((category) => (
+                <li key={category.slug}>
+                  <Link
+                    href={`/productos?categoria=${category.slug}`}
+                    className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
+                  >
+                    {category.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 

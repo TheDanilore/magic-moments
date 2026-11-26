@@ -13,7 +13,7 @@ export default function ProductCategories() {
               Explora por Categoría
             </h2>
             <p className="text-pretty mt-1.5 text-sm text-[var(--text-secondary)] sm:text-base">
-              Las 6 líneas de nuestro taller en Chimbote, personalizables en color, fotos y dedicatoria.
+              Las {productCategories.length} líneas de nuestro taller en Chimbote, personalizables en color, fotos y dedicatoria.
             </p>
           </div>
           <Link
@@ -25,7 +25,7 @@ export default function ProductCategories() {
           </Link>
         </div>
 
-        <div className="mt-6 grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+        <div className="mt-6 grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
           {productCategories.map((category) => {
             const count = products.filter((p) => p.categorySlug === category.slug).length
             return (
@@ -41,7 +41,7 @@ export default function ProductCategories() {
                       fill
                       loading="lazy"
                       decoding="async"
-                      sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 16vw"
+                      sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 20vw"
                       className="studio-photo-adapt object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                   </div>

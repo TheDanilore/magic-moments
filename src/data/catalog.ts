@@ -37,6 +37,24 @@ export const productCategories: ProductCategory[] = [
     subtitle: "Conjuntos curados con taza, vela, recuerdos y dedicatoria.",
     image: "/images/prod-kit-amistad.jpg",
   },
+  {
+    slug: "peluches",
+    name: "Peluches",
+    subtitle: "Ositos, conejitos y pingüinos de felpa suave para regalar o sumar a tu box.",
+    image: "/images/productos/detallia/oso-teddy.jpg",
+  },
+  {
+    slug: "chocolates",
+    name: "Chocolates & Dulces",
+    subtitle: "Ferrero Rocher, trufas suizas Lindt Lindor, Mini Nutella y barras belgas.",
+    image: "/images/productos/detallia/ferrero-rocher.jpg",
+  },
+  {
+    slug: "accesorios",
+    name: "Accesorios & Extras",
+    subtitle: "Guirnaldas Micro-LED cálidas y mini ramilletes de flores preservadas.",
+    image: "/images/productos/detallia/guirnalda-led.jpg",
+  },
 ]
 
 export const products: Product[] = [
@@ -802,6 +820,631 @@ export const products: Product[] = [
       colors: ["Azul Marino", "Champagne", "Frambuesa"],
       sizes: ["Estándar", "Deluxe"],
       themes: ["Graduación", "Logros", "Profesional"],
+    },
+    reviews: [],
+  },
+  {
+    id: 22,
+    sku: "MM-CS-022",
+    name: "Box Romance Eterno & Ensueño",
+    subtitle: "Oso Teddy con satín · Ferrero Rocher x8, carta lacrada y luces LED",
+    badge: "Top Regalo",
+    description:
+      "La combinación definitiva para celebrar aniversarios y fechas inolvidables, con atmósfera íntima y luminosa al destapar.",
+    longDescription: `
+      <p>Diseñada con una atmósfera íntima y luminosa al destapar. Cada elemento está empacado con viruta perlada y aroma floral para sorprender desde el primer instante.</p>
+      <ul>
+        <li>Caja Rosa Nube con lazo sedoso</li>
+        <li>Oso Teddy Classic con Satín</li>
+        <li>Ferrero Rocher Selección (x8)</li>
+        <li>Carta Pergamino con Lacre de Cera</li>
+        <li>Luces Guirnalda Micro-LED</li>
+      </ul>
+    `,
+    priceCents: 7900,
+    compareAtCents: 8900,
+    stock: 10,
+    weightGrams: 980,
+    dimensionsCm: { length: 28, width: 22, height: 12 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    image: "/images/productos/box-romance-eterno.jpg",
+    images: ["/images/productos/box-romance-eterno.jpg"],
+    options: {
+      colors: ["Rosa Nube", "Dorado Champagne", "Medianoche Velvet"],
+      sizes: ["Edición Clásica", "Edición Deluxe + Flores"],
+      themes: ["Aniversario & Amor", "San Valentín", "Cumpleaños"],
+    },
+    reviews: [],
+  },
+  {
+    id: 23,
+    sku: "MM-CS-023",
+    name: "Box Golden Sweet Euphoria",
+    subtitle: "Trufas Lindt Lindor · Ferrero x8, llavero Spotify y tarjeta foil",
+    badge: "Gourmet Deluxe",
+    description:
+      "Para amantes del buen chocolate, los destellos dorados y los detalles modernos con toque musical.",
+    longDescription: `
+      <p>Una explosión de texturas crujientes y dulces finos, acompañada de una pieza musical inolvidable en empaque champagne.</p>
+      <ul>
+        <li>Caja Champagne con lazo ámbar</li>
+        <li>Trufas Suizas Lindt Lindor</li>
+        <li>Ferrero Rocher Selección (x8)</li>
+        <li>Llavero Acrílico Spotify con canción</li>
+        <li>Tarjeta Floral con detalles Oro Foil</li>
+      </ul>
+    `,
+    priceCents: 7200,
+    compareAtCents: 8200,
+    stock: 10,
+    weightGrams: 920,
+    dimensionsCm: { length: 28, width: 20, height: 11 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    image: "/images/productos/box-golden-sweet.jpg",
+    images: ["/images/productos/box-golden-sweet.jpg"],
+    options: {
+      colors: ["Dorado Champagne", "Rosa Nube", "Medianoche Velvet"],
+      sizes: ["Edición Gourmet", "Edición Extra Dulces"],
+      themes: ["Cumpleaños & Dulces", "Aniversario", "Agradecimiento"],
+    },
+    reviews: [],
+  },
+  {
+    id: 24,
+    sku: "MM-CS-024",
+    name: "Box Medianoche Velvet & Memorias",
+    subtitle: "Cuadro Spotify + foto · Conejito vainilla, Mini Nutella y carta",
+    badge: "Exclusivo",
+    description:
+      "Elegancia sobria, sofisticada y con alto impacto visual en tonos profundos y dorados.",
+    longDescription: `
+      <p>Un contraste imponente de tonos profundos y dorados, ideal para sorprender a quien aprecia los acabados de alta gama.</p>
+      <ul>
+        <li>Caja Medianoche Velvet con lazo dorado</li>
+        <li>Cuadro Vidrio Código Spotify + Foto</li>
+        <li>Conejito Pastel Orejitas Vainilla</li>
+        <li>Mini Nutella con Cucharita Dorada</li>
+        <li>Carta Caligrafiada personalizada</li>
+      </ul>
+    `,
+    priceCents: 8500,
+    compareAtCents: 9600,
+    stock: 8,
+    weightGrams: 1050,
+    dimensionsCm: { length: 29, width: 22, height: 12 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    image: "/images/productos/box-medianoche-velvet.jpg",
+    images: ["/images/productos/box-medianoche-velvet.jpg"],
+    options: {
+      colors: ["Medianoche Velvet", "Negro & Dorado", "Dorado Champagne"],
+      sizes: ["Edición Velvet", "Edición Velvet + Micro-LED"],
+      themes: ["Hitos Especiales", "Aniversario", "Cumpleaños"],
+    },
+    reviews: [],
+  },
+  {
+    id: 25,
+    sku: "MM-CS-025",
+    name: "Box Chic Mini Detalle Dulce",
+    subtitle: "Flores preservadas · Ferrero x4 y tarjeta dedicatoria caligrafiada",
+    badge: "Express",
+    description:
+      "El regalo perfecto cuando buscas algo delicado, emotivo y accesible en formato compacto.",
+    longDescription: `
+      <p>Práctica, hermosa y pensada para decir «estoy pensando en ti» con delicadeza absoluta.</p>
+      <ul>
+        <li>Caja Compacta Rosa Pastel</li>
+        <li>Mini Ramillete Flores Preservadas</li>
+        <li>Ferrero Rocher Selección (x4)</li>
+        <li>Tarjeta Dedicatoria caligrafiada</li>
+      </ul>
+    `,
+    priceCents: 4500,
+    compareAtCents: 5200,
+    stock: 16,
+    weightGrams: 480,
+    dimensionsCm: { length: 20, width: 15, height: 10 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    image: "/images/productos/box-chic-mini.jpg",
+    images: ["/images/productos/box-chic-mini.jpg"],
+    options: {
+      colors: ["Rosa Pastel", "Rosa Nube", "Crema & Dorado"],
+      sizes: ["Mini Compacta", "Mini + Llavero"],
+      themes: ["Sorpresa Espontánea", "Amistad", "Cumpleaños", "Amor"],
+    },
+    reviews: [],
+  },
+  {
+    id: 26,
+    sku: "MM-PL-026",
+    name: "Oso Teddy con Lazo de Satín",
+    subtitle: "Peluche hipoalergénico de 24 cm · Suave con cinta sedosa",
+    badge: "Más Vendido",
+    description:
+      "Peluche hipoalergénico supersuave de 24 cm con lazo de cinta sedosa, ideal para regalar solo o sumar a tu box.",
+    longDescription: `
+      <p>Un clásico tierno y abrazable para acompañar cartas, chocolates o cajas sorpresa personalizadas.</p>
+      <ul>
+        <li>Felpa hipoalergénica extrasuave de 24 cm de altura</li>
+        <li>Lazo de satín sedoso en cuello con acabado artesanal</li>
+        <li>Disponible individual o empacado en cajita de regalo</li>
+      </ul>
+    `,
+    priceCents: 3500,
+    stock: 18,
+    weightGrams: 280,
+    dimensionsCm: { length: 24, width: 15, height: 11 },
+    category: "Peluches",
+    categorySlug: "peluches",
+    image: "/images/productos/detallia/oso-teddy.jpg",
+    images: ["/images/productos/detallia/oso-teddy.jpg"],
+    options: {
+      colors: ["Miel", "Crema", "Rosa Pastel"],
+      sizes: ["24 cm (Clásico)", "24 cm + Cajita Regalo"],
+      themes: ["Amor & Aniversario", "Cumpleaños", "Complemento Box"],
+    },
+    reviews: [],
+  },
+  {
+    id: 27,
+    sku: "MM-PL-027",
+    name: "Conejito Pastel Orejitas",
+    subtitle: "Felpa premium tono vainilla · Bufanda tejida artesanal",
+    badge: "Tierno",
+    description:
+      "Conejito de felpa premium en tono vainilla con orejitas largas y bufanda tejida pastel.",
+    longDescription: `
+      <p>Dulce y delicado, perfecto para detalles románticos, cumpleaños o como protagonista de una caja personalizada.</p>
+      <ul>
+        <li>Textura aterciopelada en tono vainilla suave</li>
+        <li>Orejitas caídas con interior rosa pastel y bufanda tejida</li>
+        <li>Opción con tarjeta dedicatoria personalizada</li>
+      </ul>
+    `,
+    priceCents: 3200,
+    stock: 16,
+    weightGrams: 240,
+    dimensionsCm: { length: 20, width: 14, height: 10 },
+    category: "Peluches",
+    categorySlug: "peluches",
+    image: "/images/productos/detallia/conejito-pastel.jpg",
+    images: ["/images/productos/detallia/conejito-pastel.jpg"],
+    options: {
+      colors: ["Vainilla", "Rosa Pastel", "Crema"],
+      sizes: ["Estándar (20 cm)", "Con Dedicatoria"],
+      themes: ["Tierno", "Cumpleaños", "Amistad", "Complemento Box"],
+    },
+    reviews: [],
+  },
+  {
+    id: 28,
+    sku: "MM-PL-028",
+    name: "Pingüino «Love Hug»",
+    subtitle: "Peluche suave · Corazón afelpado entre las aletas",
+    description:
+      "Tierno peluche de pingüino sosteniendo un pequeño corazón afelpado entre sus aletas.",
+    longDescription: `
+      <p>Un detalle encantador para expresar cariño sin palabras, ideal para parejas, amigos o como complemento en boxes.</p>
+      <ul>
+        <li>Peluche compacto de 18 cm con felpa suave al tacto</li>
+        <li>Corazón rojo bordado integrado entre sus aletas</li>
+        <li>Listo para entregar o incluir en tu caja personalizada</li>
+      </ul>
+    `,
+    priceCents: 2900,
+    stock: 16,
+    weightGrams: 220,
+    dimensionsCm: { length: 18, width: 13, height: 10 },
+    category: "Peluches",
+    categorySlug: "peluches",
+    image: "/images/productos/detallia/pinguino-love-hug.jpg",
+    images: ["/images/productos/detallia/pinguino-love-hug.jpg"],
+    options: {
+      colors: ["Celeste Hielo", "Rosa Pastel", "Negro"],
+      sizes: ["Estándar (18 cm)", "Con Dedicatoria"],
+      themes: ["Amor", "Amistad", "Complemento Box"],
+    },
+    reviews: [],
+  },
+  {
+    id: 29,
+    sku: "MM-CH-029",
+    name: "Ferrero Rocher Selección (x8)",
+    subtitle: "Bombones italianos · Avellana entera y baño dorado",
+    badge: "Clásico VIP",
+    description:
+      "Bombones italianos crocantes con avellana entera, relleno cremoso y baño de chocolate con leche.",
+    longDescription: `
+      <p>El acompañamiento gourmet preferido para elevar cualquier caja sorpresa, ramo o dedicatoria especial.</p>
+      <ul>
+        <li>Estuche original de 8 bombones Ferrero Rocher</li>
+        <li>Opcional con cinta satinada y tarjetita dedicatoria</li>
+        <li>Ideal para combinar con peluches, cuadros LED o flores</li>
+      </ul>
+    `,
+    priceCents: 2800,
+    stock: 24,
+    weightGrams: 200,
+    dimensionsCm: { length: 15, width: 10, height: 6 },
+    category: "Chocolates & Dulces",
+    categorySlug: "chocolates",
+    image: "/images/productos/detallia/ferrero-rocher.jpg",
+    images: ["/images/productos/detallia/ferrero-rocher.jpg"],
+    options: {
+      colors: ["Dorado", "Lazo Rojo", "Lazo Rosa"],
+      sizes: ["Caja x8 Bombones", "Caja x8 + Lazo y Tarjeta"],
+      themes: ["Gourmet", "Aniversario", "Cumpleaños", "Complemento Box"],
+    },
+    reviews: [],
+  },
+  {
+    id: 30,
+    sku: "MM-CH-030",
+    name: "Trufas Suizas Lindt Lindor",
+    subtitle: "Corazón x6 trufas · Chocolate con leche y centro fundente",
+    badge: "Gourmet",
+    description:
+      "Corazón con 6 trufas de chocolate suizo con leche y centro suavemente fundente.",
+    longDescription: `
+      <p>Presentación romántica en estuche corazón con la inconfundible textura cremosa de las trufas suizas Lindt Lindor.</p>
+      <ul>
+        <li>6 trufas Lindt Lindor envueltas individualmente</li>
+        <li>Estuche metálico o rígido en forma de corazón</li>
+        <li>Opción con tarjeta dedicatoria personalizada</li>
+      </ul>
+    `,
+    priceCents: 3200,
+    stock: 20,
+    weightGrams: 180,
+    dimensionsCm: { length: 14, width: 10, height: 5 },
+    category: "Chocolates & Dulces",
+    categorySlug: "chocolates",
+    image: "/images/productos/detallia/trufas-lindor.jpg",
+    images: ["/images/productos/detallia/trufas-lindor.jpg"],
+    options: {
+      colors: ["Rojo Pasión", "Dorado", "Rosa Pétalo"],
+      sizes: ["Corazón x6 Trufas", "Corazón x6 + Dedicatoria"],
+      themes: ["Gourmet", "Amor", "San Valentín", "Complemento Box"],
+    },
+    reviews: [],
+  },
+  {
+    id: 31,
+    sku: "MM-CH-031",
+    name: "Mini Nutella + Cucharita Dorada",
+    subtitle: "Frasco decorativo 140 g · Mini cuchara metálica dorada",
+    description:
+      "Frasco decorativo de Mini Nutella de 140 g acompañado de mini cuchara metálica dorada con lazo.",
+    longDescription: `
+      <p>Un detalle dulce, coqueto y fotogénico para sumar a cajas personalizadas o entregar como antojo especial.</p>
+      <ul>
+        <li>Frasco original de Nutella de 140 g</li>
+        <li>Incluye cucharita metálica en acabado dorado</li>
+        <li>Disponible con lazo satinado y etiqueta personalizada</li>
+      </ul>
+    `,
+    priceCents: 1800,
+    stock: 25,
+    weightGrams: 240,
+    dimensionsCm: { length: 12, width: 9, height: 9 },
+    category: "Chocolates & Dulces",
+    categorySlug: "chocolates",
+    image: "/images/productos/detallia/mini-nutella.jpg",
+    images: ["/images/productos/detallia/mini-nutella.jpg"],
+    options: {
+      colors: ["Cacao", "Dorado", "Lazo Rojo"],
+      sizes: ["Frasco 140 g + Cucharita", "Con Lazo y Etiqueta"],
+      themes: ["Detalle Dulce", "Cumpleaños", "Complemento Box"],
+    },
+    reviews: [],
+  },
+  {
+    id: 32,
+    sku: "MM-CH-032",
+    name: "Barra Belga Frutos Rojos",
+    subtitle: "Chocolate amargo 70% artesanal · Arándanos y pistachos",
+    description:
+      "Barra de chocolate amargo 70% artesanal con arándanos deshidratados y pistachos tostados.",
+    longDescription: `
+      <p>Para quienes prefieren el cacao intenso equilibrado con acidez frutal y crocante de frutos secos.</p>
+      <ul>
+        <li>Chocolate artesanal 70% cacao de perfil intenso</li>
+        <li>Topping de arándanos rojos y pistachos tostados</li>
+        <li>Presentación en envoltura elegante lista para regalar</li>
+      </ul>
+    `,
+    priceCents: 1900,
+    stock: 22,
+    weightGrams: 130,
+    dimensionsCm: { length: 15, width: 8, height: 2 },
+    category: "Chocolates & Dulces",
+    categorySlug: "chocolates",
+    image: "/images/productos/detallia/barra-belga.jpg",
+    images: ["/images/productos/detallia/barra-belga.jpg"],
+    options: {
+      colors: ["Vino Frambuesa", "Cacao", "Dorado"],
+      sizes: ["Barra 70% Cacao", "Pack 2 Barras"],
+      themes: ["Gourmet Artesanal", "Agradecimiento", "Complemento Box"],
+    },
+    reviews: [],
+  },
+  {
+    id: 33,
+    sku: "MM-CL-033",
+    name: "Mini Marco Acrílico Polaroid",
+    subtitle: "Marco magnético transparente · Impresión de foto tipo Polaroid",
+    badge: "Personalizable",
+    description:
+      "Marco magnético transparente con impresión de tu fotografía favorita en formato tipo Polaroid.",
+    longDescription: `
+      <p>Exhibe su recuerdo favorito en escritorio o velador con un marco acrílico cristalino y cierre magnético.</p>
+      <ul>
+        <li>Bloque acrílico transparente de bordes pulidos</li>
+        <li>Impresión fotográfica nítida estilo Polaroid con frase corta</li>
+        <li>Opción con set de 3 fotografías intercambiables</li>
+      </ul>
+    `,
+    priceCents: 2200,
+    stock: 24,
+    weightGrams: 160,
+    dimensionsCm: { length: 14, width: 10, height: 3 },
+    category: "Cuadros 3D LED",
+    categorySlug: "cuadros-3d-led",
+    image: "/images/productos/detallia/marco-polaroid.jpg",
+    images: ["/images/productos/detallia/marco-polaroid.jpg"],
+    options: {
+      colors: ["Transparente", "Blanco", "Rosa Pastel"],
+      sizes: ["Marco Magnético + 1 Foto", "Marco + Set 3 Fotos"],
+      themes: ["Foto Polaroid", "Pareja", "Amistad", "Recuerdo"],
+    },
+    reviews: [],
+  },
+  {
+    id: 34,
+    sku: "MM-CL-034",
+    name: "Cuadro Vidrio con Código Spotify",
+    subtitle: "Placa acrílica minimalista · Foto y código escaneable de canción",
+    badge: "Tendencia",
+    description:
+      "Placa acrílica de diseño minimalista con tu fotografía y código escaneable de tu canción especial en Spotify.",
+    longDescription: `
+      <p>Inmortaliza «nuestra canción» junto a su foto favorita sobre placa acrílica cristalina con base estable.</p>
+      <ul>
+        <li>Impresión en alta definición con título, artista y código Spotify real</li>
+        <li>Incluye base de apoyo (opción con base de luz LED cálida)</li>
+        <li>Empaque protegido para entrega local y envíos por Shalom</li>
+      </ul>
+    `,
+    priceCents: 3200,
+    stock: 20,
+    weightGrams: 260,
+    dimensionsCm: { length: 19, width: 14, height: 4 },
+    category: "Cuadros 3D LED",
+    categorySlug: "cuadros-3d-led",
+    image: "/images/productos/detallia/cuadro-spotify.jpg",
+    images: ["/images/productos/detallia/cuadro-spotify.jpg"],
+    options: {
+      colors: ["Transparente", "Negro", "Madera Natural"],
+      sizes: ["Placa Acrílica + Base", "Placa + Base LED Cálida"],
+      themes: ["Código Spotify + Foto", "Aniversario", "Nuestra Canción"],
+    },
+    reviews: [],
+  },
+  {
+    id: 35,
+    sku: "MM-CL-035",
+    name: "Mini Lienzo con Caballete de Madera",
+    subtitle: "Lienzo rústico 10×15 cm · Ilustración artística o frase personalizada",
+    description:
+      "Lienzo rústico con caballete de madera natural, ilustración artística o frase personalizada.",
+    longDescription: `
+      <p>Un detalle decorativo cálido y artesanal para escritorio o mesa de noche, personalizado con frase o dibujo.</p>
+      <ul>
+        <li>Caballete plegable en madera natural lijada</li>
+        <li>Mini lienzo de algodón de 10 × 15 cm</li>
+        <li>Personalizable con frase, fecha o ilustración minimalista</li>
+      </ul>
+    `,
+    priceCents: 2500,
+    stock: 18,
+    weightGrams: 180,
+    dimensionsCm: { length: 15, width: 10, height: 4 },
+    category: "Cuadros 3D LED",
+    categorySlug: "cuadros-3d-led",
+    image: "/images/productos/detallia/mini-lienzo.jpg",
+    images: ["/images/productos/detallia/mini-lienzo.jpg"],
+    options: {
+      colors: ["Madera Natural", "Crema", "Rosa Pastel"],
+      sizes: ["Mini Lienzo 10×15 cm", "Lienzo + Dedicatoria"],
+      themes: ["Ilustración Personalizada", "Frase Especial", "Cumpleaños"],
+    },
+    reviews: [],
+  },
+  {
+    id: 36,
+    sku: "MM-LL-036",
+    name: "Llavero Acrílico Spotify Bar",
+    subtitle: "Grabado láser · Fecha especial, iniciales o código de música",
+    badge: "Favorito",
+    description:
+      "Llavero acrílico resistente con grabado de fecha especial, iniciales o código escaneable de canción.",
+    longDescription: `
+      <p>Compacto, ligero y resistente para llevar todos los días esa canción o fecha que los conecta.</p>
+      <ul>
+        <li>Barra acrílica de alta transparencia con argolla metálica</li>
+        <li>Grabado preciso con código Spotify, fecha o iniciales</li>
+        <li>Disponible por unidad, lote de 6 o docena (12+ unidades)</li>
+      </ul>
+    `,
+    priceCents: 1400,
+    stock: 50,
+    weightGrams: 35,
+    dimensionsCm: { length: 9, width: 5, height: 2 },
+    category: "Llaveros Acrílicos",
+    categorySlug: "llaveros",
+    image: "/images/productos/detallia/llavero-spotify-bar.jpg",
+    images: ["/images/productos/detallia/llavero-spotify-bar.jpg"],
+    options: {
+      colors: ["Transparente", "Negro", "Lazo Azul Rey", "Lazo Rojo"],
+      sizes: ["Individual Grabado Láser", "Lote 6 u.", "Docena 12+ u."],
+      themes: ["Código Spotify", "Fecha Especial", "Iniciales"],
+    },
+    reviews: [],
+  },
+  {
+    id: 37,
+    sku: "MM-LL-037",
+    name: "Llavero Pareja de Corazones Imán",
+    subtitle: "Set de 2 llaveros · Se atraen magnéticamente al juntarse",
+    badge: "Magnético",
+    description:
+      "Set de dos llaveros complementarios que se atraen magnéticamente al acercarlos.",
+    longDescription: `
+      <p>Pensados para compartir entre pareja o mejores amigos: cada mitad lleva su propio imán para unirse al estar juntos.</p>
+      <ul>
+        <li>Set de 2 llaveros con dijes magnéticos y argollas reforzadas</li>
+        <li>Acabado brillante resistente al uso diario</li>
+        <li>Opción con tarjeta dedicatoria y bolsita kraft Magic Moments</li>
+      </ul>
+    `,
+    priceCents: 1800,
+    stock: 35,
+    weightGrams: 55,
+    dimensionsCm: { length: 10, width: 7, height: 2 },
+    category: "Llaveros Acrílicos",
+    categorySlug: "llaveros",
+    image: "/images/productos/detallia/llavero-corazones-iman.jpg",
+    images: ["/images/productos/detallia/llavero-corazones-iman.jpg"],
+    options: {
+      colors: ["Frambuesa", "Negro", "Plateado", "Dorado"],
+      sizes: ["Set 2 Llaveros Imán", "Set + Tarjeta y Bolsa Kraft"],
+      themes: ["Pareja", "Mejores Amigos", "Aniversario"],
+    },
+    reviews: [],
+  },
+  {
+    id: 38,
+    sku: "MM-TJ-038",
+    name: "Carta Pergamino con Sello de Lacre",
+    subtitle: "Sobre texturizado · Sello de cera auténtica y caligrafía artesanal",
+    badge: "Elegante",
+    description:
+      "Sobre de papel texturizado sellado con lacre de cera auténtica y carta caligrafiada artesanal.",
+    longDescription: `
+      <p>El toque romántico clásico para acompañar cualquier caja, ramo o cuadro con tus propias palabras.</p>
+      <ul>
+        <li>Sobre artesanal en papel pergamino o algodón crema</li>
+        <li>Sello de lacre en cera carmesí estampado a mano</li>
+        <li>Carta interior impresa o caligrafiada con tu dedicatoria</li>
+      </ul>
+    `,
+    priceCents: 1200,
+    stock: 40,
+    weightGrams: 45,
+    dimensionsCm: { length: 15, width: 10, height: 1 },
+    category: "Tarjetas 3D",
+    categorySlug: "tarjetas",
+    image: "/images/productos/detallia/carta-lacre.jpg",
+    images: ["/images/productos/detallia/carta-lacre.jpg"],
+    options: {
+      colors: ["Crema", "Marfil", "Rojo Carmesí", "Rosa Pétalo"],
+      sizes: ["Carta + Sobre Sellado", "Pack 6 Sobres"],
+      themes: ["Aniversario", "Amor", "Caligrafía Artesanal"],
+    },
+    reviews: [],
+  },
+  {
+    id: 39,
+    sku: "MM-TJ-039",
+    name: "Tarjeta Floral «Love Notes» Oro Foil",
+    subtitle: "Tarjeta doble · Relieve botánico y tipografía dorada",
+    description:
+      "Tarjeta doble con diseño floral delicado y tipografía estampada en relieve dorado.",
+    longDescription: `
+      <p>Elegante y luminosa, ideal para felicitar cumpleaños, agradecer o añadir un mensaje especial en tu pedido.</p>
+      <ul>
+        <li>Cartulina marfil de alto gramaje con detalles dorados</li>
+        <li>Espacio interior amplio para dedicatoria personalizada</li>
+        <li>Incluye sobre combinado listo para entregar</li>
+      </ul>
+    `,
+    priceCents: 1000,
+    stock: 40,
+    weightGrams: 35,
+    dimensionsCm: { length: 14, width: 10, height: 1 },
+    category: "Tarjetas 3D",
+    categorySlug: "tarjetas",
+    image: "/images/productos/detallia/tarjeta-love-notes.jpg",
+    images: ["/images/productos/detallia/tarjeta-love-notes.jpg"],
+    options: {
+      colors: ["Marfil", "Dorado", "Rosa Pastel"],
+      sizes: ["Tarjeta Doble + Sobre", "Pack 6 Tarjetas"],
+      themes: ["Love Notes", "Cumpleaños", "Agradecimiento"],
+    },
+    reviews: [],
+  },
+  {
+    id: 40,
+    sku: "MM-AC-040",
+    name: "Guirnalda Micro-LED Cálida",
+    subtitle: "Luces de hadas · Interruptor oculto para iluminar cajas y ramos",
+    badge: "Efecto Wow",
+    description:
+      "Luces de hadas en alambre flexible con interruptor oculto para iluminar el interior de la caja o ramo al abrir.",
+    longDescription: `
+      <p>Transforma la apertura de cualquier regalo en un momento mágico con iluminación cálida envolvente.</p>
+      <ul>
+        <li>Alambre de cobre moldeable con micro-focos LED de luz cálida</li>
+        <li>Incluye pilas instaladas y switch discreto de encendido</li>
+        <li>Ideal como extra para boxes personalizados, cuadros o ramos</li>
+      </ul>
+    `,
+    priceCents: 1200,
+    stock: 30,
+    weightGrams: 50,
+    dimensionsCm: { length: 10, width: 8, height: 3 },
+    category: "Accesorios & Extras",
+    categorySlug: "accesorios",
+    image: "/images/productos/detallia/guirnalda-led.jpg",
+    images: ["/images/productos/detallia/guirnalda-led.jpg"],
+    options: {
+      colors: ["Ámbar Cálido", "Blanco", "Rosa Suave"],
+      sizes: ["1 metro (Interior Box)", "2 metros (Cuadros & Ramos)"],
+      themes: ["Iluminación Box", "Efecto Sorpresa", "Complemento Regalo"],
+    },
+    reviews: [],
+  },
+  {
+    id: 41,
+    sku: "MM-AC-041",
+    name: "Mini Ramillete Flores Preservadas",
+    subtitle: "Bouquet miniatura · Rosas secas y paniculata de larga duración",
+    description:
+      "Bouquet miniatura artesanal con rosas preservadas, paniculata blanca y lazo natural que duran años.",
+    longDescription: `
+      <p>Un toque botánico natural que conserva su encanto sin necesidad de agua, perfecto para acompañar boxes o tarjetas.</p>
+      <ul>
+        <li>Flores naturales preservadas combinadas a mano</li>
+        <li>Envoltura kraft/papel suave con lazo de yute o satín</li>
+        <li>Aroma delicado y tamaño ideal para complementar regalos</li>
+      </ul>
+    `,
+    priceCents: 1600,
+    stock: 25,
+    weightGrams: 90,
+    dimensionsCm: { length: 15, width: 10, height: 6 },
+    category: "Accesorios & Extras",
+    categorySlug: "accesorios",
+    image: "/images/productos/detallia/mini-ramillete.jpg",
+    images: ["/images/productos/detallia/mini-ramillete.jpg"],
+    options: {
+      colors: ["Rosa Pastel", "Lavanda", "Amarillo Girasol", "Crema"],
+      sizes: ["Bouquet Miniatura", "Bouquet + Tarjeta"],
+      themes: ["Flores Preservadas", "Aniversario", "Complemento Box"],
     },
     reviews: [],
   },

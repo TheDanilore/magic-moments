@@ -104,6 +104,17 @@ const COLOR_HEX_MAP: Record<string, string> = {
   "madera natural": "#c8a477",
   "verde salvia": "#84a98c",
   "personalizado": "#b03658",
+  "rosa nube": "#fde2e4",
+  "medianoche velvet": "#2b1f2b",
+  "dorado champagne": "#e9cca4",
+  "rosa pastel": "#f8bbd0",
+  "vainilla": "#f7ece1",
+  "miel": "#c68b59",
+  "celeste hielo": "#b5e2fa",
+  "cacao": "#4e342e",
+  "rojo carmesí": "#b71c1c",
+  "ámbar cálido": "#f59e0b",
+  "negro & dorado": "#1f1f23",
 }
 
 /**
