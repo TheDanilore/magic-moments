@@ -23,8 +23,8 @@ export function PromoShareButton({
     try {
       if (navigator.share) {
         await navigator.share({
-          title: "Magic Moments | Promociones y Sorteos",
-          text: "¡Mira las promociones y sorteos de detalles personalizados en Magic Moments!",
+          title: "Magic Moments | Promociones",
+          text: "¡Mira las promociones y packs de detalles personalizados en Magic Moments!",
           url: shareUrl,
         })
         return

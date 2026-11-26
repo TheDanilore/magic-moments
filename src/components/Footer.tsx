@@ -30,7 +30,7 @@ export default function Footer() {
                 Magic Moments
               </span>
               <span className="block text-xs text-[var(--text-muted-on-dark)]">
-                Detalles personalizados · Yanin Faviana
+                Detalles y regalos personalizados
               </span>
             </div>
           </Link>
@@ -120,7 +120,7 @@ export default function Footer() {
                   href="/promociones"
                   className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
                 >
-                  Lotes y Pedidos
+                  Promociones
                 </Link>
               </li>
               <li>
@@ -164,24 +164,16 @@ export default function Footer() {
               <span>@magic_moments050</span>
             </a>
 
-            <div className="space-y-1 text-xs text-[var(--text-muted-on-dark)]">
-              <p>También estamos en Facebook y TikTok:</p>
-              <div className="flex flex-wrap gap-1.5">
-                <span className="inline-flex items-center rounded-full border border-[var(--border-on-dark)] px-2.5 py-1 text-[11px] text-[var(--text-secondary-on-dark)]">
-                  Facebook · Próximamente enlace
-                </span>
-                <span className="inline-flex items-center rounded-full border border-[var(--border-on-dark)] px-2.5 py-1 text-[11px] text-[var(--text-secondary-on-dark)]">
-                  TikTok · Próximamente enlace
-                </span>
-              </div>
-            </div>
+            <p className="text-pretty text-xs leading-relaxed text-[var(--text-muted-on-dark)]">
+              También estamos en Facebook y TikTok (enlaces directos&nbsp;próximamente).
+            </p>
           </div>
         </div>
       </div>
 
       <div className="mx-auto mt-10 max-w-7xl border-t border-[var(--border-on-dark)] px-4 pt-6 sm:px-8">
-        <p className="text-center text-xs text-[var(--text-muted-on-dark)]">
-          © {new Date().getFullYear()} Magic Moments · Chimbote y Nuevo Chimbote, Perú · S/ PEN.
+        <p className="text-pretty text-center text-xs text-[var(--text-muted-on-dark)]">
+          © {new Date().getFullYear()} Magic Moments · Chimbote y Nuevo Chimbote, Perú · S/&nbsp;PEN.
         </p>
       </div>
     </footer>

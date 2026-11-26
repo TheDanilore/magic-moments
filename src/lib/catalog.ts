@@ -67,3 +67,45 @@ export function getProductsByCategory(categorySlug?: string): Product[] {
 export function getRelatedProducts(productId: number, limit = 3): Product[] {
   return products.filter((product) => product.id !== productId).slice(0, limit)
 }
+
+const COLOR_HEX_MAP: Record<string, string> = {
+  "rosa pétalo": "#f4a7c1",
+  "rosa suave": "#f7bfd2",
+  "frambuesa": "#b03658",
+  "vino frambuesa": "#6d1e3b",
+  "amarillo girasol": "#f4b41a",
+  "amarillo": "#f4b41a",
+  "azul rey": "#1d4ed8",
+  "azul marino": "#1e3a8a",
+  "azul rey & rosa": "#1d4ed8",
+  "negro & azul rey": "#18181b",
+  "negro & rojo": "#18181b",
+  "azul & dorado": "#1d4ed8",
+  "rojo racing": "#dc2626",
+  "rojo pasión": "#dc2626",
+  "rojo": "#dc2626",
+  "negro": "#1f1f23",
+  "lila": "#c084fc",
+  "lavanda": "#c4b5fd",
+  "menta": "#6ee7b7",
+  "celeste": "#7dd3fc",
+  "dorado": "#d4af37",
+  "champagne": "#e5d3b3",
+  "oro rosa": "#e0a9a0",
+  "plateado": "#cbd5e1",
+  "crema": "#f5ebd6",
+  "crema & dorado": "#f5ebd6",
+  "marfil": "#faf3e0",
+  "blanco": "#ffffff",
+  "madera natural": "#c8a477",
+  "verde salvia": "#84a98c",
+  "personalizado": "#b03658",
+}
+
+/**
+ * Devuelve un hex aproximado para mostrar muestras de color en la UI.
+ */
+export function getColorSwatchHex(colorName: string): string {
+  const key = colorName.trim().toLowerCase()
+  return COLOR_HEX_MAP[key] ?? "#d8a9bb"
+}

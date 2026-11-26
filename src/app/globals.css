@@ -10,6 +10,15 @@
   .text-pretty {
     text-wrap: pretty;
   }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @layer base {
@@ -56,6 +65,9 @@
     --color-whatsapp: #0f7a3f;
     --color-whatsapp-hover: #0b6131;
     --color-whatsapp-ink: #ffffff;
+    --text-whatsapp-accessible: #0c6b36;
+    --text-whatsapp-accessible: #0c6b36;
+    --surface-badge-count: rgba(45, 24, 33, 0.22);
 
     --badge-editorial-bg: #6d1e3b;
     --badge-editorial-text: #fff8fa;
@@ -131,6 +143,9 @@
     --color-whatsapp: #0f7a3f;
     --color-whatsapp-hover: #128c4a;
     --color-whatsapp-ink: #ffffff;
+    --text-whatsapp-accessible: #4ade80;
+    --text-whatsapp-accessible: #4ade80;
+    --surface-badge-count: rgba(255, 248, 250, 0.2);
 
     --badge-editorial-bg: #fce6ee;
     --badge-editorial-text: #2d1821;
@@ -266,29 +281,6 @@ textarea:focus-visible {
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
   }
-}
-
-.hero-atelier-gradient {
-  background: radial-gradient(
-      900px 520px at 88% 12%,
-      rgba(255, 224, 150, 0.52) 0%,
-      rgba(255, 224, 150, 0) 62%
-    ),
-    linear-gradient(
-      145deg,
-      var(--surface-blush) 0%,
-      var(--surface-page) 56%,
-      var(--surface-warm-sun) 100%
-    );
-}
-
-.dark .hero-atelier-gradient {
-  background: radial-gradient(
-      820px 480px at 88% 14%,
-      rgba(217, 138, 22, 0.16) 0%,
-      rgba(217, 138, 22, 0) 60%
-    ),
-    linear-gradient(145deg, #2a1520 0%, #1c1016 58%, #281b15 100%);
 }
 
 @keyframes shimmer-sweep {

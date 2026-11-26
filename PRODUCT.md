@@ -17,7 +17,7 @@ Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS, Lucide Icons, Sonne
 
 ## Product Purpose
 
-**Magic Moments** (*Fabiana Mauricio / Yanin Faviana*, [`@magic_moments050`](https://www.instagram.com/magic_moments050/)) es una tienda online de detalles y regalos personalizados en Chimbote y Nuevo Chimbote con envíos a todo el Perú (`S/` PEN). Ofrece cajas personalizadas, cuadros 3D con luces LED, ramos temáticos con rosas eternas, llaveros acrílicos personalizados y tarjetas/kits; permite configurar variantes y cantidades, estimar el envío Shalom y coordinar el pedido por WhatsApp.
+**Magic Moments** ([`@magic_moments050`](https://www.instagram.com/magic_moments050/)) es una tienda online de detalles y regalos personalizados en Chimbote y Nuevo Chimbote con envíos a todo el Perú (`S/` PEN). Ofrece cajas personalizadas, cuadros 3D con luces LED, ramos temáticos con rosas eternas, llaveros acrílicos personalizados y tarjetas/kits; permite configurar variantes y cantidades, estimar el envío Shalom y coordinar el pedido por WhatsApp.
 
 > **Estado del catálogo web:** Las fotografías y líneas de producto reflejan la oferta real visible en `@magic_moments050`, mientras que los precios en `S/` PEN y stock mostrados en la web son referenciales hasta confirmar cotización por WhatsApp.
 
@@ -45,7 +45,7 @@ Enfoque artesanal y colorido ("Convertimos tus momentos especiales en recuerdos 
 
 ## Brand Commitments
 
-- Nombre de marca confirmado: **Magic Moments** (emblema ilustrado con firma *Yanin Faviana* / `@magic_moments050`).
+- Nombre de marca confirmado: **Magic Moments** (`@magic_moments050`).
 - Eslogan de marca: *"En Magic Moments, convertimos tus momentos especiales en recuerdos inolvidables."*
 - Comunicación en español de Perú y precios expresados en Soles (`S/` PEN).
 - WhatsApp oficial de pedidos/consultas: `+51 979 048 693`.

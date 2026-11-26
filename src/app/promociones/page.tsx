@@ -8,39 +8,39 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export const metadata: Metadata = {
-  title: "Lotes y Pedidos a Medida",
+  title: "Promociones",
 }
 
 export default function PromocionesPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section className="hero-atelier-gradient w-full border-b border-[var(--border-subtle)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-20">
+      <section className="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-blush)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="flex flex-col justify-center space-y-5 lg:col-span-6">
               <div className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--badge-discount-bg)] px-3.5 py-1.5 text-xs font-bold text-[var(--badge-discount-text)]">
                 <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                <span>Unidad · Lotes pequeños · Envíos Shalom</span>
+                <span>Packs · Docenas · Envíos Shalom</span>
               </div>
               <div className="space-y-3">
                 <h1 className="font-display text-3xl leading-[0.98] font-bold tracking-[-0.04em] text-balance sm:text-5xl">
-                  Pedidos Personalizados y Lotes para Eventos
+                  Promociones y Packs de Regalo
                 </h1>
                 <p className="text-pretty max-w-xl text-base text-[var(--text-secondary)]">
-                  Cotiza detalles individuales o pequeños lotes por mayor (como 12 o más llaveros acrílicos) hechos a mano en Chimbote con envíos a todo el Perú.
+                  Aprovecha nuestros packs combinados, cotizaciones especiales por docena de llaveros acrílicos y el beneficio de envío gratis vía Shalom desde S/ 150.
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <PromoWhatsAppButton
-                  promoTitle="Cotización de pedido / lote personalizado"
-                  promoDetails="Hola Magic Moments, quiero cotizar un pedido personalizado o un lote pequeño para evento."
-                  label="Cotizar por WhatsApp"
+                  promoTitle="Promociones y Packs Magic Moments"
+                  promoDetails="Hola Magic Moments, quiero consultar por las promociones y packs vigentes."
+                  label="Consultar por WhatsApp"
                   size="lg"
                   className="min-h-12 rounded-full bg-[var(--color-whatsapp)] px-6 text-sm font-semibold text-[var(--color-whatsapp-ink)] hover:bg-[var(--color-whatsapp-hover)]"
                 />
                 <Link
                   href="/productos"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-page)]"
                 >
                   Ver catálogo
                 </Link>
@@ -48,14 +48,14 @@ export default function PromocionesPage() {
             </div>
             <div className="lg:col-span-6">
               <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2 shadow-sm">
-                <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-stage)-0.35rem)] bg-[var(--surface-blush)]">
+                <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-stage)-0.35rem)] bg-[var(--surface-card)]">
                   <Image
-                    src="/images/prod-llaveros-acrilicos.jpg"
-                    alt="Lote de 12 llaveros acrílicos personalizados Magic Moments"
+                    src="/images/productos/box-hot-wheels-abierta.jpg"
+                    alt="Packs y promociones de regalos personalizados Magic Moments"
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
+                    className="studio-photo-adapt object-cover"
                   />
                 </div>
               </div>
@@ -68,21 +68,20 @@ export default function PromocionesPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
-              Opciones por Categoría y Cantidad
+              Promociones Disponibles
             </h2>
             <p className="text-pretty mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Elige la modalidad que mejor se adapte a tu regalo o evento y coordínala directo con nuestro taller
+              Beneficios y packs activos para coordinar directamente por WhatsApp
             </p>
           </div>
 
           <div className="mx-auto mt-8">
             <Tabs defaultValue="all" className="w-full">
-              <TabsList className="mb-6 w-full justify-start overflow-auto">
+              <TabsList className="mb-6 w-full justify-start gap-1">
                 <TabsTrigger value="all" className="min-h-10">Todas</TabsTrigger>
-                <TabsTrigger value="llaveros" className="min-h-10">Llaveros en lote</TabsTrigger>
-                <TabsTrigger value="cajas" className="min-h-10">Cajas y Ramos</TabsTrigger>
-                <TabsTrigger value="cuadros" className="min-h-10">Cuadros 3D LED</TabsTrigger>
-                <TabsTrigger value="envios" className="min-h-10">Envíos Shalom</TabsTrigger>
+                <TabsTrigger value="packs" className="min-h-10">Packs Regalo</TabsTrigger>
+                <TabsTrigger value="llaveros" className="min-h-10">Docena de Llaveros</TabsTrigger>
+                <TabsTrigger value="envios" className="min-h-10">Envío Shalom</TabsTrigger>
               </TabsList>
 
               <TabsContent value="all" className="mt-0">
@@ -91,10 +90,49 @@ export default function PromocionesPage() {
                     <CardHeader className="pb-0">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <CardTitle className="font-display">Lotes de Llaveros Acrílicos</CardTitle>
-                          <CardDescription>Desde 6 o 12 unidades iguales o variadas</CardDescription>
+                          <CardTitle className="font-display">Pack Caja o Cuadro + Tarjeta 3D</CardTitle>
+                          <CardDescription>Dedicatoria sellada incluida en tu combo</CardDescription>
                         </div>
-                        <span className="rounded-full bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-bold text-[var(--badge-discount-text)]">
+                        <span className="shrink-0 rounded-full bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-bold text-[var(--badge-discount-text)]">
+                          Pack
+                        </span>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="pt-4">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-blush)]">
+                        <Image
+                          src="/images/productos/cuadro-3d-led-girasoles.jpg"
+                          alt="Pack Cuadro 3D con luces LED y tarjeta personalizada"
+                          fill
+                          loading="lazy"
+                          decoding="async"
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="studio-photo-adapt object-cover"
+                        />
+                      </div>
+                      <p className="text-pretty mt-4 text-sm text-[var(--text-secondary)]">
+                        Arma tu Caja Temática o Cuadro 3D LED junto con una Tarjeta 3D artesanal y coordina el combo personalizado por WhatsApp.
+                      </p>
+                    </CardContent>
+                    <CardFooter>
+                      <PromoWhatsAppButton
+                        promoTitle="Pack Caja o Cuadro 3D LED + Tarjeta 3D"
+                        promoDetails="Hola, quiero cotizar el Pack de Caja o Cuadro 3D LED con Tarjeta 3D."
+                        label="Cotizar Pack por WhatsApp"
+                        showGiftIcon
+                        className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
+                      />
+                    </CardFooter>
+                  </Card>
+
+                  <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                    <CardHeader className="pb-0">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <CardTitle className="font-display">Docena de Llaveros Acrílicos</CardTitle>
+                          <CardDescription>Tarifa especial desde 12 unidades</CardDescription>
+                        </div>
+                        <span className="shrink-0 rounded-full bg-[var(--surface-blush)] px-2.5 py-1 text-xs font-bold text-[var(--text-accent-accessible)]">
                           12+ u.
                         </span>
                       </div>
@@ -102,8 +140,8 @@ export default function PromocionesPage() {
                     <CardContent className="pt-4">
                       <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-blush)]">
                         <Image
-                          src="/images/prod-llaveros-acrilicos.jpg"
-                          alt="Lote de llaveros acrílicos personalizados"
+                          src="/images/productos/box-hot-wheels-detalle.jpg"
+                          alt="Promoción por docena en llaveros acrílicos personalizados"
                           fill
                           loading="lazy"
                           decoding="async"
@@ -111,15 +149,15 @@ export default function PromocionesPage() {
                           className="studio-photo-adapt object-cover"
                         />
                       </div>
-                      <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        Ideales para cumpleaños, recuerdos escolares, parejas o eventos. Incluye diseño a medida y herraje dorado o plateado.
+                      <p className="text-pretty mt-4 text-sm text-[var(--text-secondary)]">
+                        Ideales para cumpleaños, eventos o recuerdos. Personaliza fotos o ilustraciones y solicita precio especial por docena en WhatsApp.
                       </p>
                     </CardContent>
                     <CardFooter>
                       <PromoWhatsAppButton
-                        promoTitle="Lote de Llaveros Acrílicos (12+ unidades)"
-                        promoDetails="Hola, quiero cotizar un lote de llaveros acrílicos personalizados."
-                        label="Cotizar lote por WhatsApp"
+                        promoTitle="Promoción Docena de Llaveros Acrílicos (12+ u.)"
+                        promoDetails="Hola, quiero consultar el precio promocional por docena de llaveros acrílicos."
+                        label="Consultar Promo 12+"
                         showGiftIcon
                         className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
                       />
@@ -130,19 +168,19 @@ export default function PromocionesPage() {
                     <CardHeader className="pb-0">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <CardTitle className="font-display">Cuadros 3D con Luces LED</CardTitle>
-                          <CardDescription>Disponible en 2 modelos personalizables</CardDescription>
+                          <CardTitle className="font-display">Envío Shalom Gratis</CardTitle>
+                          <CardDescription>Referencial en pedidos mayores a S/ 150</CardDescription>
                         </div>
-                        <span className="rounded-full bg-[var(--surface-blush)] px-2.5 py-1 text-xs font-bold text-[var(--text-accent-accessible)]">
-                          2 modelos
+                        <span className="shrink-0 rounded-full bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-bold text-[var(--badge-discount-text)]">
+                          Gratis
                         </span>
                       </div>
                     </CardHeader>
                     <CardContent className="pt-4">
                       <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-blush)]">
                         <Image
-                          src="/images/prod-cuadro-3d-led.jpg"
-                          alt="Cuadro 3D con luces LED"
+                          src="/images/productos/ramo-hot-wheels.jpg"
+                          alt="Envío Shalom gratis en compras mayores a S/ 150"
                           fill
                           loading="lazy"
                           decoding="async"
@@ -150,47 +188,8 @@ export default function PromocionesPage() {
                           className="studio-photo-adapt object-cover"
                         />
                       </div>
-                      <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        Marcos luminosos de girasoles, Snoopy, personajes o foto especial. Armados y embalados para viajar seguros a todo el Perú.
-                      </p>
-                    </CardContent>
-                    <CardFooter>
-                      <PromoWhatsAppButton
-                        promoTitle="Cuadro 3D con Luces LED"
-                        promoDetails="Quiero elegir modelo y temática para un Cuadro 3D con luces LED."
-                        label="Personalizar Cuadro LED"
-                        showGiftIcon
-                        className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
-                      />
-                    </CardFooter>
-                  </Card>
-
-                  <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-                    <CardHeader className="pb-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <CardTitle className="font-display">Envíos Shalom y Delivery</CardTitle>
-                          <CardDescription>Gratis en pedidos mayores a S/ 150</CardDescription>
-                        </div>
-                        <span className="rounded-full bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-bold text-[var(--badge-discount-text)]">
-                          Desde S/ 8
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-4">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-blush)]">
-                        <Image
-                          src="/images/prod-ramo-eterno.jpg"
-                          alt="Ramo temático y envío Shalom"
-                          fill
-                          loading="lazy"
-                          decoding="async"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="studio-photo-adapt object-cover"
-                        />
-                      </div>
-                      <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        Entrega coordinada en Chimbote y Nuevo Chimbote, o envío nacional Shalom con cálculo automático desde el carrito.
+                      <p className="text-pretty mt-4 text-sm text-[var(--text-secondary)]">
+                        Combina tus detalles favoritos y al superar S/ 150.00 el carrito aplica envío Shalom sin costo referencial a todo el Perú.
                       </p>
                     </CardContent>
                     <CardFooter>
@@ -205,19 +204,40 @@ export default function PromocionesPage() {
                 </div>
               </TabsContent>
 
+              <TabsContent value="packs" className="mt-0">
+                <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <CardHeader>
+                    <CardTitle className="font-display">Pack Caja o Cuadro 3D LED + Tarjeta 3D</CardTitle>
+                    <CardDescription>Arma tu regalo completo en una sola coordinación</CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-sm text-[var(--text-secondary)]">
+                    Elige tu caja temática, ramo o cuadro con luces LED y súmale una tarjeta dedicatoria en papel algodón.
+                  </CardContent>
+                  <CardFooter>
+                    <PromoWhatsAppButton
+                      promoTitle="Pack Regalo Personalizado"
+                      promoDetails="Hola, quiero cotizar un pack combinado de regalo."
+                      label="Cotizar Pack por WhatsApp"
+                      showGiftIcon
+                      className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)]"
+                    />
+                  </CardFooter>
+                </Card>
+              </TabsContent>
+
               <TabsContent value="llaveros" className="mt-0">
                 <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <CardHeader>
-                    <CardTitle className="font-display">Llaveros Acrílicos por Unidad o Docena</CardTitle>
-                    <CardDescription>Presupuestos a medida desde 1 hasta 12+ unidades</CardDescription>
+                    <CardTitle className="font-display">Llaveros Acrílicos por Docena (12+ u.)</CardTitle>
+                    <CardDescription>Atención por unidad o en cantidad para tus eventos</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-3 text-sm text-[var(--text-secondary)]">
                     <p>
-                      Puedes combinar fotos, iniciales florales o temáticas de eventos en acrílico transparente circular o rectangular.
+                      Personalizamos diseños circulares o rectangulares con tus fotos, iniciales florales o temática especial.
                     </p>
                     <div className="flex items-center gap-2 text-xs font-medium text-[var(--text-primary)]">
                       <Package className="h-4 w-4 text-[var(--text-accent-accessible)]" aria-hidden="true" />
-                      <span>12 llaveros acrílicos caben fácilmente en Paquete XXS / XS Shalom.</span>
+                      <span>12 llaveros acrílicos caben en Paquete XS Shalom (S/ 10.00 ref.).</span>
                     </div>
                   </CardContent>
                   <CardFooter className="gap-3">
@@ -225,47 +245,7 @@ export default function PromocionesPage() {
                       href="/productos/2"
                       className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)]"
                     >
-                      Configurar cantidad
-                    </Link>
-                  </CardFooter>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="cajas" className="mt-0">
-                <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-                  <CardHeader>
-                    <CardTitle className="font-display">Cajas Temáticas y Ramos Eternos</CardTitle>
-                    <CardDescription>Hot Wheels, Flores Amarillas, Cumpleaños y Aniversarios</CardDescription>
-                  </CardHeader>
-                  <CardContent className="text-sm text-[var(--text-secondary)]">
-                    Personalizamos la temática completa, la cinta de satén, las fotos instantáneas y la tarjeta con dedicatoria.
-                  </CardContent>
-                  <CardFooter>
-                    <Link
-                      href="/productos?categoria=cajas-sorpresa"
-                      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)]"
-                    >
-                      Ver Cajas Personalizadas
-                    </Link>
-                  </CardFooter>
-                </Card>
-              </TabsContent>
-
-              <TabsContent value="cuadros" className="mt-0">
-                <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-                  <CardHeader>
-                    <CardTitle className="font-display">Cuadros 3D con Luces LED (2 Modelos)</CardTitle>
-                    <CardDescription>Iluminación cálida + diseño 3D + foto personalizada</CardDescription>
-                  </CardHeader>
-                  <CardContent className="text-sm text-[var(--text-secondary)]">
-                    Elige temática de girasoles, Snoopy, fútbol o pareja. Coordinamos tu boceto antes de armarlo.
-                  </CardContent>
-                  <CardFooter>
-                    <Link
-                      href="/productos/9"
-                      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)]"
-                    >
-                      Ver Cuadro 3D LED
+                      Configurar 12 llaveros
                     </Link>
                   </CardFooter>
                 </Card>
@@ -274,8 +254,8 @@ export default function PromocionesPage() {
               <TabsContent value="envios" className="mt-0">
                 <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <CardHeader>
-                    <CardTitle className="font-display">Cobertura Chimbote y Todo el Perú</CardTitle>
-                    <CardDescription>Tarifario referencial Shalom según peso y dimensiones</CardDescription>
+                    <CardTitle className="font-display">Beneficio de Envío Shalom y Entrega Local</CardTitle>
+                    <CardDescription>Chimbote, Nuevo Chimbote y envíos a todo el Perú</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-2 text-sm text-[var(--text-secondary)]">
                     <p className="flex items-center gap-2">
@@ -284,7 +264,7 @@ export default function PromocionesPage() {
                     </p>
                     <p className="flex items-center gap-2">
                       <MessageCircle className="h-4 w-4 text-[var(--color-whatsapp)]" aria-hidden="true" />
-                      <span>Envíos agencia a agencia Shalom desde S/ 8.00 (gratis desde S/ 150.00).</span>
+                      <span>Envíos Shalom desde S/ 8.00 y gratis referencial desde S/ 150.00.</span>
                     </p>
                   </CardContent>
                 </Card>

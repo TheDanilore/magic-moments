@@ -55,7 +55,7 @@ export function QuantityStepper({
         onClick={onDecrement}
         disabled={atMin}
         aria-label={`Disminuir cantidad de ${itemName}`}
-        className="inline-flex h-12 w-12 cursor-pointer touch-manipulation items-center justify-center rounded-full transition-colors hover:bg-current/10 disabled:cursor-not-allowed disabled:opacity-40"
+        className="inline-flex h-12 w-12 cursor-pointer touch-manipulation items-center justify-center rounded-full transition-colors hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-40 dark:hover:bg-white/10"
       >
         <Minus className="h-4 w-4" aria-hidden="true" />
       </button>
@@ -87,7 +87,7 @@ export function QuantityStepper({
         onClick={onIncrement}
         disabled={atMax}
         aria-label={`Aumentar cantidad de ${itemName}`}
-        className="inline-flex h-12 w-12 cursor-pointer touch-manipulation items-center justify-center rounded-full transition-colors hover:bg-current/10 disabled:cursor-not-allowed disabled:opacity-40"
+        className="inline-flex h-12 w-12 cursor-pointer touch-manipulation items-center justify-center rounded-full transition-colors hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-40 dark:hover:bg-white/10"
       >
         <Plus className="h-4 w-4" aria-hidden="true" />
       </button>

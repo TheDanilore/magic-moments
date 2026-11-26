@@ -12,6 +12,7 @@ import {
   Instagram,
   MessageCircle,
   Package,
+  Play,
   Share2,
   ShieldCheck,
   ShoppingBag,
@@ -30,9 +31,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/context/cart-context"
 import { useHotkeys } from "@/hooks/use-hotkeys"
-import { getDefaultProductOptions } from "@/lib/catalog"
+import { getColorSwatchHex, getDefaultProductOptions } from "@/lib/catalog"
 import { formatPEN } from "@/lib/format"
-import { evaluateSingleProductShipping } from "@/lib/shipping"
+import {
+  evaluateSingleProductShipping,
+  FREE_SHIPPING_THRESHOLD_CENTS,
+} from "@/lib/shipping"
 import {
   buildProductInquiryMessage,
   buildWhatsAppUrl,
@@ -57,6 +61,7 @@ export function ProductDetailClient({
     useCart()
 
   const [activeImageIndex, setActiveImageIndex] = useState(0)
+  const [showingVideo, setShowingVideo] = useState(false)
   const [selectedColor, setSelectedColor] = useState(defaultOptions.color)
   const [selectedSize, setSelectedSize] = useState(defaultOptions.size)
   const [selectedTheme, setSelectedTheme] = useState(defaultOptions.theme)
@@ -69,6 +74,7 @@ export function ProductDetailClient({
 
   useEffect(() => {
     setActiveImageIndex(0)
+    setShowingVideo(false)
     setSelectedColor(defaultOptions.color)
     setSelectedSize(defaultOptions.size)
     setSelectedTheme(defaultOptions.theme)
@@ -102,7 +108,8 @@ export function ProductDetailClient({
     [items, product.id]
   )
   const availableStock = Math.max(0, product.stock - inBagTotalQty)
-  const showBatchPresets = product.categorySlug === "llaveros" || product.stock >= 12
+  const showBatchPresets =
+    product.categorySlug === "llaveros" || product.categorySlug === "tarjetas"
 
   const selectedOptions = useMemo(
     () => ({
@@ -227,13 +234,18 @@ export function ProductDetailClient({
               type="button"
               onClick={() => setSelectedColor(color)}
               aria-pressed={selectedColor === color}
-              className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
+              className={`inline-flex min-h-11 cursor-pointer touch-manipulation items-center gap-2 rounded-full border px-4 text-xs font-medium transition-colors ${
                 selectedColor === color
                   ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
                   : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
               }`}
             >
-              {color}
+              <span
+                aria-hidden="true"
+                className="h-3 w-3 shrink-0 rounded-full border border-black/20"
+                style={{ backgroundColor: getColorSwatchHex(color) }}
+              />
+              <span>{color}</span>
             </button>
           ))}
         </div>
@@ -313,8 +325,8 @@ export function ProductDetailClient({
         {liveStatus}
       </div>
 
-      {/* Top Blush & Sunflower Split-View Showcase Band */}
-      <section className="hero-atelier-gradient w-full border-b border-[var(--border-subtle)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-16">
+      {/* Top Blush Showcase Band */}
+      <section className="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-blush)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <nav
             aria-label="Ruta de navegación"
@@ -354,17 +366,29 @@ export function ProductDetailClient({
             <div className="space-y-3 md:sticky md:top-24 md:col-span-6">
               <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2 shadow-sm">
                 <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-stage)-0.35rem)] bg-[var(--surface-blush)]">
-                  <Image
-                    src={product.images[activeImageIndex] || product.image}
-                    alt={product.name}
-                    fill
-                    priority
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    className="object-cover"
-                  />
+                  {showingVideo && product.video ? (
+                    <video
+                      src={product.video}
+                      poster={product.image}
+                      controls
+                      autoPlay
+                      playsInline
+                      loop
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src={product.images[activeImageIndex] || product.image}
+                      alt={product.name}
+                      fill
+                      priority
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="studio-photo-adapt object-cover"
+                    />
+                  )}
                 </div>
 
-                {product.images.length > 1 ? (
+                {!showingVideo && product.images.length > 1 ? (
                   <div className="pointer-events-none absolute inset-x-4 top-1/2 flex -translate-y-1/2 justify-between">
                     <button
                       type="button"
@@ -392,15 +416,18 @@ export function ProductDetailClient({
                 ) : null}
               </div>
 
-              <div className="grid grid-cols-4 gap-2.5">
+              <div className="grid grid-cols-4 gap-2.5 sm:grid-cols-5">
                 {product.images.map((image, index) => (
                   <button
                     key={index}
                     type="button"
-                    onClick={() => setActiveImageIndex(index)}
+                    onClick={() => {
+                      setShowingVideo(false)
+                      setActiveImageIndex(index)
+                    }}
                     aria-label={`Ver imagen ${index + 1} de ${product.name}`}
                     className={`relative aspect-square overflow-hidden rounded-xl border bg-[var(--surface-elevated)] transition-all ${
-                      activeImageIndex === index
+                      !showingVideo && activeImageIndex === index
                         ? "border-[var(--color-cta-primary)] ring-2 ring-[var(--color-cta-primary)]/40"
                         : "border-[var(--border-subtle)] opacity-75 hover:opacity-100"
                     }`}
@@ -412,10 +439,25 @@ export function ProductDetailClient({
                       loading="lazy"
                       decoding="async"
                       sizes="120px"
-                      className="object-cover"
+                      className="studio-photo-adapt object-cover"
                     />
                   </button>
                 ))}
+                {product.video ? (
+                  <button
+                    type="button"
+                    onClick={() => setShowingVideo(true)}
+                    aria-label={`Ver video real de ${product.name}`}
+                    className={`relative flex aspect-square cursor-pointer flex-col items-center justify-center gap-1 overflow-hidden rounded-xl border bg-[var(--surface-obsidian)] text-[var(--text-on-dark)] transition-all ${
+                      showingVideo
+                        ? "border-[var(--color-cta-primary)] ring-2 ring-[var(--color-cta-primary)]/40"
+                        : "border-[var(--border-subtle)] opacity-85 hover:opacity-100"
+                    }`}
+                  >
+                    <Play className="h-5 w-5 fill-current" aria-hidden="true" />
+                    <span className="text-xs font-semibold">Video</span>
+                  </button>
+                ) : null}
               </div>
             </div>
 
@@ -464,25 +506,36 @@ export function ProductDetailClient({
               {/* Quantity & Purchase Controls */}
               <div className="space-y-3 border-t border-[var(--border-subtle)] pt-5">
                 {showBatchPresets ? (
-                  <div className="flex flex-wrap items-center gap-2 text-xs">
-                    <span className="font-semibold text-[var(--text-secondary)]">
-                      Pedir por unidad o lote:
-                    </span>
-                    {BATCH_PRESETS.map((preset) => (
-                      <button
-                        key={preset}
-                        type="button"
-                        disabled={availableStock > 0 && preset > availableStock}
-                        onClick={() => setQuantity(preset)}
-                        className={`min-h-10 cursor-pointer rounded-full border px-3.5 font-semibold tabular-nums transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
-                          quantity === preset
-                            ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
-                            : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
-                        }`}
-                      >
-                        {preset === 1 ? "1 unidad" : `${preset} unidades`}
-                      </button>
-                    ))}
+                  <div className="space-y-2">
+                    <div className="flex flex-wrap items-center gap-2 text-xs">
+                      <span className="font-semibold text-[var(--text-secondary)]">
+                        Pedir por unidad o docena:
+                      </span>
+                      {BATCH_PRESETS.map((preset) => (
+                        <button
+                          key={preset}
+                          type="button"
+                          disabled={availableStock > 0 && preset > availableStock}
+                          onClick={() => setQuantity(preset)}
+                          className={`min-h-12 cursor-pointer rounded-full border px-4 font-semibold tabular-nums transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
+                            quantity === preset
+                              ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
+                              : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+                          }`}
+                        >
+                          {preset === 1 ? "1 unidad" : `${preset} unidades`}
+                        </button>
+                      ))}
+                    </div>
+                    {product.priceCents * quantity >= FREE_SHIPPING_THRESHOLD_CENTS ? (
+                      <p className="text-xs font-medium text-[var(--text-whatsapp-accessible)] tabular-nums">
+                        ¡Supera {formatPEN(FREE_SHIPPING_THRESHOLD_CENTS)}! Califica para envío Shalom gratis referencial.
+                      </p>
+                    ) : FREE_SHIPPING_THRESHOLD_CENTS - product.priceCents * quantity <= 2500 ? (
+                      <p className="text-xs font-medium text-[var(--text-accent-accessible)] tabular-nums">
+                        A solo {formatPEN(FREE_SHIPPING_THRESHOLD_CENTS - product.priceCents * quantity)} del envío Shalom gratis ({formatPEN(FREE_SHIPPING_THRESHOLD_CENTS)}).
+                      </p>
+                    ) : null}
                   </div>
                 ) : null}
 
@@ -507,7 +560,7 @@ export function ProductDetailClient({
                       type="button"
                       disabled={availableStock <= 0}
                       onClick={handleAddToCart}
-                      className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full bg-[var(--color-cta-primary)] px-6 text-sm font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
+                      className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full bg-[var(--color-cta-primary)] px-6 text-sm font-semibold text-[var(--color-cta-primary-ink)] tabular-nums transition-colors hover:bg-[var(--color-cta-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {added ? (
                         <>
@@ -517,7 +570,11 @@ export function ProductDetailClient({
                       ) : (
                         <>
                           <ShoppingBag className="h-4 w-4" aria-hidden="true" />
-                          <span>Añadir al Pedido</span>
+                          <span>
+                            {quantity > 1
+                              ? `Añadir (${quantity}) · ${formatPEN(product.priceCents * quantity)}`
+                              : "Añadir al Pedido"}
+                          </span>
                         </>
                       )}
                     </button>
@@ -540,6 +597,17 @@ export function ProductDetailClient({
                     />
                   </button>
                 </div>
+
+                {product.priceCents * quantity >= 10000 &&
+                product.priceCents * quantity < FREE_SHIPPING_THRESHOLD_CENTS ? (
+                  <p className="rounded-xl bg-[var(--surface-warm-sun)] px-3.5 py-2.5 text-xs font-medium text-[var(--badge-discount-text)] tabular-nums dark:text-[var(--text-accent-on-dark)]">
+                    ¡Estás a solo{" "}
+                    <strong>
+                      {formatPEN(FREE_SHIPPING_THRESHOLD_CENTS - product.priceCents * quantity)}
+                    </strong>{" "}
+                    de alcanzar envío Shalom gratis (desde {formatPEN(FREE_SHIPPING_THRESHOLD_CENTS)})!
+                  </p>
+                ) : null}
 
                 {totalCount > 0 ? (
                   <button
@@ -589,7 +657,7 @@ export function ProductDetailClient({
                       className="h-4 w-4 shrink-0 text-[var(--text-accent-accessible)]"
                       aria-hidden="true"
                     />
-                    <span>Hecho a mano en Chimbote</span>
+                    <span>Armado artesanal (2–4 días) · Envía tus fotos por WhatsApp</span>
                   </li>
                 </ul>
               </div>
@@ -678,7 +746,7 @@ export function ProductDetailClient({
       </section>
 
       {/* Mobile Sticky Bottom Action Bar */}
-      <div className="safe-bottom-pad fixed inset-x-0 bottom-0 z-30 border-t border-[var(--border-on-dark)] bg-[var(--surface-obsidian)]/96 px-4 pt-2.5 text-[var(--text-on-dark)] backdrop-blur-md md:hidden">
+      <div className="safe-bottom-pad fixed inset-x-0 bottom-0 z-30 border-t border-[var(--border-on-dark)] bg-[var(--surface-obsidian)] px-4 pt-2.5 text-[var(--text-on-dark)] md:hidden">
         <div className="mx-auto flex max-w-lg items-center gap-2.5">
           <button
             type="button"

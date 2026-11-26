@@ -113,7 +113,7 @@ export function ContactFormClient() {
             href={lastWhatsAppUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 font-medium text-[var(--color-whatsapp)] underline underline-offset-2"
+            className="inline-flex items-center gap-1 font-medium text-[var(--text-whatsapp-accessible)] underline underline-offset-2"
           >
             <span>Abrir WhatsApp aquí</span>
             <ExternalLink className="h-3 w-3" aria-hidden="true" />

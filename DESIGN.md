@@ -10,18 +10,23 @@ colors:
   berry-deep: "#6d1e3b"
   ink: "#2d1821"
   ink-muted: "#664754"
+  night-plum: "#1c1016"
   cta-primary: "#b03658"
   cta-primary-hover: "#952947"
   accent-accessible: "#962947"
   accent-sunflower: "#fff0c7"
   whatsapp: "#0f7a3f"
+  whatsapp-accessible-light: "#0c6b36"
+  whatsapp-accessible-dark: "#4ade80"
+  dark-page: "#1c1016"
+  dark-card: "#26151e"
 typography:
   display: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
   sans: "Figtree, ui-sans-serif, system-ui, sans-serif"
 ---
 
 ## Overview
-**Atelier Pétalo, Frambuesa & Girasol** reemplaza los bloques negros y monocromáticos por una paleta luminosa inspirada en el emblema ilustrado de `@magic_moments050`: rosa pétalo suave (`#fce6ee`), frambuesa berry de alto contraste (`#b03658`, ≥ 5.9:1 WCAG AA), vino frambuesa (`#6d1e3b`) para cierres y acentos girasol cálido (`#fff0c7` / `#ffd97d`) propios de los cuadros 3D LED y ramos. En modo oscuro utiliza **Ciruela Nocturna** (`#1c1016` / `#26151e`) manteniendo calidez cromática.
+**Atelier Pétalo, Frambuesa & Girasol** reemplaza los bloques negros y monocromáticos por superficies sólidas limpias sin degradados, inspiradas en `@magic_moments050`: rosa pétalo suave (`#fce6ee`), frambuesa berry de alto contraste (`#b03658`, ≥ 5.9:1 WCAG AA), vino frambuesa (`#6d1e3b`) para cierres y acentos girasol cálido (`#fff0c7` / `#ffd97d`) propios de los cuadros 3D LED y ramos. En modo oscuro utiliza **Ciruela Nocturna** (`#1c1016` / `#26151e`) manteniendo calidez cromática.
 
 ## Ergonomía & Reglas
 - Contraste WCAG AA mínimo de `4.5:1` en todos los botones, chips activos y enlaces (incluyendo CTAs frambuesa `#b03658` y WhatsApp `#0f7a3f`).

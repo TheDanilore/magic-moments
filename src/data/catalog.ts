@@ -4,20 +4,20 @@ export const productCategories: ProductCategory[] = [
   {
     slug: "cajas-sorpresa",
     name: "Cajas Personalizadas",
-    subtitle: "Cajas temáticas y explosivas con fotos, dulces y lazos satinados.",
-    image: "/images/prod-caja-amor.jpg",
+    subtitle: "Boxes Hot Wheels, Flores Amarillas y temáticas con fotos, dulces y lazos.",
+    image: "/images/productos/box-hot-wheels-abierta.jpg",
   },
   {
     slug: "cuadros-3d-led",
     name: "Cuadros 3D LED",
-    subtitle: "Marcos de madera en 2 modelos con luces LED cálidas y fotos.",
-    image: "/images/prod-cuadro-3d-led.jpg",
+    subtitle: "Marcos profundos de madera con luces LED cálidas, girasoles y fotos.",
+    image: "/images/productos/cuadro-3d-led-girasoles.jpg",
   },
   {
     slug: "ramos-tematicos",
     name: "Ramos Temáticos",
-    subtitle: "Rosas eternas satinadas con tarjetas, brillos y temática a elección.",
-    image: "/images/prod-ramo-eterno.jpg",
+    subtitle: "Rosas eternas satinadas con carritos Hot Wheels, fotos y tarjetas.",
+    image: "/images/productos/ramo-hot-wheels.jpg",
   },
   {
     slug: "llaveros",
@@ -41,6 +41,303 @@ export const productCategories: ProductCategory[] = [
 
 export const products: Product[] = [
   {
+    id: 11,
+    sku: "MM-CS-011",
+    name: "Box Hot Wheels Personalizado",
+    subtitle: "Carrito Hot Wheels · Llavero acrílico, fotos, dulces y tarjeta",
+    badge: "Edición Hot Wheels",
+    description:
+      "Box personalizado estilo Hot Wheels con lazo azul rey, carrito coleccionable, llavero acrílico con foto, tira polaroid, dulces y mensajes dedicatorios.",
+    longDescription: `
+      <p>Pensado para hacer feliz a su niño interior. Este box personalizado se arma a mano con estética racing Hot Wheels, cinta satinada azul rey y acabados listos para sorprender.</p>
+      <ul>
+        <li>Caja rígida blanca personalizada con bandera a cuadros, flamas y frase exterior</li>
+        <li>1 o 2 carritos Hot Wheels originales según modelo elegido</li>
+        <li>Llavero acrílico personalizado con foto y tarjeta temática incluida</li>
+        <li>Fotos estilo polaroid con ganchitos de corazón, chocolates y tarjeta interior</li>
+      </ul>
+    `,
+    priceCents: 6900,
+    stock: 12,
+    weightGrams: 950,
+    dimensionsCm: { length: 28, width: 20, height: 11 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    featured: true,
+    image: "/images/productos/box-hot-wheels-abierta.jpg",
+    images: [
+      "/images/productos/box-hot-wheels-abierta.jpg",
+      "/images/productos/box-hot-wheels-cerrada.jpg",
+      "/images/productos/box-hot-wheels-detalle.jpg",
+      "/images/productos/box-hot-wheels-duo.jpg",
+    ],
+    video: "/videos/magic-moments-detalle.mp4",
+    options: {
+      colors: ["Azul Rey", "Rojo Racing", "Negro", "Personalizado"],
+      sizes: ["1 Carrito + Llavero", "2 Carritos + Fotos", "Box Dúo"],
+      themes: ["Niño Interior", "Hot Wheels Clásico", "Aniversario", "Cumpleaños"],
+    },
+    reviews: [],
+  },
+  {
+    id: 12,
+    sku: "MM-CS-012",
+    name: "Box Flores Amarillas «Para la más hermosa»",
+    subtitle: "Girasol tejido · Tarjetas desplegables, chocolates y fotos",
+    badge: "Flores Amarillas",
+    description:
+      "Box temático de flores amarillas con tapa ilustrada, lazo satinado amarillo, ramo de girasol tejido a mano, chocolates y tarjetas desplegables con dedicatoria.",
+    longDescription: `
+      <p>Un detalle luminoso para el 21 de septiembre, cumpleaños o aniversarios. Combina un diseño tierno en tapa con un interior repleto de mensajes y un girasol eterno tejido.</p>
+      <ul>
+        <li>Caja rígida personalizada con lazo amarillo satinado e ilustración a medida</li>
+        <li>Girasol tejido artesanal con margaritas y mariposa decorativa en papel kraft</li>
+        <li>Set de 3 tarjetas desplegables unidas con cinta y dedicatorias románticas</li>
+        <li>Selección de chocolates y fotografía personalizada en el interior</li>
+      </ul>
+    `,
+    priceCents: 6500,
+    stock: 14,
+    weightGrams: 900,
+    dimensionsCm: { length: 28, width: 20, height: 11 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    featured: true,
+    image: "/images/productos/box-flores-amarillas-abierta.jpg",
+    images: [
+      "/images/productos/box-flores-amarillas-abierta.jpg",
+      "/images/productos/box-flores-amarillas-tapa.jpg",
+      "/images/productos/box-flores-amarillas-tarjetas.jpg",
+    ],
+    options: {
+      colors: ["Amarillo Girasol", "Crema & Dorado", "Rosa Pétalo"],
+      sizes: ["Box Clásico + Girasol", "Box Completo + Chocolates"],
+      themes: ["Flores Amarillas (21 Sept)", "Para la más hermosa", "Pollito Tierno", "Aniversario"],
+    },
+    reviews: [],
+  },
+  {
+    id: 13,
+    sku: "MM-RM-013",
+    name: "Ramo Hot Wheels con Rosas Eternas",
+    subtitle: "2 carritos Hot Wheels · Rosas satinadas azul rey y fotos",
+    badge: "Más pedido",
+    description:
+      "Ramo temático en envoltura coreana negra con 2 carritos Hot Wheels originales, rosas eternas de satén azul rey, fotos personalizadas y toppers racing.",
+    longDescription: `
+      <p>La combinación perfecta entre flores eternas y pasión por los autos. Cada ramo se envuelve a mano con papel coreano mate y lazo satinado con broche brillante.</p>
+      <ul>
+        <li>Rosas eternas hechas a mano en cinta satinada azul rey o color a elección</li>
+        <li>1 o 2 carritos Hot Wheels en empaque original integrados en el ramo</li>
+        <li>Tarjeta dedicatoria «Para el amor de mi vida» y fotos estilo polaroid</li>
+        <li>Apliques temáticos (banderas a cuadros, copa, llanta en llamas y corazón)</li>
+      </ul>
+    `,
+    priceCents: 7500,
+    stock: 10,
+    weightGrams: 720,
+    dimensionsCm: { length: 36, width: 26, height: 15 },
+    category: "Ramos Temáticos",
+    categorySlug: "ramos-tematicos",
+    featured: true,
+    image: "/images/productos/ramo-hot-wheels.jpg",
+    images: [
+      "/images/productos/ramo-hot-wheels.jpg",
+      "/images/productos/ramo-hot-wheels-detalle.jpg",
+      "/images/productos/ramo-hot-wheels-superior.jpg",
+    ],
+    options: {
+      colors: ["Negro & Azul Rey", "Negro & Rojo", "Azul & Dorado"],
+      sizes: ["1 Carrito + 3 Rosas", "2 Carritos + 3 Rosas", "Especial + 6 Rosas"],
+      themes: ["Para el amor de mi vida", "Hot Wheels Pareja", "Aniversario", "Cumpleaños"],
+    },
+    reviews: [],
+  },
+  {
+    id: 14,
+    sku: "MM-CL-014",
+    name: "Cuadro 3D LED «Entre tantos girasoles»",
+    subtitle: "Noche Estrellada & Snoopy · Foto polaroid, ramo 3D y luz LED",
+    badge: "Con luz LED",
+    description:
+      "Cuadro tridimensional en marco de madera natural con fondo Noche Estrellada, ramo de girasoles en relieve, ilustración de Snoopy, foto polaroid y luces LED cálidas.",
+    longDescription: `
+      <p>Uno de nuestros cuadros 3D más especiales: une el cielo estrellado con un campo de girasoles, tu fotografía estilo polaroid y un ramillete tridimensional iluminado desde el interior.</p>
+      <ul>
+        <li>Marco profundo en madera natural con guirnalda de luces LED cálidas integrada</li>
+        <li>Ramo de girasoles 3D artesanal con lazo de organza y detalle de Snoopy</li>
+        <li>Frase personalizada «Entre tantos girasoles, siempre te elegiré a ti»</li>
+        <li>Opción disponible en combo junto con osito de peluche blanco</li>
+      </ul>
+    `,
+    priceCents: 5800,
+    stock: 12,
+    weightGrams: 700,
+    dimensionsCm: { length: 25, width: 20, height: 6 },
+    category: "Cuadros 3D LED",
+    categorySlug: "cuadros-3d-led",
+    featured: true,
+    image: "/images/productos/cuadro-3d-led-girasoles.jpg",
+    images: [
+      "/images/productos/cuadro-3d-led-girasoles.jpg",
+      "/images/productos/cuadro-3d-led-girasoles-osito.jpg",
+      "/images/productos/cuadro-3d-led-florecer.jpg",
+    ],
+    options: {
+      colors: ["Madera Natural", "Blanco", "Negro"],
+      sizes: ["Solo Cuadro 3D LED", "Combo Cuadro + Osito"],
+      themes: ["Noche Estrellada + Snoopy", "Girasoles + Polaroid", "21 de Septiembre"],
+    },
+    reviews: [],
+  },
+  {
+    id: 15,
+    sku: "MM-CL-015",
+    name: "Cuadro 3D LED «Tú haces florecer mi vida»",
+    subtitle: "Tira de 3 fotos · Ramo de girasoles 3D, cinta y luces cálidas",
+    badge: "3 Fotos",
+    description:
+      "Cuadro 3D iluminado con luces LED cálidas, espacio para 3 fotografías de pareja, ramo artesanal de girasoles con lazo satinado y banner «Gracias por existir».",
+    longDescription: `
+      <p>Ideal para revivir sus mejores momentos juntos en un solo marco iluminado. Incluye tres fotografías personalizadas junto a un ramo tridimensional de girasoles.</p>
+      <ul>
+        <li>Marco profundo de madera clara con iluminación LED cálida perimetral</li>
+        <li>3 fotografías personalizadas impresas en alta nitidez</li>
+        <li>Ramo de girasoles 3D en relieve con lazo blanco y mensaje «Gracias por existir»</li>
+        <li>Empaque protector listo para envío seguro por Shalom a todo el Perú</li>
+      </ul>
+    `,
+    priceCents: 5500,
+    stock: 12,
+    weightGrams: 680,
+    dimensionsCm: { length: 25, width: 20, height: 6 },
+    category: "Cuadros 3D LED",
+    categorySlug: "cuadros-3d-led",
+    featured: true,
+    image: "/images/productos/cuadro-3d-led-florecer.jpg",
+    images: [
+      "/images/productos/cuadro-3d-led-florecer.jpg",
+      "/images/productos/cuadro-3d-led-girasoles.jpg",
+      "/images/productos/cuadro-3d-led-girasoles-osito.jpg",
+    ],
+    options: {
+      colors: ["Madera Natural", "Blanco", "Rosa Pétalo"],
+      sizes: ["Modelo Clásico (20×25 cm)", "Modelo Grande (25×30 cm)"],
+      themes: ["Tú haces florecer mi vida", "Gracias por existir", "Aniversario"],
+    },
+    reviews: [],
+  },
+  {
+    id: 2,
+    sku: "MM-LL-002",
+    name: "Llavero Acrílico Personalizado",
+    subtitle: "Acrílico cristalino · Tarjeta temática y lote para eventos (12+)",
+    badge: "Por unidad o lote",
+    description:
+      "Llavero acrílico personalizado con fotografía, tarjeta temática y lazo a tono. Ideal para regalo individual o recuerdos en lote.",
+    longDescription: `
+      <p>Un recuerdo ligero, duradero y colorido para llevar a todas partes. Trabajamos tus llaveros acrílicos con impresión nítida y tarjeta personalizada opcional.</p>
+      <ul>
+        <li>Acrílico transparente de alta nitidez (formato rectangular o circular)</li>
+        <li>Personalización con foto, pareja, mascota, temática Hot Wheels o evento</li>
+        <li>Disponible por unidad o en lotes pequeños (6, 12 o más recuerdos)</li>
+        <li>Presentación con lazo satinado y tarjeta dedicatoria</li>
+      </ul>
+    `,
+    priceCents: 1200,
+    stock: 60,
+    weightGrams: 35,
+    dimensionsCm: { length: 9, width: 6, height: 2 },
+    category: "Llaveros Acrílicos",
+    categorySlug: "llaveros",
+    featured: true,
+    image: "/images/productos/box-hot-wheels-detalle.jpg",
+    images: [
+      "/images/productos/box-hot-wheels-detalle.jpg",
+      "/images/prod-llaveros-acrilicos.jpg",
+      "/images/prod-llavero-cristal.jpg",
+      "/images/prod-llavero-pareja.jpg",
+    ],
+    options: {
+      colors: ["Azul Rey", "Rosa Pétalo", "Dorado", "Celeste"],
+      sizes: ["Rectangular 4×6 cm", "Circular 5 cm"],
+      themes: ["Foto Pareja / Mascota", "Hot Wheels", "Recuerdo Evento (Lote)", "Iniciales Florales"],
+    },
+    reviews: [],
+  },
+  {
+    id: 3,
+    sku: "MM-TJ-003",
+    name: "Tarjeta 3D Aniversario",
+    subtitle: "Papel algodón 300 g · Corte tridimensional y lacre",
+    badge: "Artesanal",
+    description: "Tarjeta tridimensional con mensaje personalizado para aniversarios y fechas especiales.",
+    longDescription: `
+      <p>Expresa tus sentimientos con nuestra Tarjeta 3D artesanal. Al abrirla, se despliega una escena tridimensional cortada con precisión sobre papel texturizado.</p>
+      <ul>
+        <li>Papel artístico de algodón de 300 g/m²</li>
+        <li>Mensaje interior impreso o caligrafiado a elección</li>
+        <li>Sobre rosa empolvado con sello de lacre dorado incluido</li>
+      </ul>
+    `,
+    priceCents: 1500,
+    stock: 30,
+    weightGrams: 60,
+    dimensionsCm: { length: 15, width: 10, height: 2 },
+    category: "Tarjetas 3D",
+    categorySlug: "tarjetas",
+    featured: true,
+    image: "/images/prod-tarjeta-3d.jpg",
+    images: [
+      "/images/prod-tarjeta-3d.jpg",
+      "/images/prod-tarjeta-felicitacion.jpg",
+      "/images/prod-caja-cumpleanos-detalle.jpg",
+      "/images/nosotros-proceso.jpg",
+    ],
+    options: {
+      colors: ["Rosa Pétalo", "Rojo", "Crema", "Dorado"],
+      sizes: ["Clásica", "Grande"],
+      themes: ["Aniversario", "Amor", "Cumpleaños", "Agradecimiento"],
+    },
+    reviews: [],
+  },
+  {
+    id: 4,
+    sku: "MM-KR-004",
+    name: "Kit Regalo Amistad",
+    subtitle: "Taza cerámica · Vela aromática, llavero y tarjeta",
+    badge: "Kit Curado",
+    description: "Kit completo con detalles especiales para celebrar la amistad.",
+    longDescription: `
+      <p>Diseñado para agradecer a esa persona incondicional. El Kit Regalo Amistad reúne detalles cálidos y útiles dentro de una caja lista para obsequiar.</p>
+      <ul>
+        <li>Taza cerámica personalizada con frase o nombre</li>
+        <li>Vela aromática en frasco ámbar artesanal</li>
+        <li>Llavero temático y tarjeta dedicatoria</li>
+      </ul>
+    `,
+    priceCents: 4800,
+    stock: 10,
+    weightGrams: 750,
+    dimensionsCm: { length: 24, width: 18, height: 10 },
+    category: "Kits de Regalo",
+    categorySlug: "kits-regalo",
+    featured: true,
+    image: "/images/prod-kit-amistad.jpg",
+    images: [
+      "/images/prod-kit-amistad.jpg",
+      "/images/prod-caja-cumpleanos-detalle.jpg",
+      "/images/prod-tarjeta-felicitacion.jpg",
+      "/images/prod-llaveros-acrilicos.jpg",
+    ],
+    options: {
+      colors: ["Rosa Pétalo", "Lavanda", "Menta", "Crema"],
+      sizes: ["Estándar", "Deluxe"],
+      themes: ["Amistad", "Cumpleaños", "Agradecimiento"],
+    },
+    reviews: [],
+  },
+  {
     id: 1,
     sku: "MM-CS-001",
     name: "Caja Personalizada Temática",
@@ -59,13 +356,11 @@ export const products: Product[] = [
       </ul>
     `,
     priceCents: 5900,
-    compareAtCents: 7200,
     stock: 15,
     weightGrams: 850,
     dimensionsCm: { length: 26, width: 18, height: 11 },
     category: "Cajas Personalizadas",
     categorySlug: "cajas-sorpresa",
-    featured: true,
     image: "/images/prod-caja-cumpleanos.jpg",
     images: [
       "/images/prod-caja-cumpleanos.jpg",
@@ -81,77 +376,38 @@ export const products: Product[] = [
     reviews: [],
   },
   {
-    id: 2,
-    sku: "MM-LL-002",
-    name: "Llavero Acrílico Personalizado",
-    subtitle: "Acrílico cristalino · Unidad o lote para eventos (12+)",
-    badge: "Por unidad o lote",
-    description:
-      "Llavero acrílico personalizado con fotografía, ilustración o iniciales. Ideal para regalo individual o recuerdos en lote.",
-    longDescription: `
-      <p>Un recuerdo ligero, duradero y colorido para llevar a todas partes. Trabajamos tus llaveros acrílicos con impresión nítida y herraje dorado o plateado.</p>
-      <ul>
-        <li>Acrílico transparente de alta nitidez (formato rectangular o circular)</li>
-        <li>Personalización con foto, pareja, mascota, nombre o logo de evento</li>
-        <li>Disponible por unidad o en lotes pequeños (6, 12 o más recuerdos)</li>
-        <li>Incluye borla decorativa a tono y presentación lista para entregar</li>
-      </ul>
-    `,
-    priceCents: 1200,
-    stock: 60,
-    weightGrams: 35,
-    dimensionsCm: { length: 9, width: 6, height: 2 },
-    category: "Llaveros Acrílicos",
-    categorySlug: "llaveros",
-    featured: true,
-    image: "/images/prod-llaveros-acrilicos.jpg",
-    images: [
-      "/images/prod-llaveros-acrilicos.jpg",
-      "/images/prod-llavero-cristal.jpg",
-      "/images/prod-llavero-pareja.jpg",
-    ],
-    options: {
-      colors: ["Rosa Pétalo", "Dorado", "Crema", "Celeste"],
-      sizes: ["Circular 5 cm", "Rectangular 4×6 cm"],
-      themes: ["Foto Pareja / Mascota", "Recuerdo Evento (Lote)", "Iniciales Florales", "Temática Libre"],
-    },
-    reviews: [],
-  },
-  {
     id: 9,
     sku: "MM-CL-009",
-    name: "Cuadro 3D con Luces LED",
-    subtitle: "Disponible en 2 modelos · Marco de madera y luz cálida",
-    badge: "2 modelos",
+    name: "Cuadro 3D LED Superhéroes & Temático",
+    subtitle: "Personalizado con nombre · Fondo cómic y luces LED cálidas",
+    badge: "A medida",
     description:
-      "Cuadro tridimensional de madera iluminado con luces LED cálidas, lámina temática y fotografía personalizada.",
+      "Cuadro tridimensional de madera iluminado con luces LED cálidas, nombre en relieve y temática favorita (Spider-Man, Fútbol, Parejas).",
     longDescription: `
-      <p>Uno de los detalles más pedidos en @magic_moments050. Combina profundidad 3D en papel arte, tu fotografía favorita y una guirnalda de luces LED cálidas en el interior.</p>
+      <p>Uno de los detalles más pedidos en @magic_moments050. Combina profundidad 3D con el nombre de esa persona especial, lámina temática y luces LED cálidas en el interior.</p>
       <ul>
-        <li>Disponible en 2 modelos de marco profundo en madera natural o clara</li>
+        <li>Disponible en marco profundo negro o madera natural</li>
         <li>Iluminación LED cálida interior lista para encender</li>
-        <li>Personalizable con temáticas (Girasoles, Snoopy, Spider-Man, Fútbol, Parejas)</li>
+        <li>Personalizable con temáticas (Spider-Man / Marvel, Fútbol, Girasoles, Parejas)</li>
         <li>Empaque protegido para envío seguro por Shalom a todo el Perú</li>
       </ul>
     `,
     priceCents: 5500,
-    compareAtCents: 6400,
     stock: 14,
     weightGrams: 680,
     dimensionsCm: { length: 24, width: 19, height: 6 },
     category: "Cuadros 3D LED",
     categorySlug: "cuadros-3d-led",
-    featured: true,
     image: "/images/prod-cuadro-3d-led.jpg",
     images: [
       "/images/prod-cuadro-3d-led.jpg",
-      "/images/prod-caja-cumpleanos-detalle.jpg",
-      "/images/prod-tarjeta-3d.jpg",
+      "/images/productos/cuadro-3d-led-girasoles.jpg",
+      "/images/productos/cuadro-3d-led-florecer.jpg",
     ],
     options: {
-      colors: ["Madera Natural", "Rosa Suave", "Blanco"],
+      colors: ["Negro", "Madera Natural", "Blanco"],
       sizes: ["Modelo Clásico (20×25 cm)", "Modelo Grande (25×30 cm)"],
-      themes: ["Girasoles / 21 Sept", "Pareja & Fotos", "Superhéroes / Fútbol", "Cumpleaños"],
+      themes: ["Superhéroes / Spider-Man", "Fútbol", "Girasoles / 21 Sept", "Pareja & Fotos"],
     },
     reviews: [],
   },
@@ -177,86 +433,16 @@ export const products: Product[] = [
     dimensionsCm: { length: 34, width: 24, height: 14 },
     category: "Ramos Temáticos",
     categorySlug: "ramos-tematicos",
-    featured: true,
     image: "/images/prod-ramo-eterno.jpg",
     images: [
       "/images/prod-ramo-eterno.jpg",
+      "/images/productos/ramo-hot-wheels.jpg",
       "/images/prod-caja-amor.jpg",
-      "/images/prod-tarjeta-felicitacion.jpg",
     ],
     options: {
-      colors: ["Azul Rey & Rosa", "Rosa Pétalo", "Amarillo Girasol", "Rojo Pasión"],
+      colors: ["Rosa Pétalo", "Azul Rey & Rosa", "Amarillo Girasol", "Rojo Pasión"],
       sizes: ["6 Rosas", "12 Rosas", "Especial con Detalles"],
-      themes: ["Aniversario", "Hot Wheels", "Flores Amarillas", "Cumpleaños"],
-    },
-    reviews: [],
-  },
-  {
-    id: 3,
-    sku: "MM-TJ-003",
-    name: "Tarjeta 3D Aniversario",
-    subtitle: "Papel algodón 300 g · Corte tridimensional y lacre",
-    badge: "Artesanal",
-    description: "Tarjeta tridimensional con mensaje personalizado para aniversarios y fechas especiales.",
-    longDescription: `
-      <p>Expresa tus sentimientos con nuestra Tarjeta 3D artesanal. Al abrirla, se despliega una escena tridimensional cortada con precisión sobre papel texturizado.</p>
-      <ul>
-        <li>Papel artístico de algodón de 300 g/m²</li>
-        <li>Mensaje interior impreso o caligrafiado a elección</li>
-        <li>Sobre rosa empolvado con sello de lacre dorado incluido</li>
-      </ul>
-    `,
-    priceCents: 1500,
-    stock: 30,
-    weightGrams: 60,
-    dimensionsCm: { length: 15, width: 10, height: 2 },
-    category: "Tarjetas 3D",
-    categorySlug: "tarjetas",
-    image: "/images/prod-tarjeta-3d.jpg",
-    images: [
-      "/images/prod-tarjeta-3d.jpg",
-      "/images/prod-tarjeta-felicitacion.jpg",
-      "/images/prod-caja-cumpleanos-detalle.jpg",
-      "/images/nosotros-proceso.jpg",
-    ],
-    options: {
-      colors: ["Rosa Pétalo", "Rojo", "Crema", "Dorado"],
-      sizes: ["Clásica", "Grande"],
-      themes: ["Aniversario", "Amor", "Cumpleaños", "Agradecimiento"],
-    },
-    reviews: [],
-  },
-  {
-    id: 4,
-    sku: "MM-KR-004",
-    name: "Kit Regalo Amistad",
-    subtitle: "Taza cerámica · Vela aromática, llavero y tarjeta",
-    description: "Kit completo con detalles especiales para celebrar la amistad.",
-    longDescription: `
-      <p>Diseñado para agradecer a esa persona incondicional. El Kit Regalo Amistad reúne detalles cálidos y útiles dentro de una caja lista para obsequiar.</p>
-      <ul>
-        <li>Taza cerámica personalizada con frase o nombre</li>
-        <li>Vela aromática en frasco ámbar artesanal</li>
-        <li>Llavero temático y tarjeta dedicatoria</li>
-      </ul>
-    `,
-    priceCents: 4800,
-    stock: 10,
-    weightGrams: 750,
-    dimensionsCm: { length: 24, width: 18, height: 10 },
-    category: "Kits de Regalo",
-    categorySlug: "kits-regalo",
-    image: "/images/prod-kit-amistad.jpg",
-    images: [
-      "/images/prod-kit-amistad.jpg",
-      "/images/prod-caja-cumpleanos-detalle.jpg",
-      "/images/prod-tarjeta-felicitacion.jpg",
-      "/images/prod-llaveros-acrilicos.jpg",
-    ],
-    options: {
-      colors: ["Rosa Pétalo", "Lavanda", "Menta", "Crema"],
-      sizes: ["Estándar", "Deluxe"],
-      themes: ["Amistad", "Cumpleaños", "Agradecimiento"],
+      themes: ["Aniversario", "Flores Amarillas", "Hot Wheels", "Cumpleaños"],
     },
     reviews: [],
   },
@@ -277,7 +463,6 @@ export const products: Product[] = [
       </ul>
     `,
     priceCents: 6500,
-    compareAtCents: 7900,
     stock: 10,
     weightGrams: 950,
     dimensionsCm: { length: 28, width: 19, height: 11 },
@@ -380,7 +565,6 @@ export const products: Product[] = [
       </ul>
     `,
     priceCents: 5500,
-    compareAtCents: 6500,
     stock: 12,
     weightGrams: 900,
     dimensionsCm: { length: 26, width: 19, height: 11 },

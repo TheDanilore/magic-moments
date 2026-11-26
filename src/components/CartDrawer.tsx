@@ -284,7 +284,7 @@ function CartDrawerContent() {
                 onClick={closeDrawer}
                 className="inline-flex min-h-11 items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] px-4 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)]"
               >
-                Lotes y Pedidos
+                Promociones
               </Link>
             </div>
 
@@ -464,7 +464,7 @@ function CartDrawerContent() {
             >
               {copyStatus === "copied" ? (
                 <>
-                  <Check className="h-3.5 w-3.5 text-[var(--color-whatsapp)]" aria-hidden="true" />
+                  <Check className="h-3.5 w-3.5 text-[var(--text-whatsapp-accessible)]" aria-hidden="true" />
                   <span>¡Copiado!</span>
                 </>
               ) : (
@@ -524,7 +524,7 @@ function CartDrawerContent() {
           </a>
 
           <p className="mt-2 text-center text-xs text-[var(--text-secondary)]">
-            Pagos por Yape · Plin · Transferencia
+            Pagos por Yape · Plin · Transferencia · Montos y envío referenciales
           </p>
         </div>
       ) : null}

@@ -9,7 +9,9 @@ import { AdaptiveSheet } from "@/components/ui/AdaptiveSheet"
 import { PriceTag } from "@/components/ui/PriceTag"
 import { QuantityStepper } from "@/components/ui/QuantityStepper"
 import { useCart } from "@/context/cart-context"
-import { getDefaultProductOptions } from "@/lib/catalog"
+import { getColorSwatchHex, getDefaultProductOptions } from "@/lib/catalog"
+import { formatPEN } from "@/lib/format"
+import { FREE_SHIPPING_THRESHOLD_CENTS } from "@/lib/shipping"
 import { buildProductInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 import type { Product } from "@/types/catalog"
 
@@ -63,7 +65,8 @@ export function ProductQuickViewModal({
     .filter((item) => item.product.id === product.id)
     .reduce((sum, item) => sum + item.quantity, 0)
   const availableStock = Math.max(0, product.stock - inBagTotalQty)
-  const showBatchPresets = product.categorySlug === "llaveros" || product.stock >= 12
+  const showBatchPresets =
+    product.categorySlug === "llaveros" || product.categorySlug === "tarjetas"
 
   const whatsappUrl = buildWhatsAppUrl(
     buildProductInquiryMessage(product, selectedOptions, quantity)
@@ -141,11 +144,10 @@ export function ProductQuickViewModal({
                   type="button"
                   onClick={() => setActiveImage(idx)}
                   aria-label={`Ver vista ${idx + 1}`}
-                  className={`relative aspect-square overflow-hidden rounded-xl border transition-all ${
-                    activeImage === idx
+                  className={`relative aspect-square overflow-hidden rounded-xl border transition-all ${activeImage === idx
                       ? "border-[var(--color-cta-primary)] ring-2 ring-[var(--color-cta-primary)]/40"
                       : "border-[var(--border-subtle)] opacity-75 hover:opacity-100"
-                  }`}
+                    }`}
                 >
                   <Image
                     src={img}
@@ -183,13 +185,17 @@ export function ProductQuickViewModal({
                       type="button"
                       onClick={() => setSelectedColor(color)}
                       aria-pressed={selectedColor === color}
-                      className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-3.5 text-xs font-medium transition-colors ${
-                        selectedColor === color
+                      className={`inline-flex min-h-11 cursor-pointer touch-manipulation items-center gap-2 rounded-full border px-3.5 text-xs font-medium transition-colors ${selectedColor === color
                           ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
                           : "border-[var(--border-subtle)] bg-[var(--surface-card)] text-[var(--text-primary)]"
-                      }`}
+                        }`}
                     >
-                      {color}
+                      <span
+                        aria-hidden="true"
+                        className="h-3 w-3 shrink-0 rounded-full border border-black/20"
+                        style={{ backgroundColor: getColorSwatchHex(color) }}
+                      />
+                      <span>{color}</span>
                     </button>
                   ))}
                 </div>
@@ -206,11 +212,10 @@ export function ProductQuickViewModal({
                       type="button"
                       onClick={() => setSelectedSize(size)}
                       aria-pressed={selectedSize === size}
-                      className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-3.5 text-xs font-medium transition-colors ${
-                        selectedSize === size
+                      className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-3.5 text-xs font-medium transition-colors ${selectedSize === size
                           ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
                           : "border-[var(--border-subtle)] bg-[var(--surface-card)] text-[var(--text-primary)]"
-                      }`}
+                        }`}
                     >
                       {size}
                     </button>
@@ -227,11 +232,10 @@ export function ProductQuickViewModal({
                       type="button"
                       onClick={() => setSelectedTheme(theme)}
                       aria-pressed={selectedTheme === theme}
-                      className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-3.5 text-xs font-medium transition-colors ${
-                        selectedTheme === theme
+                      className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-3.5 text-xs font-medium transition-colors ${selectedTheme === theme
                           ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
                           : "border-[var(--border-subtle)] bg-[var(--surface-card)] text-[var(--text-primary)]"
-                      }`}
+                        }`}
                     >
                       {theme}
                     </button>
@@ -242,23 +246,33 @@ export function ProductQuickViewModal({
 
             <div className="space-y-3 border-t border-[var(--border-subtle)] pt-4">
               {showBatchPresets ? (
-                <div className="flex flex-wrap items-center gap-2 text-xs">
-                  <span className="font-semibold text-[var(--text-secondary)]">Cantidad rápida:</span>
-                  {BATCH_PRESETS.map((preset) => (
-                    <button
-                      key={preset}
-                      type="button"
-                      disabled={availableStock > 0 && preset > availableStock}
-                      onClick={() => setQuantity(preset)}
-                      className={`min-h-9 cursor-pointer rounded-full border px-3 font-semibold tabular-nums transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
-                        quantity === preset
-                          ? "border-[var(--color-cta-primary)] bg-[var(--surface-blush)] text-[var(--text-accent-accessible)]"
-                          : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
-                      }`}
-                    >
-                      {preset === 1 ? "1 unidad" : `${preset} u.`}
-                    </button>
-                  ))}
+                <div className="space-y-1.5">
+                  <div className="flex flex-wrap items-center gap-2 text-xs">
+                    <span className="font-semibold text-[var(--text-secondary)]">Cantidad rápida:</span>
+                    {BATCH_PRESETS.map((preset) => (
+                      <button
+                        key={preset}
+                        type="button"
+                        disabled={availableStock > 0 && preset > availableStock}
+                        onClick={() => setQuantity(preset)}
+                        className={`min-h-11 cursor-pointer rounded-full border px-3.5 font-semibold tabular-nums transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${quantity === preset
+                            ? "border-[var(--color-cta-primary)] bg-[var(--surface-blush)] text-[var(--text-accent-accessible)]"
+                            : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+                          }`}
+                      >
+                        {preset === 1 ? "1 unidad" : `${preset} u.`}
+                      </button>
+                    ))}
+                  </div>
+                  {product.priceCents * quantity >= FREE_SHIPPING_THRESHOLD_CENTS ? (
+                    <p className="text-xs font-medium text-[var(--text-whatsapp-accessible)] tabular-nums">
+                      ¡Califica para envío Shalom gratis (desde {formatPEN(FREE_SHIPPING_THRESHOLD_CENTS)})!
+                    </p>
+                  ) : FREE_SHIPPING_THRESHOLD_CENTS - product.priceCents * quantity <= 2500 ? (
+                    <p className="text-xs font-medium text-[var(--text-accent-accessible)] tabular-nums">
+                      A solo {formatPEN(FREE_SHIPPING_THRESHOLD_CENTS - product.priceCents * quantity)} del envío Shalom gratis ({formatPEN(FREE_SHIPPING_THRESHOLD_CENTS)}).
+                    </p>
+                  ) : null}
                 </div>
               ) : null}
 
@@ -280,7 +294,7 @@ export function ProductQuickViewModal({
                   type="button"
                   onClick={handleAdd}
                   disabled={availableStock <= 0}
-                  className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)] tabular-nums transition-colors hover:bg-[var(--color-cta-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {added ? (
                     <>
@@ -290,11 +304,26 @@ export function ProductQuickViewModal({
                   ) : (
                     <>
                       <ShoppingBag className="h-4 w-4" aria-hidden="true" />
-                      <span>Agregar al pedido</span>
+                      <span>
+                        {quantity > 1
+                          ? `Agregar (${quantity}) · ${formatPEN(product.priceCents * quantity)}`
+                          : "Agregar al pedido"}
+                      </span>
                     </>
                   )}
                 </button>
               </div>
+
+              {product.priceCents * quantity >= 10000 &&
+                product.priceCents * quantity < FREE_SHIPPING_THRESHOLD_CENTS ? (
+                <p className="rounded-xl bg-[var(--surface-warm-sun)] px-3 py-2 text-xs font-medium text-[var(--badge-discount-text)] tabular-nums dark:bg-[var(--surface-warm-sun)] dark:text-[var(--text-accent-on-dark)]">
+                  ¡Estás a solo{" "}
+                  <strong>
+                    {formatPEN(FREE_SHIPPING_THRESHOLD_CENTS - product.priceCents * quantity)}
+                  </strong>{" "}
+                  de envío Shalom gratis (desde {formatPEN(FREE_SHIPPING_THRESHOLD_CENTS)})!
+                </p>
+              ) : null}
 
               <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
                 <a

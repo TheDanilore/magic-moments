@@ -7,7 +7,6 @@ import { AdaptiveSheet } from "@/components/ui/AdaptiveSheet"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Separator } from "@/components/ui/separator"
 import { productCategories, products } from "@/data/catalog"
 import { getCategoryBySlug } from "@/lib/catalog"
 import type { Product } from "@/types/catalog"
@@ -47,7 +46,7 @@ export function ProductsCatalogClient({
   const [query, setQuery] = useState<string>(initialQuery)
   const [selectedPriceRanges, setSelectedPriceRanges] = useState<PriceRangeId[]>([])
   const [sortBy, setSortBy] = useState<SortOption>("featured")
-  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false)
+  const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false)
   const [inspecting, setInspecting] = useState<{ product: Product; color?: string } | null>(null)
   const [isPending, startTransition] = useTransition()
 
@@ -93,7 +92,8 @@ export function ProductsCatalogClient({
       }
 
       if (normalizedQuery) {
-        const haystack = `${product.name} ${product.subtitle} ${product.description} ${product.category} ${product.sku}`.toLowerCase()
+        const haystack =
+          `${product.name} ${product.subtitle} ${product.description} ${product.category} ${product.sku} ${product.options.themes.join(" ")}`.toLowerCase()
         if (!haystack.includes(normalizedQuery)) {
           return false
         }
@@ -120,7 +120,7 @@ export function ProductsCatalogClient({
     } else if (sortBy === "newest") {
       sorted.sort((a, b) => b.id - a.id)
     } else {
-      sorted.sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)) || a.id - b.id)
+      sorted.sort((a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)))
     }
 
     return sorted
@@ -129,132 +129,26 @@ export function ProductsCatalogClient({
   const hasActiveFilters =
     selectedCategory !== "all" || query.trim() !== "" || selectedPriceRanges.length > 0
 
-  const renderFilterControls = (onAfterSelect?: () => void) => (
-    <div className="space-y-6">
-      <div>
-        <h3 className="mb-3 font-display text-base font-bold text-[var(--text-primary)]">
-          Categorías
-        </h3>
-        <ul className="space-y-1.5 text-sm">
-          <li>
-            <button
-              type="button"
-              onClick={() => {
-                handleSelectCategory("all")
-                onAfterSelect?.()
-              }}
-              className={`flex min-h-11 w-full cursor-pointer items-center rounded-xl px-3 text-left font-medium transition-colors ${
-                selectedCategory === "all"
-                  ? "bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
-                  : "text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]"
-              }`}
-            >
-              Todas
-            </button>
-          </li>
-          {productCategories.map((category) => (
-            <li key={category.slug}>
-              <button
-                type="button"
-                onClick={() => {
-                  handleSelectCategory(category.slug)
-                  onAfterSelect?.()
-                }}
-                className={`flex min-h-11 w-full cursor-pointer items-center rounded-xl px-3 text-left font-medium transition-colors ${
-                  selectedCategory === category.slug
-                    ? "bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
-                    : "text-[var(--text-secondary)] hover:bg-[var(--surface-card)] hover:text-[var(--text-primary)]"
-                }`}
-              >
-                {category.name}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <Separator />
-
-      <div>
-        <h3 className="mb-3 font-display text-base font-bold text-[var(--text-primary)]">
-          Precio
-        </h3>
-        <div className="space-y-2.5">
-          {PRICE_RANGES.map((range) => (
-            <div key={range.id} className="flex min-h-10 items-center space-x-2.5">
-              <Checkbox
-                id={`price-${range.id}`}
-                checked={selectedPriceRanges.includes(range.id)}
-                onCheckedChange={() => togglePriceRange(range.id)}
-              />
-              <Label htmlFor={`price-${range.id}`} className="cursor-pointer text-sm">
-                {range.label}
-              </Label>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <Separator />
-
-      <div>
-        <h3 className="mb-3 font-display text-base font-bold text-[var(--text-primary)]">
-          Ordenar por
-        </h3>
-        <Select
-          value={sortBy}
-          onValueChange={(val) =>
-            startTransition(() => {
-              setSortBy(val as SortOption)
-            })
-          }
-        >
-          <SelectTrigger className="min-h-11 rounded-xl">
-            <SelectValue placeholder="Ordenar por" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="featured">Destacados</SelectItem>
-            <SelectItem value="price-low">Precio: Menor a Mayor</SelectItem>
-            <SelectItem value="price-high">Precio: Mayor a Menor</SelectItem>
-            <SelectItem value="newest">Más Recientes</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  )
-
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section className="w-full pt-24 pb-12 md:pt-28 md:pb-16">
+      <section className="w-full pt-22 pb-16 md:pt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <div className="flex flex-col gap-4 border-b border-[var(--border-subtle)] pb-6 md:flex-row md:items-end md:justify-between">
+          <div className="flex flex-col gap-4 border-b border-[var(--border-subtle)] pb-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
               <h1 className="font-display text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] sm:text-4xl">
                 {activeCategory ? activeCategory.name : "Nuestros Productos"}
               </h1>
-              <div className="mt-1.5 flex flex-wrap items-center gap-2">
-                <p className="text-sm text-[var(--text-secondary)]">
-                  {activeCategory
-                    ? activeCategory.subtitle
-                    : "Detalles personalizados listos para coordinar por WhatsApp"}
-                </p>
-                {hasActiveFilters ? (
-                  <button
-                    type="button"
-                    onClick={resetFilters}
-                    className="inline-flex min-h-8 cursor-pointer items-center gap-1 rounded-full border border-[var(--border-strong)] bg-[var(--surface-card)] px-3 text-xs font-semibold text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
-                  >
-                    <span>Limpiar filtros</span>
-                    <X className="h-3 w-3" aria-hidden="true" />
-                  </button>
-                ) : null}
-              </div>
+              <p className="text-pretty mt-1.5 text-sm text-[var(--text-secondary)]">
+                {activeCategory
+                  ? activeCategory.subtitle
+                  : "Detalles hechos a mano · Precios referenciales sujetos a personalización por WhatsApp"}
+              </p>
             </div>
 
-            <div className="flex items-center gap-2">
-              <div className="relative flex-1 md:flex-initial">
+            <div className="flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row sm:items-center">
+              <div className="relative w-full sm:w-[240px] lg:w-[270px]">
                 <Search
-                  className="pointer-events-none absolute top-3.5 left-3.5 h-4 w-4 text-[var(--text-secondary)]"
+                  className="pointer-events-none absolute top-1/2 left-3.5 h-4 w-4 -translate-y-1/2 text-[var(--text-secondary)]"
                   aria-hidden="true"
                 />
                 <input
@@ -263,89 +157,196 @@ export function ProductsCatalogClient({
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Buscar productos..."
+                  placeholder="Buscar cajas, cuadros, ramos..."
                   aria-label="Buscar productos"
-                  className="h-11 w-full rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] pr-4 pl-10 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)] md:w-[240px] lg:w-[300px]"
+                  className="h-12 w-full rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] pr-4 pl-10 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]"
                 />
               </div>
 
-              <button
-                type="button"
-                onClick={() => setIsMobileFilterOpen(true)}
-                aria-label="Abrir filtros"
-                className="inline-flex h-11 shrink-0 cursor-pointer touch-manipulation items-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-4 text-xs font-semibold text-[var(--text-primary)] md:hidden"
-              >
-                <SlidersHorizontal className="h-4 w-4" aria-hidden="true" />
-                <span>Filtros</span>
-              </button>
+              <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:items-center">
+                <button
+                  type="button"
+                  onClick={() => setIsFilterSheetOpen(true)}
+                  aria-label="Filtrar por precio"
+                  className="inline-flex h-12 w-full shrink-0 cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-4 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)] sm:w-auto"
+                >
+                  <SlidersHorizontal className="h-4 w-4 shrink-0" aria-hidden="true" />
+                  <span>
+                    Precio{selectedPriceRanges.length > 0 ? ` (${selectedPriceRanges.length})` : ""}
+                  </span>
+                </button>
+
+                <Select
+                  value={sortBy}
+                  onValueChange={(val) =>
+                    startTransition(() => {
+                      setSortBy(val as SortOption)
+                    })
+                  }
+                >
+                  <SelectTrigger aria-label="Ordenar productos" className="h-12 w-full min-w-0 rounded-full border-[var(--border-strong)] bg-[var(--surface-elevated)] px-4 text-xs font-semibold sm:w-auto sm:min-w-[175px]">
+                    <SelectValue placeholder="Ordenar por" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="featured">Destacados</SelectItem>
+                    <SelectItem value="price-low">Precio: Menor a Mayor</SelectItem>
+                    <SelectItem value="price-high">Precio: Mayor a Menor</SelectItem>
+                    <SelectItem value="newest">Más Recientes</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
 
-          <div className="mt-8 grid grid-cols-1 gap-8 md:grid-cols-4">
-            {/* Desktop Sidebar */}
-            <aside className="hidden md:block">{renderFilterControls()}</aside>
-
-            {/* Product Grid */}
-            <div className="md:col-span-3">
-              {filteredProducts.length === 0 ? (
-                <div className="flex flex-col items-center justify-center rounded-[var(--radius-stage)] border border-dashed border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 py-16 text-center">
-                  <Filter className="h-8 w-8 text-[var(--text-secondary)]" aria-hidden="true" />
-                  <p className="mt-3 font-display text-xl font-bold text-[var(--text-primary)]">
-                    No encontramos coincidencias
-                  </p>
-                  <p className="mt-1 max-w-md text-sm text-[var(--text-secondary)]">
-                    Prueba limpiando los filtros activos o explora nuestros productos más solicitados.
-                  </p>
-                  <button
-                    type="button"
-                    onClick={resetFilters}
-                    className="mt-5 inline-flex min-h-12 cursor-pointer items-center rounded-full bg-[var(--color-cta-primary)] px-6 text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
-                  >
-                    Ver todos los productos
-                  </button>
-                </div>
-              ) : (
-                <div
-                  className={`grid grid-cols-1 gap-6 transition-opacity duration-150 sm:grid-cols-2 lg:grid-cols-3 ${
-                    isPending ? "opacity-65" : "opacity-100"
+          {/* Horizontal Category Pills + Results Count */}
+          <div className="mt-4 flex flex-col gap-3 lg:mt-6 lg:flex-row lg:items-center lg:justify-between">
+            <h2 className="sr-only">Categorías y listado de detalles</h2>
+            <div
+              role="group"
+              aria-label="Filtrar por categoría"
+              className="no-scrollbar -mx-4 flex flex-nowrap gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0"
+            >
+              <button
+                type="button"
+                onClick={() => handleSelectCategory("all")}
+                aria-pressed={selectedCategory === "all"}
+                className={`inline-flex min-h-11 shrink-0 cursor-pointer touch-manipulation items-center rounded-full border px-4 text-xs font-semibold whitespace-nowrap transition-colors ${
+                  selectedCategory === "all"
+                    ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
+                    : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+                }`}
+              >
+                Todas
+              </button>
+              {productCategories.map((category) => (
+                <button
+                  key={category.slug}
+                  type="button"
+                  onClick={() => handleSelectCategory(category.slug)}
+                  aria-pressed={selectedCategory === category.slug}
+                  className={`inline-flex min-h-11 shrink-0 cursor-pointer touch-manipulation items-center rounded-full border px-4 text-xs font-semibold whitespace-nowrap transition-colors ${
+                    selectedCategory === category.slug
+                      ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
+                      : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
                   }`}
                 >
-                  {filteredProducts.map((product) => (
-                    <ProductCard
-                      key={product.id}
-                      product={product}
-                      onInspect={(prod, color) => setInspecting({ product: prod, color })}
-                    />
-                  ))}
-                </div>
-              )}
+                  {category.name}
+                </button>
+              ))}
             </div>
+
+            <div className="flex shrink-0 flex-wrap items-center gap-2 text-xs text-[var(--text-secondary)]">
+              <span className="font-medium tabular-nums" aria-live="polite">
+                {isPending
+                  ? "Actualizando..."
+                  : `Mostrando ${filteredProducts.length} de ${products.length} detalles`}
+              </span>
+              {hasActiveFilters ? (
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="inline-flex min-h-10 cursor-pointer items-center gap-1 rounded-full border border-[var(--border-strong)] bg-[var(--surface-card)] px-3 font-semibold text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+                >
+                  <span>Limpiar</span>
+                  <X className="h-3 w-3" aria-hidden="true" />
+                </button>
+              ) : null}
+            </div>
+          </div>
+
+          {/* Product Grid */}
+          <div className="mt-6 sm:mt-8" aria-busy={isPending}>
+            {filteredProducts.length === 0 ? (
+              <div className="flex flex-col items-center justify-center rounded-[var(--radius-stage)] border border-dashed border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 py-16 text-center">
+                <Filter className="h-8 w-8 text-[var(--text-secondary)]" aria-hidden="true" />
+                <p className="mt-3 font-display text-xl font-bold text-[var(--text-primary)]">
+                  No encontramos coincidencias
+                </p>
+                <p className="mt-1 max-w-md text-sm text-[var(--text-secondary)]">
+                  Prueba limpiando los filtros activos o explora todos nuestros detalles personalizados.
+                </p>
+                <button
+                  type="button"
+                  onClick={resetFilters}
+                  className="mt-5 inline-flex min-h-12 cursor-pointer items-center rounded-full bg-[var(--color-cta-primary)] px-6 text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
+                >
+                  Ver todos los productos
+                </button>
+              </div>
+            ) : (
+              <div
+                className={`grid grid-cols-1 gap-6 transition-opacity duration-150 sm:grid-cols-2 lg:grid-cols-4 ${
+                  isPending ? "opacity-65" : "opacity-100"
+                }`}
+              >
+                {filteredProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onInspect={(prod, color) => setInspecting({ product: prod, color })}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* Mobile Bottom Sheet Filters */}
+      {/* Price Filter AdaptiveSheet */}
       <AdaptiveSheet
-        isOpen={isMobileFilterOpen}
-        onClose={() => setIsMobileFilterOpen(false)}
+        isOpen={isFilterSheetOpen}
+        onClose={() => setIsFilterSheetOpen(false)}
         desktopMode="drawer"
-        ariaLabel="Filtros de productos"
+        ariaLabel="Filtrar por precio"
       >
         <div className="safe-bottom-pad flex max-h-[82dvh] flex-col overflow-y-auto px-5 pt-2 pb-6">
           <div className="mb-4 flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
             <h2 className="font-display text-lg font-bold text-[var(--text-primary)]">
-              Filtrar catálogo
+              Rango de precio
             </h2>
             <button
               type="button"
-              onClick={() => setIsMobileFilterOpen(false)}
+              onClick={() => setIsFilterSheetOpen(false)}
               aria-label="Cerrar filtros"
               className="inline-flex h-12 w-12 cursor-pointer touch-manipulation items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--text-primary)]"
             >
               <X className="h-4 w-4" aria-hidden="true" />
             </button>
           </div>
-          {renderFilterControls(() => setIsMobileFilterOpen(false))}
+
+          <div className="space-y-3">
+            {PRICE_RANGES.map((range) => (
+              <div key={range.id} className="flex min-h-12 items-center space-x-3 rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-3.5">
+                <Checkbox
+                  id={`price-${range.id}`}
+                  checked={selectedPriceRanges.includes(range.id)}
+                  onCheckedChange={() => togglePriceRange(range.id)}
+                />
+                <Label htmlFor={`price-${range.id}`} className="flex-1 cursor-pointer py-3 text-sm font-medium">
+                  {range.label}
+                </Label>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-6 flex gap-2">
+            {selectedPriceRanges.length > 0 ? (
+              <button
+                type="button"
+                onClick={() => setSelectedPriceRanges([])}
+                className="min-h-12 flex-1 cursor-pointer rounded-full border border-[var(--border-strong)] text-sm font-semibold text-[var(--text-primary)]"
+              >
+                Limpiar
+              </button>
+            ) : null}
+            <button
+              type="button"
+              onClick={() => setIsFilterSheetOpen(false)}
+              className="min-h-12 flex-1 cursor-pointer rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)]"
+            >
+              Aplicar
+            </button>
+          </div>
         </div>
       </AdaptiveSheet>
 

@@ -133,10 +133,10 @@ export function buildProductInquiryMessage(
 }
 
 /**
- * Construye el mensaje prellenado para promociones y sorteos.
+ * Construye el mensaje prellenado para promociones y packs.
  */
 export function buildPromoMessage(promoTitle: string, promoDetails?: string): string {
-  const lines = [`Hola Magic Moments, quiero participar / aprovechar la promoción: "${promoTitle}".`]
+  const lines = [`Hola Magic Moments, quiero consultar por la promoción: "${promoTitle}".`]
   if (promoDetails && promoDetails.trim()) {
     lines.push(promoDetails.trim())
   }

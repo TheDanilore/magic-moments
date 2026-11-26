@@ -43,6 +43,7 @@ export interface Product {
   featured?: boolean
   image: string
   images: string[]
+  video?: string
   options: {
     colors: string[]
     sizes: string[]

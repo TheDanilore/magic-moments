@@ -4,61 +4,52 @@ import { ArrowRight, ArrowUpRight } from "lucide-react"
 import { productCategories } from "@/data/catalog"
 
 export default function ProductCategories() {
-  const homeCategories = productCategories.slice(0, 4)
-
   return (
-    <section className="w-full border-y border-[var(--border-subtle)] bg-[var(--surface-page)] py-14 md:py-20">
+    <section className="w-full border-y border-[var(--border-subtle)] bg-[var(--surface-page)] py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
+        <div className="flex flex-col justify-between gap-3 md:flex-row md:items-end">
           <div className="max-w-xl">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
+            <h2 className="font-display text-2xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] sm:text-3xl md:text-4xl">
               Explora por Categoría
             </h2>
-            <p className="text-pretty mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Cajas temáticas, cuadros 3D iluminados, ramos eternos y llaveros acrílicos personalizados a tu gusto.
+            <p className="text-pretty mt-1.5 text-sm text-[var(--text-secondary)] sm:text-base">
+              Las 6 líneas de nuestro taller en Chimbote, personalizables en color, fotos y dedicatoria.
             </p>
           </div>
           <Link
             href="/productos"
             className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-[var(--text-accent-accessible)] underline underline-offset-4 hover:opacity-80"
           >
-            <span>Ver las {productCategories.length} categorías</span>
+            <span>Ver catálogo completo</span>
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </Link>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-          {homeCategories.map((category) => (
+        <div className="mt-6 grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+          {productCategories.map((category) => (
             <article key={category.slug} className="group flex flex-col">
               <Link
                 href={`/productos?categoria=${category.slug}`}
-                className="flex flex-1 flex-col rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3 shadow-sm transition-all hover:border-[var(--color-cta-primary)] hover:shadow-md"
+                className="flex flex-1 flex-col rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2.5 shadow-sm transition-all hover:border-[var(--color-cta-primary)] hover:shadow-md"
               >
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.25rem)] bg-[var(--surface-blush)]">
+                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.3rem)] bg-[var(--surface-blush)]">
                   <Image
                     src={category.image}
                     alt={category.name}
                     fill
                     loading="lazy"
                     decoding="async"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 16vw"
                     className="studio-photo-adapt object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                 </div>
-                <div className="mt-3.5 flex flex-1 flex-col justify-between px-1 pb-1">
-                  <div>
-                    <div className="flex items-center justify-between gap-2">
-                      <h3 className="font-display text-lg font-bold tracking-tight text-[var(--text-primary)]">
-                        {category.name}
-                      </h3>
-                      <span className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[var(--surface-blush)] text-[var(--text-accent-accessible)] transition-colors group-hover:bg-[var(--color-cta-primary)] group-hover:text-[var(--color-cta-primary-ink)]">
-                        <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                      </span>
-                    </div>
-                    <p className="text-pretty mt-1.5 text-xs leading-relaxed text-[var(--text-secondary)]">
-                      {category.subtitle}
-                    </p>
-                  </div>
+                <div className="mt-2.5 flex flex-1 items-center justify-between gap-1.5 px-0.5 pb-0.5">
+                  <h3 className="line-clamp-2 font-display text-sm leading-tight font-bold tracking-tight text-[var(--text-primary)]">
+                    {category.name}
+                  </h3>
+                  <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--surface-blush)] text-[var(--text-accent-accessible)] transition-colors group-hover:bg-[var(--color-cta-primary)] group-hover:text-[var(--color-cta-primary-ink)]">
+                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                  </span>
                 </div>
               </Link>
             </article>

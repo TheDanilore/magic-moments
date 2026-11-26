@@ -15,7 +15,7 @@ export default function ContactoPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section className="hero-atelier-gradient w-full border-b border-[var(--border-subtle)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-20">
+      <section className="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-blush)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
             <h1 className="font-display text-3xl leading-[0.98] font-bold tracking-[-0.04em] text-balance sm:text-5xl">
@@ -62,7 +62,7 @@ export default function ContactoPage() {
                           href={whatsappUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="font-semibold text-[var(--color-whatsapp)] underline underline-offset-2"
+                          className="font-semibold text-[var(--text-whatsapp-accessible)] underline underline-offset-2"
                         >
                           {whatsappPhone}
                         </a>
@@ -128,7 +128,7 @@ export default function ContactoPage() {
             <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
               Preguntas Frecuentes
             </h2>
-            <p className="mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
+            <p className="text-pretty mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
               Respuestas rápidas sobre personalización, lotes y envíos
             </p>
           </div>

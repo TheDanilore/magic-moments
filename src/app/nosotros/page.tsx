@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function NosotrosPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section className="hero-atelier-gradient w-full border-b border-[var(--border-subtle)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-20">
+      <section className="w-full border-b border-[var(--border-subtle)] bg-[var(--surface-blush)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="flex flex-col justify-center space-y-4 lg:col-span-6">
@@ -22,11 +22,11 @@ export default function NosotrosPage() {
               </div>
 
               <div className="space-y-2">
-                <h1 className="font-display text-3xl leading-[0.98] font-bold tracking-[-0.04em] text-balance sm:text-5xl xl:text-6xl">
+                <h1 className="font-display text-3xl leading-[1.02] font-bold tracking-[-0.03em] text-balance sm:text-4xl lg:text-5xl">
                   Sobre Magic Moments
                 </h1>
-                <p className="max-w-[600px] text-base font-medium text-[var(--text-accent-accessible)] md:text-lg">
-                  Yanin Faviana · Detalles hechos a mano para emocionar
+                <p className="text-pretty max-w-[600px] text-base font-medium text-[var(--text-accent-accessible)] md:text-lg">
+                  Detalles personalizados hechos a mano para emocionar
                 </p>
               </div>
               <p className="text-pretty max-w-[600px] text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
@@ -43,7 +43,7 @@ export default function NosotrosPage() {
                   href="https://www.instagram.com/magic_moments050/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-page)]"
                 >
                   <Instagram className="h-4 w-4 text-[var(--text-accent-accessible)]" aria-hidden="true" />
                   <span>@magic_moments050</span>
@@ -51,16 +51,16 @@ export default function NosotrosPage() {
               </div>
             </div>
 
-            <div className="flex justify-center lg:col-span-6">
-              <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3 shadow-md">
-                <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-stage)-0.35rem)] bg-[var(--surface-blush)]">
+            <div className="lg:col-span-6">
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2 shadow-sm">
+                <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-stage)-0.35rem)] bg-[var(--surface-card)]">
                   <Image
-                    src="/images/logo-magic-moments.jpg"
+                    src="/images/nosotros-taller.jpg"
                     fill
                     priority
-                    sizes="(max-width: 1024px) 100vw, 420px"
-                    alt="Emblema ilustrado Magic Moments"
-                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    alt="Taller y empaque artesanal de Magic Moments"
+                    className="studio-photo-adapt object-cover"
                   />
                 </div>
               </div>
@@ -75,7 +75,7 @@ export default function NosotrosPage() {
             <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
               Nuestros Valores
             </h2>
-            <p className="mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
+            <p className="text-pretty mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
               Lo que cuidamos en cada caja, cuadro LED, ramo o llavero
             </p>
           </div>
@@ -88,7 +88,7 @@ export default function NosotrosPage() {
                 <CardTitle className="mt-2 font-display">Dedicación</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <p className="text-pretty text-sm text-[var(--text-secondary)]">
                   Cada pedido está hecho a mano con cariño y atención en cada lazo y dedicatoria.
                 </p>
               </CardContent>
@@ -101,7 +101,7 @@ export default function NosotrosPage() {
                 <CardTitle className="mt-2 font-display">Creatividad</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <p className="text-pretty text-sm text-[var(--text-secondary)]">
                   Adaptamos temáticas favoritas (girasoles, personajes, fechas especiales) a tu estilo.
                 </p>
               </CardContent>
@@ -114,7 +114,7 @@ export default function NosotrosPage() {
                 <CardTitle className="mt-2 font-display">Envío Seguro</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <p className="text-pretty text-sm text-[var(--text-secondary)]">
                   Protegemos cada detalle para entrega en Chimbote o envío nacional vía Shalom.
                 </p>
               </CardContent>
@@ -127,7 +127,7 @@ export default function NosotrosPage() {
                 <CardTitle className="mt-2 font-display">Personalización</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-[var(--text-secondary)]">
+                <p className="text-pretty text-sm text-[var(--text-secondary)]">
                   Desde un obsequio único hasta lotes pequeños de llaveros para tus eventos.
                 </p>
               </CardContent>
@@ -136,14 +136,14 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      <section className="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-blush)]/45 py-12 md:py-20">
+      <section className="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-card)] py-12 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
             <div className="order-2 lg:order-1">
               <div className="grid grid-cols-2 gap-4">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <Image
-                    src="/images/prod-cuadro-3d-led.jpg"
+                    src="/images/productos/cuadro-3d-led-girasoles.jpg"
                     alt="Cuadro 3D con luces LED Magic Moments"
                     fill
                     loading="lazy"
@@ -154,8 +154,8 @@ export default function NosotrosPage() {
                 </div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <Image
-                    src="/images/prod-ramo-eterno.jpg"
-                    alt="Ramo temático con rosas eternas"
+                    src="/images/productos/ramo-hot-wheels.jpg"
+                    alt="Ramo temático Hot Wheels con rosas eternas"
                     fill
                     loading="lazy"
                     decoding="async"
@@ -165,8 +165,8 @@ export default function NosotrosPage() {
                 </div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <Image
-                    src="/images/prod-llaveros-acrilicos.jpg"
-                    alt="Llaveros acrílicos personalizados"
+                    src="/images/productos/box-hot-wheels-abierta.jpg"
+                    alt="Box Hot Wheels personalizado Magic Moments"
                     fill
                     loading="lazy"
                     decoding="async"
@@ -176,8 +176,8 @@ export default function NosotrosPage() {
                 </div>
                 <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <Image
-                    src="/images/prod-caja-amor.jpg"
-                    alt="Caja personalizada lista para entrega"
+                    src="/images/productos/box-flores-amarillas-abierta.jpg"
+                    alt="Box Flores Amarillas lista para entrega"
                     fill
                     loading="lazy"
                     decoding="async"
@@ -194,7 +194,7 @@ export default function NosotrosPage() {
                   Nuestro Proceso
                 </h2>
                 <p className="text-sm text-[var(--text-secondary)] sm:text-base">
-                  Así preparamos cada regalo o lote de recuerdos
+                  Así preparamos cada regalo o docena de recuerdos
                 </p>
               </div>
               <div className="space-y-4">
@@ -217,7 +217,7 @@ export default function NosotrosPage() {
                   {
                     step: 4,
                     title: "Entrega en Chimbote o envío Shalom",
-                    text: "Coordinamos entrega en Chimbote / Nuevo Chimbote o despacho seguro a todo el Perú.",
+                    text: "Coordinamos entrega en Chimbote y Nuevo Chimbote o despacho seguro a todo\u00A0el\u00A0Perú.",
                   },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">
@@ -228,7 +228,7 @@ export default function NosotrosPage() {
                       <h3 className="font-display font-semibold text-[var(--text-primary)]">
                         {item.title}
                       </h3>
-                      <p className="text-sm text-[var(--text-secondary)]">{item.text}</p>
+                      <p className="text-pretty text-sm text-[var(--text-secondary)]">{item.text}</p>
                     </div>
                   </div>
                 ))}
