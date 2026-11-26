@@ -19,12 +19,14 @@ interface ProductQuickViewModalProps {
   onClose: () => void
 }
 
+const BATCH_PRESETS = [1, 6, 12] as const
+
 export function ProductQuickViewModal({
   product,
   initialColor,
   onClose,
 }: ProductQuickViewModalProps) {
-  const { addItem, openDrawer } = useCart()
+  const { items, addItem, openDrawer } = useCart()
 
   const [activeImage, setActiveImage] = useState(0)
   const [selectedColor, setSelectedColor] = useState("")
@@ -57,14 +59,24 @@ export function ProductQuickViewModal({
     return null
   }
 
+  const inBagTotalQty = items
+    .filter((item) => item.product.id === product.id)
+    .reduce((sum, item) => sum + item.quantity, 0)
+  const availableStock = Math.max(0, product.stock - inBagTotalQty)
+  const showBatchPresets = product.categorySlug === "llaveros" || product.stock >= 12
+
   const whatsappUrl = buildWhatsAppUrl(
     buildProductInquiryMessage(product, selectedOptions, quantity)
   )
 
   const handleAdd = () => {
+    if (availableStock <= 0) {
+      toast.info(`Ya tienes el máximo referencial en tu pedido (${product.stock} u.)`)
+      return
+    }
     const result = addItem(product, selectedOptions, quantity, false)
     if (!result.added) {
-      toast.info(`Stock máximo alcanzado (${product.stock} disponibles)`)
+      toast.info(`Stock referencial alcanzado (${product.stock} disponibles)`)
       return
     }
     setAdded(true)
@@ -105,7 +117,7 @@ export function ProductQuickViewModal({
             type="button"
             onClick={onClose}
             aria-label="Cerrar vista rápida"
-            className="inline-flex h-12 w-12 shrink-0 cursor-pointer touch-manipulation items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-[var(--surface-card)]"
+            className="inline-flex h-12 w-12 shrink-0 cursor-pointer touch-manipulation items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
           >
             <X className="h-4 w-4" aria-hidden="true" />
           </button>
@@ -113,7 +125,7 @@ export function ProductQuickViewModal({
 
         <div className="grid gap-6 md:grid-cols-2">
           <div className="space-y-3">
-            <div className="relative aspect-square overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)]">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-blush)]">
               <Image
                 src={product.images[activeImage] ?? product.image}
                 alt={product.name}
@@ -185,7 +197,7 @@ export function ProductQuickViewModal({
 
               <div>
                 <p className="mb-2 text-xs font-semibold text-[var(--text-primary)]">
-                  Tamaño: <span className="font-normal text-[var(--text-secondary)]">{selectedSize}</span>
+                  Modelo / Tamaño: <span className="font-normal text-[var(--text-secondary)]">{selectedSize}</span>
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {product.options.sizes.map((size) => (
@@ -196,7 +208,7 @@ export function ProductQuickViewModal({
                       aria-pressed={selectedSize === size}
                       className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-3.5 text-xs font-medium transition-colors ${
                         selectedSize === size
-                          ? "border-[var(--color-cta-dark)] bg-[var(--color-cta-dark)] text-[var(--color-cta-dark-ink)]"
+                          ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
                           : "border-[var(--border-subtle)] bg-[var(--surface-card)] text-[var(--text-primary)]"
                       }`}
                     >
@@ -228,21 +240,46 @@ export function ProductQuickViewModal({
               </div>
             </div>
 
-            <div className="space-y-2.5 border-t border-[var(--border-subtle)] pt-4">
+            <div className="space-y-3 border-t border-[var(--border-subtle)] pt-4">
+              {showBatchPresets ? (
+                <div className="flex flex-wrap items-center gap-2 text-xs">
+                  <span className="font-semibold text-[var(--text-secondary)]">Cantidad rápida:</span>
+                  {BATCH_PRESETS.map((preset) => (
+                    <button
+                      key={preset}
+                      type="button"
+                      disabled={availableStock > 0 && preset > availableStock}
+                      onClick={() => setQuantity(preset)}
+                      className={`min-h-9 cursor-pointer rounded-full border px-3 font-semibold tabular-nums transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
+                        quantity === preset
+                          ? "border-[var(--color-cta-primary)] bg-[var(--surface-blush)] text-[var(--text-accent-accessible)]"
+                          : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+                      }`}
+                    >
+                      {preset === 1 ? "1 unidad" : `${preset} u.`}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
+
               <div className="flex items-center gap-3">
                 <QuantityStepper
                   quantity={quantity}
-                  maxStock={product.stock}
+                  maxStock={Math.max(1, availableStock || product.stock)}
                   minQuantity={1}
                   itemName={product.name}
+                  allowDirectInput
                   onDecrement={() => setQuantity((q) => Math.max(1, q - 1))}
-                  onIncrement={() => setQuantity((q) => Math.min(product.stock, q + 1))}
+                  onIncrement={() =>
+                    setQuantity((q) => Math.min(Math.max(1, availableStock || product.stock), q + 1))
+                  }
+                  onQuantityChange={(next) => setQuantity(next)}
                 />
 
                 <button
                   type="button"
                   onClick={handleAdd}
-                  disabled={product.stock <= 0}
+                  disabled={availableStock <= 0}
                   className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {added ? (
@@ -267,12 +304,12 @@ export function ProductQuickViewModal({
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[var(--color-whatsapp)] px-4 text-xs font-semibold text-[var(--color-whatsapp-ink)] transition-colors hover:bg-[var(--color-whatsapp-hover)]"
                 >
                   <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                  <span>Pedir por WhatsApp</span>
+                  <span>Cotizar por WhatsApp</span>
                 </a>
                 <Link
                   href={`/productos/${product.id}`}
                   onClick={onClose}
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--border-strong)] px-4 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-card)]"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--border-strong)] px-4 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
                 >
                   Ver ficha completa
                 </Link>

@@ -1,26 +1,30 @@
 ---
-name: Magic Moments — Atelier Rosa & Obsidiana
-description: Boutique de detalles personalizados con escenario nocturno en obsidiana, catálogo luminoso en marfil rosado y ergonomía camaleónica.
+name: Magic Moments — Atelier Pétalo, Frambuesa & Girasol
+description: Boutique artesanal de detalles personalizados en Chimbote y todo el Perú con superficies rosa pétalo, vino frambuesa y acentos girasol dorado.
 colors:
-  page: "#f6f2ef"
-  card: "#ece5df"
-  elevated: "#fcfaf8"
-  obsidian: "#111113"
-  ink: "#141413"
-  ink-muted: "#5c5852"
-  cta-primary: "#c94c6a"
-  cta-primary-hover: "#b23c59"
-  accent-accessible: "#9a2e4b"
-  whatsapp: "#128c4a"
+  page: "#fff7fa"
+  blush: "#fce6ee"
+  blush-deep: "#f9d5e3"
+  card: "#f7e8ee"
+  elevated: "#ffffff"
+  berry-deep: "#6d1e3b"
+  ink: "#2d1821"
+  ink-muted: "#664754"
+  cta-primary: "#b03658"
+  cta-primary-hover: "#952947"
+  accent-accessible: "#962947"
+  accent-sunflower: "#fff0c7"
+  whatsapp: "#0f7a3f"
 typography:
   display: "Bricolage Grotesque, ui-sans-serif, system-ui, sans-serif"
-  sans: "Instrument Sans, ui-sans-serif, system-ui, sans-serif"
+  sans: "Figtree, ui-sans-serif, system-ui, sans-serif"
 ---
 
 ## Overview
-**Atelier Rosa & Obsidiana** combina un escenario focal oscuro (`#111113`) para el Hero y la vitrina de producto con un catálogo cálido y luminoso (`#f6f2ef` / `#ece5df`), soportando modo claro y oscuro mediante variables CSS semánticas (`var(--surface-*)`, `var(--text-*)`, `var(--color-cta-*)`).
+**Atelier Pétalo, Frambuesa & Girasol** reemplaza los bloques negros y monocromáticos por una paleta luminosa inspirada en el emblema ilustrado de `@magic_moments050`: rosa pétalo suave (`#fce6ee`), frambuesa berry de alto contraste (`#b03658`, ≥ 5.9:1 WCAG AA), vino frambuesa (`#6d1e3b`) para cierres y acentos girasol cálido (`#fff0c7` / `#ffd97d`) propios de los cuadros 3D LED y ramos. En modo oscuro utiliza **Ciruela Nocturna** (`#1c1016` / `#26151e`) manteniendo calidez cromática.
 
 ## Ergonomía & Reglas
-- Targets táctiles mínimos de `48×48px` (`min-h-12 min-w-12`) en controles móviles y selectores.
+- Contraste WCAG AA mínimo de `4.5:1` en todos los botones, chips activos y enlaces (incluyendo CTAs frambuesa `#b03658` y WhatsApp `#0f7a3f`).
+- Targets táctiles mínimos de `48×48px` (`min-h-12`) en controles móviles, selectores y acciones principales.
 - Atajos de teclado silenciosos (`/`, `B`, `T`, `Esc`, `A`, `←`, `→`) revelados exclusivamente en `ShortcutTooltip` al hacer hover o focus en escritorio.
-- Imágenes reales de estudio con `aspect-ratio` fijo y `loading="lazy"` (excepto Hero `priority`) para `CLS = 0`.
+- Imágenes con `aspect-ratio` consistente dentro de contenedores posicionados (`relative`) para `CLS = 0`.

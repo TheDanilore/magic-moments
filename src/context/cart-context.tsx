@@ -125,14 +125,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     () => EMPTY_CART
   )
 
-  // Rehidrata los productos almacenados con el catálogo actual para mantener precios, stock y peso al día
+  // Rehidrata los productos almacenados con el catálogo actual y valida stock acumulado por producto
   const items = useMemo(() => {
     if (rawItems.length === 0) return rawItems
+    const remainingByProduct = new Map<number, number>()
     const next: CartItem[] = []
     for (const item of rawItems) {
       const fresh = catalogById.get(item.product.id)
-      if (!fresh) continue
-      const clampedQty = Math.min(Math.max(1, item.quantity), Math.max(1, fresh.stock))
+      if (!fresh || fresh.stock <= 0) continue
+      const remaining = remainingByProduct.get(fresh.id) ?? fresh.stock
+      if (remaining <= 0) continue
+      const clampedQty = Math.min(Math.max(1, item.quantity), remaining)
+      remainingByProduct.set(fresh.id, remaining - clampedQty)
       next.push({
         ...item,
         product: fresh,
@@ -184,14 +188,20 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const lineKey = buildCartLineKey(freshProduct.id, selectedOptions)
       const safeQty = Math.max(1, Math.floor(quantity))
 
-      const currentQty =
-        readCartSnapshot().items.find((item) => item.lineKey === lineKey)?.quantity ?? 0
+      const snapshotItems = readCartSnapshot().items
+      const currentLineQty =
+        snapshotItems.find((item) => item.lineKey === lineKey)?.quantity ?? 0
+      const currentProductTotalQty = snapshotItems
+        .filter((item) => item.product.id === freshProduct.id)
+        .reduce((sum, item) => sum + item.quantity, 0)
+      const availableForProduct = Math.max(0, maxStock - currentProductTotalQty)
 
-      if (currentQty >= maxStock) {
+      if (availableForProduct <= 0) {
         return { added: false, atLimit: true }
       }
 
-      const nextQty = Math.min(currentQty + safeQty, maxStock)
+      const addedQty = Math.min(safeQty, availableForProduct)
+      const nextQty = currentLineQty + addedQty
 
       writeCartSnapshot((prev) => {
         const idx = prev.items.findIndex((item) => item.lineKey === lineKey)
@@ -212,7 +222,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
               lineKey,
               product: freshProduct,
               options: selectedOptions,
-              quantity: Math.min(safeQty, maxStock),
+              quantity: addedQty,
             },
           ],
         }
@@ -223,29 +233,38 @@ export function CartProvider({ children }: { children: ReactNode }) {
         setIsDrawerOpen(true)
       }
 
-      return { added: true, atLimit: nextQty >= maxStock }
+      return { added: true, atLimit: currentProductTotalQty + addedQty >= maxStock }
     },
     []
   )
 
   const updateQuantity = useCallback((lineKey: string, delta: number) => {
-    writeCartSnapshot((prev) => ({
-      ...prev,
-      items: prev.items
-        .map((item) => {
-          if (item.lineKey !== lineKey) return item
-          const fresh = catalogById.get(item.product.id) ?? item.product
-          const maxStock = Math.max(0, fresh.stock)
-          const nextQty = item.quantity + delta
-          if (nextQty <= 0) return null
-          return {
-            ...item,
-            product: fresh,
-            quantity: maxStock > 0 ? Math.min(nextQty, maxStock) : nextQty,
-          }
-        })
-        .filter((item): item is CartItem => item !== null),
-    }))
+    writeCartSnapshot((prev) => {
+      const target = prev.items.find((item) => item.lineKey === lineKey)
+      if (!target) return prev
+      const fresh = catalogById.get(target.product.id) ?? target.product
+      const maxStock = Math.max(0, fresh.stock)
+      const otherLinesQty = prev.items
+        .filter((item) => item.product.id === target.product.id && item.lineKey !== lineKey)
+        .reduce((sum, item) => sum + item.quantity, 0)
+      const maxForThisLine = Math.max(0, maxStock - otherLinesQty)
+
+      return {
+        ...prev,
+        items: prev.items
+          .map((item) => {
+            if (item.lineKey !== lineKey) return item
+            const nextQty = item.quantity + delta
+            if (nextQty <= 0) return null
+            return {
+              ...item,
+              product: fresh,
+              quantity: maxStock > 0 ? Math.min(nextQty, maxForThisLine) : nextQty,
+            }
+          })
+          .filter((item): item is CartItem => item !== null),
+      }
+    })
   }, [])
 
   const removeItem = useCallback((lineKey: string) => {

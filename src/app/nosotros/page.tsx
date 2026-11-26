@@ -1,9 +1,9 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
-import { Gift, Heart, Package, Sparkles } from "lucide-react"
+import { Gift, Heart, Instagram, MapPin, Package, Sparkles } from "lucide-react"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -12,50 +12,57 @@ export const metadata: Metadata = {
 export default function NosotrosPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section
-        data-surface="obsidian"
-        className="w-full bg-[var(--surface-obsidian)] py-12 text-[var(--text-on-dark)] md:py-20"
-      >
+      <section className="hero-atelier-gradient w-full border-b border-[var(--border-subtle)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="flex flex-col justify-center space-y-4 lg:col-span-6">
+              <div className="inline-flex w-fit items-center gap-2 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-elevated)] px-3.5 py-1.5 text-xs font-semibold text-[var(--text-accent-accessible)]">
+                <MapPin className="h-3.5 w-3.5" aria-hidden="true" />
+                <span>Chimbote y Nuevo Chimbote · Perú</span>
+              </div>
+
               <div className="space-y-2">
-                <h1 className="font-display text-3xl leading-[0.96] font-bold tracking-[-0.04em] sm:text-5xl xl:text-6xl">
-                  Nuestra Historia
+                <h1 className="font-display text-3xl leading-[0.98] font-bold tracking-[-0.04em] text-balance sm:text-5xl xl:text-6xl">
+                  Sobre Magic Moments
                 </h1>
-                <p className="max-w-[600px] text-base text-[var(--text-accent-on-dark)] md:text-lg">
-                  Creando momentos especiales desde 2024
+                <p className="max-w-[600px] text-base font-medium text-[var(--text-accent-accessible)] md:text-lg">
+                  Yanin Faviana · Detalles hechos a mano para emocionar
                 </p>
               </div>
-              <p className="max-w-[600px] text-sm leading-relaxed text-[var(--text-secondary-on-dark)] sm:text-base">
-                Magic Moments nació de la pasión por crear regalos personalizados que transmitan emociones y fortalezcan lazos. Comenzamos como un pequeño emprendimiento familiar y hemos crecido gracias a la confianza de nuestros clientes, manteniendo siempre nuestra esencia: la atención al detalle y el amor por lo que hacemos.
+              <p className="text-pretty max-w-[600px] text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
+                En Magic Moments convertimos tus momentos especiales en recuerdos inolvidables. Somos un emprendimiento peruano en Chimbote y Nuevo Chimbote dedicado a diseñar cajas personalizadas, cuadros 3D con luces LED, ramos temáticos y llaveros hechos a mano con cariño.
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
                 <Link
                   href="/productos"
                   className="inline-flex min-h-12 items-center justify-center rounded-full bg-[var(--color-cta-primary)] px-6 text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
                 >
-                  Ver Productos
+                  Ver Catálogo
                 </Link>
-                <Link
-                  href="/contacto"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--border-on-dark)] bg-white/5 px-6 text-sm font-semibold text-[var(--text-on-dark)] hover:bg-white/10"
+                <a
+                  href="https://www.instagram.com/magic_moments050/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
                 >
-                  Contáctanos
-                </Link>
+                  <Instagram className="h-4 w-4 text-[var(--text-accent-accessible)]" aria-hidden="true" />
+                  <span>@magic_moments050</span>
+                </a>
               </div>
             </div>
 
-            <div className="lg:col-span-6">
-              <div className="relative aspect-square overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-on-dark)] bg-[var(--surface-obsidian-elevated)]">
-                <Image
-                  src="/images/nosotros-taller.jpg"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  alt="Equipo y empaque artesanal de Magic Moments"
-                  className="object-cover"
-                />
+            <div className="flex justify-center lg:col-span-6">
+              <div className="relative aspect-square w-full max-w-md overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3 shadow-md">
+                <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-stage)-0.35rem)] bg-[var(--surface-blush)]">
+                  <Image
+                    src="/images/logo-magic-moments.jpg"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 420px"
+                    alt="Emblema ilustrado Magic Moments"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -65,63 +72,63 @@ export default function NosotrosPage() {
       <section className="w-full py-12 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] md:text-4xl">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
               Nuestros Valores
             </h2>
             <p className="mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Los principios que guían nuestro trabajo día a día
+              Lo que cuidamos en cada caja, cuadro LED, ramo o llavero
             </p>
           </div>
           <div className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
             <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-center">
               <CardHeader className="pb-2">
-                <div className="flex justify-center">
-                  <Heart className="h-9 w-9 text-[var(--color-cta-primary)]" aria-hidden="true" />
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface-blush)]">
+                  <Heart className="h-6 w-6 text-[var(--text-accent-accessible)]" aria-hidden="true" />
                 </div>
-                <CardTitle className="mt-2 font-display">Pasión</CardTitle>
+                <CardTitle className="mt-2 font-display">Dedicación</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Amamos lo que hacemos y ponemos nuestro corazón en cada detalle que creamos.
+                  Cada pedido está hecho a mano con cariño y atención en cada lazo y dedicatoria.
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-center">
               <CardHeader className="pb-2">
-                <div className="flex justify-center">
-                  <Sparkles className="h-9 w-9 text-[var(--color-cta-primary)]" aria-hidden="true" />
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--badge-discount-bg)]">
+                  <Sparkles className="h-6 w-6 text-[var(--badge-discount-text)]" aria-hidden="true" />
                 </div>
                 <CardTitle className="mt-2 font-display">Creatividad</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Buscamos constantemente nuevas ideas y formas de sorprender a nuestros clientes.
+                  Adaptamos temáticas favoritas (girasoles, personajes, fechas especiales) a tu estilo.
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-center">
               <CardHeader className="pb-2">
-                <div className="flex justify-center">
-                  <Package className="h-9 w-9 text-[var(--color-cta-primary)]" aria-hidden="true" />
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface-blush)]">
+                  <Package className="h-6 w-6 text-[var(--text-accent-accessible)]" aria-hidden="true" />
                 </div>
-                <CardTitle className="mt-2 font-display">Calidad</CardTitle>
+                <CardTitle className="mt-2 font-display">Envío Seguro</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Utilizamos los mejores materiales y cuidamos cada detalle para ofrecer productos excepcionales.
+                  Protegemos cada detalle para entrega en Chimbote o envío nacional vía Shalom.
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-center">
               <CardHeader className="pb-2">
-                <div className="flex justify-center">
-                  <Gift className="h-9 w-9 text-[var(--color-cta-primary)]" aria-hidden="true" />
+                <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-[var(--badge-discount-bg)]">
+                  <Gift className="h-6 w-6 text-[var(--badge-discount-text)]" aria-hidden="true" />
                 </div>
                 <CardTitle className="mt-2 font-display">Personalización</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Creemos que cada regalo debe ser único, como la persona que lo recibe.
+                  Desde un obsequio único hasta lotes pequeños de llaveros para tus eventos.
                 </p>
               </CardContent>
             </Card>
@@ -129,173 +136,88 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      <section className="w-full border-y border-[var(--border-subtle)] bg-[var(--surface-card)] py-12 md:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] md:text-4xl">
-              Nuestro Equipo
-            </h2>
-            <p className="mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Las personas que hacen posible cada detalle
-            </p>
-          </div>
-          <div className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <Card className="overflow-hidden border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-              <CardHeader className="p-0">
-                <div className="relative aspect-square overflow-hidden bg-[var(--surface-card)]">
-                  <Image
-                    src="/images/prod-caja-cumpleanos-detalle.jpg"
-                    alt="Curaduría creativa en Magic Moments"
-                    fill
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 640px) 100vw, 33vw"
-                    className="studio-photo-adapt object-cover"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent className="p-6 text-center">
-                <CardTitle className="font-display">María Rodríguez</CardTitle>
-                <CardDescription className="mt-1">Fundadora y Directora Creativa</CardDescription>
-                <p className="mt-3 text-sm text-[var(--text-secondary)]">
-                  Apasionada por el diseño y la creación de experiencias memorables a través de regalos personalizados.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-              <CardHeader className="p-0">
-                <div className="relative aspect-square overflow-hidden bg-[var(--surface-card)]">
-                  <Image
-                    src="/images/nosotros-proceso.jpg"
-                    alt="Diseño artesanal de tarjetas y regalos"
-                    fill
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 640px) 100vw, 33vw"
-                    className="studio-photo-adapt object-cover"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent className="p-6 text-center">
-                <CardTitle className="font-display">Carlos Gómez</CardTitle>
-                <CardDescription className="mt-1">Diseñador Principal</CardDescription>
-                <p className="mt-3 text-sm text-[var(--text-secondary)]">
-                  Experto en diseño gráfico y papelería fina con un ojo especial para los detalles que hacen único cada producto.
-                </p>
-              </CardContent>
-            </Card>
-            <Card className="overflow-hidden border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-              <CardHeader className="p-0">
-                <div className="relative aspect-square overflow-hidden bg-[var(--surface-card)]">
-                  <Image
-                    src="/images/prod-kit-amistad.jpg"
-                    alt="Atención personalizada y armado de kits"
-                    fill
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 640px) 100vw, 33vw"
-                    className="studio-photo-adapt object-cover"
-                  />
-                </div>
-              </CardHeader>
-              <CardContent className="p-6 text-center">
-                <CardTitle className="font-display">Laura Martínez</CardTitle>
-                <CardDescription className="mt-1">Atención al Cliente</CardDescription>
-                <p className="mt-3 text-sm text-[var(--text-secondary)]">
-                  Dedicada a coordinar cada pedido por WhatsApp para que llegue puntual y perfecto.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full py-12 md:py-20">
+      <section className="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-blush)]/45 py-12 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
             <div className="order-2 lg:order-1">
               <div className="grid grid-cols-2 gap-4">
-                <div className="grid gap-4">
-                  <div className="relative aspect-square overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)]">
-                    <Image
-                      src="/images/nosotros-taller.jpg"
-                      alt="Taller de Magic Moments"
-                      fill
-                      loading="lazy"
-                      decoding="async"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
-                      className="studio-photo-adapt object-cover"
-                    />
-                  </div>
-                  <div className="relative aspect-square overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)]">
-                    <Image
-                      src="/images/nosotros-proceso.jpg"
-                      alt="Proceso creativo Magic Moments"
-                      fill
-                      loading="lazy"
-                      decoding="async"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
-                      className="studio-photo-adapt object-cover"
-                    />
-                  </div>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <Image
+                    src="/images/prod-cuadro-3d-led.jpg"
+                    alt="Cuadro 3D con luces LED Magic Moments"
+                    fill
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="studio-photo-adapt object-cover"
+                  />
                 </div>
-                <div className="grid gap-4">
-                  <div className="relative aspect-square overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)]">
-                    <Image
-                      src="/images/prod-tarjeta-felicitacion.jpg"
-                      alt="Materiales de papelería y sello de lacre"
-                      fill
-                      loading="lazy"
-                      decoding="async"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
-                      className="studio-photo-adapt object-cover"
-                    />
-                  </div>
-                  <div className="relative aspect-square overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-card)]">
-                    <Image
-                      src="/images/prod-caja-amor.jpg"
-                      alt="Producto terminado listo para envío"
-                      fill
-                      loading="lazy"
-                      decoding="async"
-                      sizes="(max-width: 1024px) 50vw, 25vw"
-                      className="studio-photo-adapt object-cover"
-                    />
-                  </div>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <Image
+                    src="/images/prod-ramo-eterno.jpg"
+                    alt="Ramo temático con rosas eternas"
+                    fill
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="studio-photo-adapt object-cover"
+                  />
+                </div>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <Image
+                    src="/images/prod-llaveros-acrilicos.jpg"
+                    alt="Llaveros acrílicos personalizados"
+                    fill
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="studio-photo-adapt object-cover"
+                  />
+                </div>
+                <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <Image
+                    src="/images/prod-caja-amor.jpg"
+                    alt="Caja personalizada lista para entrega"
+                    fill
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(max-width: 1024px) 50vw, 25vw"
+                    className="studio-photo-adapt object-cover"
+                  />
                 </div>
               </div>
             </div>
 
             <div className="order-1 flex flex-col justify-center space-y-5 lg:order-2">
               <div className="space-y-2">
-                <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] md:text-4xl">
+                <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
                   Nuestro Proceso
                 </h2>
                 <p className="text-sm text-[var(--text-secondary)] sm:text-base">
-                  Cómo creamos cada detalle con amor y dedicación
+                  Así preparamos cada regalo o lote de recuerdos
                 </p>
               </div>
               <div className="space-y-4">
                 {[
                   {
                     step: 1,
-                    title: "Diseño Personalizado",
-                    text: "Escuchamos tus ideas por WhatsApp y definimos colores, temática y dedicatoria.",
+                    title: "Coordinamos tu idea por WhatsApp",
+                    text: "Definimos temática, colores, fotos, frase y si es entrega individual o por lote.",
                   },
                   {
                     step: 2,
-                    title: "Selección de Materiales",
-                    text: "Elegimos papel algodón, cintas de satén, cajas rígidas y accesorios duraderos.",
+                    title: "Diseño e impresión a medida",
+                    text: "Preparamos láminas, fotografías, stickers, acrílicos o papel arte según el formato.",
                   },
                   {
                     step: 3,
-                    title: "Elaboración Artesanal",
-                    text: "Cada caja, tarjeta o kit se arma a mano cuidando hasta el último lazo.",
+                    title: "Armado artesanal",
+                    text: "Cada caja, cuadro con luz LED, ramo o llavero se ensambla a mano en nuestro taller.",
                   },
                   {
                     step: 4,
-                    title: "Control de Calidad y Envío",
-                    text: "Revisamos cada pieza y protegemos tu pedido para envío seguro vía Shalom o delivery.",
+                    title: "Entrega en Chimbote o envío Shalom",
+                    text: "Coordinamos entrega en Chimbote / Nuevo Chimbote o despacho seguro a todo el Perú.",
                   },
                 ].map((item) => (
                   <div key={item.step} className="flex items-start gap-4">

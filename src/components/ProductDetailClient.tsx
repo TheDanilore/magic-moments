@@ -9,13 +9,13 @@ import {
   ChevronRight,
   ChevronUp,
   Heart,
+  Instagram,
   MessageCircle,
   Package,
   Share2,
   ShieldCheck,
   ShoppingBag,
   Sparkles,
-  Star,
   Truck,
   X,
 } from "lucide-react"
@@ -24,10 +24,10 @@ import { AdaptiveSheet } from "@/components/ui/AdaptiveSheet"
 import { PriceTag } from "@/components/ui/PriceTag"
 import { QuantityStepper } from "@/components/ui/QuantityStepper"
 import { ShortcutTooltip } from "@/components/ui/ShortcutTooltip"
-import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent } from "@/components/ui/card"
 import { useCart } from "@/context/cart-context"
 import { useHotkeys } from "@/hooks/use-hotkeys"
 import { getDefaultProductOptions } from "@/lib/catalog"
@@ -41,6 +41,7 @@ import {
 import type { Product } from "@/types/catalog"
 
 const FAVORITES_STORAGE_KEY = "magic-moments-favorites-v1"
+const BATCH_PRESETS = [1, 6, 12] as const
 
 interface ProductDetailClientProps {
   product: Product
@@ -52,7 +53,8 @@ export function ProductDetailClient({
   relatedProducts,
 }: ProductDetailClientProps) {
   const defaultOptions = useMemo(() => getDefaultProductOptions(product), [product])
-  const { orderNote, setOrderNote, totalCount, isDrawerOpen, addItem, openDrawer } = useCart()
+  const { items, orderNote, setOrderNote, totalCount, isDrawerOpen, addItem, openDrawer } =
+    useCart()
 
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [selectedColor, setSelectedColor] = useState(defaultOptions.color)
@@ -92,6 +94,16 @@ export function ProductDetailClient({
     }
   }, [])
 
+  const inBagTotalQty = useMemo(
+    () =>
+      items
+        .filter((item) => item.product.id === product.id)
+        .reduce((sum, item) => sum + item.quantity, 0),
+    [items, product.id]
+  )
+  const availableStock = Math.max(0, product.stock - inBagTotalQty)
+  const showBatchPresets = product.categorySlug === "llaveros" || product.stock >= 12
+
   const selectedOptions = useMemo(
     () => ({
       color: selectedColor,
@@ -110,10 +122,15 @@ export function ProductDetailClient({
   )
 
   const handleAddToCart = () => {
+    if (availableStock <= 0) {
+      toast.info(`Stock referencial alcanzado (${product.stock} en tu pedido)`)
+      setLiveStatus(`Stock referencial alcanzado (${product.stock} en tu pedido).`)
+      return
+    }
     const result = addItem(product, selectedOptions, quantity, false)
     if (!result.added) {
-      toast.info(`Stock máximo alcanzado (${product.stock} disponibles)`)
-      setLiveStatus(`Stock máximo alcanzado (${product.stock} disponibles).`)
+      toast.info(`Stock referencial alcanzado (${product.stock} disponibles)`)
+      setLiveStatus(`Stock referencial alcanzado (${product.stock} disponibles).`)
       return
     }
 
@@ -134,7 +151,7 @@ export function ProductDetailClient({
   useHotkeys([
     {
       key: "a",
-      enabled: !isDrawerOpen && !isMobileVariantSheetOpen && product.stock > 0,
+      enabled: !isDrawerOpen && !isMobileVariantSheetOpen && availableStock > 0,
       handler: () => {
         if (document.querySelector('[role="dialog"]')) return
         handleAddToCart()
@@ -197,110 +214,98 @@ export function ProductDetailClient({
     }
   }
 
-  const renderVariantSelectors = (tone: "dark" | "light") => {
-    const isDark = tone === "dark"
-    const labelColor = isDark ? "text-[var(--text-muted-on-dark)]" : "text-[var(--text-secondary)]"
-    const valueColor = isDark ? "text-[var(--text-on-dark)]" : "text-[var(--text-primary)]"
-    const unselectedBtn = isDark
-      ? "border-[var(--border-on-dark)] bg-white/5 text-[var(--text-on-dark)] hover:border-white/40"
-      : "border-[var(--border-subtle)] bg-[var(--surface-card)] text-[var(--text-primary)] hover:border-[var(--border-strong)]"
-
-    return (
-      <div className="space-y-4">
-        <div>
-          <p className={`mb-2 text-xs font-medium ${labelColor}`}>
-            Color: <span className={`font-semibold ${valueColor}`}>{selectedColor}</span>
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {product.options.colors.map((color) => (
-              <button
-                key={color}
-                type="button"
-                onClick={() => setSelectedColor(color)}
-                aria-pressed={selectedColor === color}
-                className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
-                  selectedColor === color
-                    ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
-                    : unselectedBtn
-                }`}
-              >
-                {color}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <p className={`mb-2 text-xs font-medium ${labelColor}`}>
-            Tamaño: <span className={`font-semibold ${valueColor}`}>{selectedSize}</span>
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {product.options.sizes.map((size) => (
-              <button
-                key={size}
-                type="button"
-                onClick={() => setSelectedSize(size)}
-                aria-pressed={selectedSize === size}
-                className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
-                  selectedSize === size
-                    ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
-                    : unselectedBtn
-                }`}
-              >
-                {size}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <p className={`mb-2 text-xs font-medium ${labelColor}`}>
-            Temática: <span className={`font-semibold ${valueColor}`}>{selectedTheme}</span>
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {product.options.themes.map((theme) => (
-              <button
-                key={theme}
-                type="button"
-                onClick={() => setSelectedTheme(theme)}
-                aria-pressed={selectedTheme === theme}
-                className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
-                  selectedTheme === theme
-                    ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
-                    : unselectedBtn
-                }`}
-              >
-                {theme}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <Label
-            htmlFor={`pdp-note-${tone}`}
-            className={`block text-xs font-medium ${labelColor}`}
-          >
-            Nota o dedicatoria para tu pedido (opcional)
-          </Label>
-          <Input
-            id={`pdp-note-${tone}`}
-            type="text"
-            value={orderNote}
-            onChange={(e) => setOrderNote(e.target.value)}
-            data-hotkey-ignore="true"
-            maxLength={200}
-            placeholder="Ej. Nombre en la caja, colores o dedicatoria..."
-            className={
-              isDark
-                ? "mt-2 min-h-11 rounded-xl border-[var(--border-on-dark)] bg-white/5 text-sm text-[var(--text-on-dark)] placeholder:text-[var(--text-muted-on-dark)]"
-                : "mt-2 min-h-11 rounded-xl"
-            }
-          />
+  const renderVariantSelectors = (idPrefix: string) => (
+    <div className="space-y-4">
+      <div>
+        <p className="mb-2 text-xs font-medium text-[var(--text-secondary)]">
+          Color: <span className="font-semibold text-[var(--text-primary)]">{selectedColor}</span>
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {product.options.colors.map((color) => (
+            <button
+              key={color}
+              type="button"
+              onClick={() => setSelectedColor(color)}
+              aria-pressed={selectedColor === color}
+              className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
+                selectedColor === color
+                  ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
+                  : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+              }`}
+            >
+              {color}
+            </button>
+          ))}
         </div>
       </div>
-    )
-  }
+
+      <div>
+        <p className="mb-2 text-xs font-medium text-[var(--text-secondary)]">
+          Modelo / Tamaño:{" "}
+          <span className="font-semibold text-[var(--text-primary)]">{selectedSize}</span>
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {product.options.sizes.map((size) => (
+            <button
+              key={size}
+              type="button"
+              onClick={() => setSelectedSize(size)}
+              aria-pressed={selectedSize === size}
+              className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
+                selectedSize === size
+                  ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
+                  : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+              }`}
+            >
+              {size}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <p className="mb-2 text-xs font-medium text-[var(--text-secondary)]">
+          Temática: <span className="font-semibold text-[var(--text-primary)]">{selectedTheme}</span>
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {product.options.themes.map((theme) => (
+            <button
+              key={theme}
+              type="button"
+              onClick={() => setSelectedTheme(theme)}
+              aria-pressed={selectedTheme === theme}
+              className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
+                selectedTheme === theme
+                  ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
+                  : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+              }`}
+            >
+              {theme}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <Label
+          htmlFor={`pdp-note-${idPrefix}`}
+          className="block text-xs font-medium text-[var(--text-secondary)]"
+        >
+          Nota o dedicatoria para tu pedido (opcional)
+        </Label>
+        <Input
+          id={`pdp-note-${idPrefix}`}
+          type="text"
+          value={orderNote}
+          onChange={(e) => setOrderNote(e.target.value)}
+          data-hotkey-ignore="true"
+          maxLength={200}
+          placeholder="Ej. Nombre en la caja, colores o dedicatoria..."
+          className="mt-2 min-h-11 rounded-xl border-[var(--border-strong)] bg-[var(--surface-elevated)] text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]"
+        />
+      </div>
+    </div>
+  )
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)] pb-24 md:pb-0">
@@ -308,39 +313,36 @@ export function ProductDetailClient({
         {liveStatus}
       </div>
 
-      {/* Top Obsidian Split-View Showcase Band */}
-      <section
-        data-surface="obsidian"
-        className="w-full bg-[var(--surface-obsidian)] pt-6 pb-12 text-[var(--text-on-dark)] md:pt-8 md:pb-16"
-      >
+      {/* Top Blush & Sunflower Split-View Showcase Band */}
+      <section className="hero-atelier-gradient w-full border-b border-[var(--border-subtle)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <nav
             aria-label="Ruta de navegación"
-            className="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--text-muted-on-dark)]"
+            className="mb-6 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--text-secondary)]"
           >
             <div className="flex flex-wrap items-center gap-2">
               <Link
                 href="/productos"
-                className="inline-flex min-h-11 items-center gap-1.5 text-[var(--text-on-dark)] hover:opacity-80"
+                className="inline-flex min-h-11 items-center gap-1.5 font-medium text-[var(--text-primary)] hover:text-[var(--text-accent-accessible)]"
               >
                 <ChevronLeft className="h-4 w-4" aria-hidden="true" />
-                <span>Productos</span>
+                <span>Catálogo</span>
               </Link>
               <span aria-hidden="true">/</span>
               <Link
                 href={`/productos?categoria=${product.categorySlug}`}
-                className="inline-flex min-h-11 items-center hover:text-[var(--text-on-dark)]"
+                className="inline-flex min-h-11 items-center hover:text-[var(--text-primary)]"
               >
                 {product.category}
               </Link>
               <span aria-hidden="true">/</span>
-              <span className="text-[var(--text-accent-on-dark)]">{product.name}</span>
+              <span className="font-semibold text-[var(--text-accent-accessible)]">{product.name}</span>
             </div>
 
             <button
               type="button"
               onClick={handleShare}
-              className="inline-flex min-h-11 cursor-pointer touch-manipulation items-center gap-1.5 rounded-full border border-[var(--border-on-dark)] bg-white/5 px-4 text-xs font-semibold text-[var(--text-on-dark)] hover:bg-white/10"
+              className="inline-flex min-h-11 cursor-pointer touch-manipulation items-center gap-1.5 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-4 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
             >
               <Share2 className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Compartir</span>
@@ -350,18 +352,20 @@ export function ProductDetailClient({
           <div className="grid items-start gap-8 md:grid-cols-12 md:gap-10 lg:gap-12">
             {/* Left Sticky Interactive Gallery */}
             <div className="space-y-3 md:sticky md:top-24 md:col-span-6">
-              <div className="relative aspect-square overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-on-dark)] bg-[var(--surface-obsidian-elevated)]">
-                <Image
-                  src={product.images[activeImageIndex] || product.image}
-                  alt={product.name}
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2 shadow-sm">
+                <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-stage)-0.35rem)] bg-[var(--surface-blush)]">
+                  <Image
+                    src={product.images[activeImageIndex] || product.image}
+                    alt={product.name}
+                    fill
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
 
                 {product.images.length > 1 ? (
-                  <div className="pointer-events-none absolute inset-x-3 top-1/2 flex -translate-y-1/2 justify-between">
+                  <div className="pointer-events-none absolute inset-x-4 top-1/2 flex -translate-y-1/2 justify-between">
                     <button
                       type="button"
                       onClick={() =>
@@ -370,7 +374,7 @@ export function ProductDetailClient({
                         )
                       }
                       aria-label="Imagen anterior"
-                      className="studio-pill pointer-events-auto inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--border-on-dark)] text-[var(--text-on-dark)] hover:bg-white/15"
+                      className="studio-light-pill pointer-events-auto inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--text-primary)] shadow-sm hover:bg-[var(--surface-elevated)]"
                     >
                       <ChevronLeft className="h-4 w-4" aria-hidden="true" />
                     </button>
@@ -380,7 +384,7 @@ export function ProductDetailClient({
                         setActiveImageIndex((idx) => (idx + 1) % product.images.length)
                       }
                       aria-label="Imagen siguiente"
-                      className="studio-pill pointer-events-auto inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--border-on-dark)] text-[var(--text-on-dark)] hover:bg-white/15"
+                      className="studio-light-pill pointer-events-auto inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-[var(--border-subtle)] text-[var(--text-primary)] shadow-sm hover:bg-[var(--surface-elevated)]"
                     >
                       <ChevronRight className="h-4 w-4" aria-hidden="true" />
                     </button>
@@ -395,10 +399,10 @@ export function ProductDetailClient({
                     type="button"
                     onClick={() => setActiveImageIndex(index)}
                     aria-label={`Ver imagen ${index + 1} de ${product.name}`}
-                    className={`relative aspect-square overflow-hidden rounded-xl border transition-all ${
+                    className={`relative aspect-square overflow-hidden rounded-xl border bg-[var(--surface-elevated)] transition-all ${
                       activeImageIndex === index
-                        ? "border-[var(--text-accent-on-dark)] ring-2 ring-[var(--text-accent-on-dark)]/40"
-                        : "border-[var(--border-on-dark)] opacity-70 hover:opacity-100"
+                        ? "border-[var(--color-cta-primary)] ring-2 ring-[var(--color-cta-primary)]/40"
+                        : "border-[var(--border-subtle)] opacity-75 hover:opacity-100"
                     }`}
                   >
                     <Image
@@ -418,8 +422,8 @@ export function ProductDetailClient({
             {/* Right Configuration & Conversion Column */}
             <div className="space-y-6 md:col-span-6">
               <div>
-                <div className="flex flex-wrap items-center gap-2 text-xs text-[var(--text-muted-on-dark)]">
-                  <span className="font-semibold text-[var(--text-accent-on-dark)]">
+                <div className="flex flex-wrap items-center gap-2 text-xs text-[var(--text-secondary)]">
+                  <span className="rounded-full bg-[var(--surface-elevated)] px-2.5 py-1 font-semibold text-[var(--text-accent-accessible)]">
                     {product.category}
                   </span>
                   <span aria-hidden="true">·</span>
@@ -427,67 +431,81 @@ export function ProductDetailClient({
                   <span aria-hidden="true">·</span>
                   <span className="inline-flex items-center gap-1 tabular-nums">
                     <Package className="h-3.5 w-3.5" aria-hidden="true" />
-                    {product.stock > 0 ? `${product.stock} disponibles` : "Agotado"}
+                    {availableStock > 0
+                      ? `${availableStock} disp. (${product.stock} ref.)`
+                      : "Máx. en carrito"}
                   </span>
                 </div>
 
-                <h1 className="mt-2 font-display text-3xl leading-[0.98] font-bold tracking-[-0.03em] sm:text-4xl lg:text-5xl">
+                <h1 className="mt-2.5 font-display text-3xl leading-[0.98] font-bold tracking-[-0.03em] text-balance sm:text-4xl lg:text-5xl">
                   {product.name}
                 </h1>
-
-                <div className="mt-3 flex items-center gap-2">
-                  <div className="flex" aria-label="4 de 5 estrellas">
-                    {[1, 2, 3, 4, 5].map((star) => (
-                      <Star
-                        key={star}
-                        className={`h-4 w-4 ${
-                          star <= 4
-                            ? "fill-[var(--text-accent-on-dark)] text-[var(--text-accent-on-dark)]"
-                            : "text-[var(--text-muted-on-dark)]"
-                        }`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-xs text-[var(--text-muted-on-dark)] tabular-nums">
-                    4.0 ({product.reviews.length} reseñas)
-                  </span>
-                </div>
 
                 <div className="mt-4">
                   <PriceTag
                     priceCents={product.priceCents}
                     compareAtCents={product.compareAtCents}
                     size="lg"
-                    tone="dark"
                   />
+                  <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                    Precio base referencial · Confirma detalles finales por WhatsApp
+                  </p>
                 </div>
 
-                <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary-on-dark)] sm:text-base">
+                <p className="text-pretty mt-3 text-sm leading-relaxed text-[var(--text-secondary)] sm:text-base">
                   {product.description}
                 </p>
               </div>
 
-              <div className="border-t border-[var(--border-on-dark)] pt-5">
-                {renderVariantSelectors("dark")}
+              <div className="border-t border-[var(--border-subtle)] pt-5">
+                {renderVariantSelectors("desktop")}
               </div>
 
               {/* Quantity & Purchase Controls */}
-              <div className="space-y-3 border-t border-[var(--border-on-dark)] pt-5">
+              <div className="space-y-3 border-t border-[var(--border-subtle)] pt-5">
+                {showBatchPresets ? (
+                  <div className="flex flex-wrap items-center gap-2 text-xs">
+                    <span className="font-semibold text-[var(--text-secondary)]">
+                      Pedir por unidad o lote:
+                    </span>
+                    {BATCH_PRESETS.map((preset) => (
+                      <button
+                        key={preset}
+                        type="button"
+                        disabled={availableStock > 0 && preset > availableStock}
+                        onClick={() => setQuantity(preset)}
+                        className={`min-h-10 cursor-pointer rounded-full border px-3.5 font-semibold tabular-nums transition-colors disabled:cursor-not-allowed disabled:opacity-40 ${
+                          quantity === preset
+                            ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
+                            : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
+                        }`}
+                      >
+                        {preset === 1 ? "1 unidad" : `${preset} unidades`}
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+
                 <div className="flex flex-wrap items-center gap-3">
                   <QuantityStepper
-                    tone="dark"
                     quantity={quantity}
-                    maxStock={product.stock}
+                    maxStock={Math.max(1, availableStock || product.stock)}
                     minQuantity={1}
                     itemName={product.name}
+                    allowDirectInput
                     onDecrement={() => setQuantity((q) => Math.max(1, q - 1))}
-                    onIncrement={() => setQuantity((q) => Math.min(product.stock, q + 1))}
+                    onIncrement={() =>
+                      setQuantity((q) =>
+                        Math.min(Math.max(1, availableStock || product.stock), q + 1)
+                      )
+                    }
+                    onQuantityChange={(next) => setQuantity(next)}
                   />
 
                   <ShortcutTooltip label="Agregar al pedido" shortcut="A">
                     <button
                       type="button"
-                      disabled={product.stock <= 0}
+                      disabled={availableStock <= 0}
                       onClick={handleAddToCart}
                       className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full bg-[var(--color-cta-primary)] px-6 text-sm font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)] disabled:cursor-not-allowed disabled:opacity-50"
                     >
@@ -510,7 +528,7 @@ export function ProductDetailClient({
                     onClick={handleToggleFavorite}
                     aria-label={isFavorite ? "Quitar de favoritos" : "Añadir a favoritos"}
                     aria-pressed={isFavorite}
-                    className="inline-flex h-12 w-12 shrink-0 cursor-pointer touch-manipulation items-center justify-center rounded-full border border-[var(--border-on-dark)] bg-white/5 text-[var(--text-on-dark)] hover:bg-white/10"
+                    className="inline-flex h-12 w-12 shrink-0 cursor-pointer touch-manipulation items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
                   >
                     <Heart
                       className={`h-4 w-4 ${
@@ -527,7 +545,7 @@ export function ProductDetailClient({
                   <button
                     type="button"
                     onClick={openDrawer}
-                    className="inline-flex min-h-12 w-full cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full border border-[var(--border-on-dark)] bg-white/10 px-5 text-xs font-semibold text-[var(--text-on-dark)] tabular-nums hover:bg-white/15"
+                    className="inline-flex min-h-12 w-full cursor-pointer touch-manipulation items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-5 text-xs font-semibold text-[var(--text-primary)] tabular-nums hover:bg-[var(--surface-blush)]"
                   >
                     <ShoppingBag className="h-4 w-4" aria-hidden="true" />
                     <span>Ver pedido ({totalCount})</span>
@@ -541,23 +559,23 @@ export function ProductDetailClient({
                   className="inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[var(--color-whatsapp)] px-5 text-sm font-semibold text-[var(--color-whatsapp-ink)] transition-colors hover:bg-[var(--color-whatsapp-hover)]"
                 >
                   <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-                  <span>Pedir o consultar por WhatsApp ({getWhatsAppDisplayPhone()})</span>
+                  <span>Cotizar o pedir por WhatsApp ({getWhatsAppDisplayPhone()})</span>
                 </a>
 
                 <ul
                   aria-label="Beneficios y métodos de pago"
-                  className="grid grid-cols-1 gap-2 rounded-2xl border border-[var(--border-on-dark)] bg-white/5 p-3.5 text-xs text-[var(--text-secondary-on-dark)] sm:grid-cols-3"
+                  className="grid grid-cols-1 gap-2 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)]/90 p-3.5 text-xs text-[var(--text-secondary)] sm:grid-cols-3"
                 >
                   <li className="flex items-center gap-2">
                     <ShieldCheck
-                      className="h-4 w-4 shrink-0 text-[var(--text-accent-on-dark)]"
+                      className="h-4 w-4 shrink-0 text-[var(--text-accent-accessible)]"
                       aria-hidden="true"
                     />
                     <span>Yape · Plin · Transferencia</span>
                   </li>
                   <li className="flex items-center gap-2">
                     <Truck
-                      className="h-4 w-4 shrink-0 text-[var(--text-accent-on-dark)]"
+                      className="h-4 w-4 shrink-0 text-[var(--text-accent-accessible)]"
                       aria-hidden="true"
                     />
                     <span>
@@ -568,10 +586,10 @@ export function ProductDetailClient({
                   </li>
                   <li className="flex items-center gap-2">
                     <Sparkles
-                      className="h-4 w-4 shrink-0 text-[var(--text-accent-on-dark)]"
+                      className="h-4 w-4 shrink-0 text-[var(--text-accent-accessible)]"
                       aria-hidden="true"
                     />
-                    <span>Personalización artesanal</span>
+                    <span>Hecho a mano en Chimbote</span>
                   </li>
                 </ul>
               </div>
@@ -580,15 +598,15 @@ export function ProductDetailClient({
         </div>
       </section>
 
-      {/* Description, Reviews & Related Products */}
+      {/* Description, Real Instagram Reference & Related Products */}
       <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-8">
         <Tabs defaultValue="description">
           <TabsList className="w-full justify-start">
             <TabsTrigger value="description" className="min-h-10">
-              Descripción
+              Detalles y Personalización
             </TabsTrigger>
-            <TabsTrigger value="reviews" className="min-h-10">
-              Reseñas ({product.reviews.length})
+            <TabsTrigger value="instagram" className="min-h-10">
+              Trabajos en @magic_moments050
             </TabsTrigger>
           </TabsList>
           <TabsContent value="description" className="mt-6">
@@ -597,38 +615,28 @@ export function ProductDetailClient({
               dangerouslySetInnerHTML={{ __html: product.longDescription }}
             />
           </TabsContent>
-          <TabsContent value="reviews" className="mt-6">
-            <div className="grid max-w-4xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {product.reviews.map((review) => (
-                <Card key={review.id} className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-                  <CardContent className="p-5">
-                    <div className="flex items-center justify-between gap-2">
-                      <div>
-                        <p className="font-display text-sm font-semibold text-[var(--text-primary)]">
-                          {review.user}
-                        </p>
-                        <p className="text-xs text-[var(--text-secondary)]">{review.date}</p>
-                      </div>
-                      <div className="flex">
-                        {[1, 2, 3, 4, 5].map((star) => (
-                          <Star
-                            key={star}
-                            className={`h-3.5 w-3.5 ${
-                              star <= review.rating
-                                ? "fill-[var(--color-cta-primary)] text-[var(--color-cta-primary)]"
-                                : "text-[var(--text-secondary)]"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                    <p className="mt-3 text-sm leading-relaxed text-[var(--text-secondary)]">
-                      {review.comment}
-                    </p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <TabsContent value="instagram" className="mt-6">
+            <Card className="max-w-2xl border-[var(--border-subtle)] bg-[var(--surface-blush)]/60">
+              <CardContent className="flex flex-col items-start justify-between gap-4 p-6 sm:flex-row sm:items-center">
+                <div>
+                  <h2 className="font-display text-lg font-bold text-[var(--text-primary)]">
+                    Entregas y clientes reales en Instagram
+                  </h2>
+                  <p className="mt-1 text-sm text-[var(--text-secondary)]">
+                    Mira fotos, videos y la destacada &ldquo;Clientes ❤️&rdquo; directamente en nuestro perfil oficial.
+                  </p>
+                </div>
+                <a
+                  href="https://www.instagram.com/magic_moments050/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-12 shrink-0 items-center gap-2 rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
+                >
+                  <Instagram className="h-4 w-4" aria-hidden="true" />
+                  <span>Abrir @magic_moments050</span>
+                </a>
+              </CardContent>
+            </Card>
           </TabsContent>
         </Tabs>
 
@@ -643,7 +651,7 @@ export function ProductDetailClient({
                   href={`/productos/${relatedProduct.id}`}
                   className="flex flex-1 flex-col rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3 transition-colors hover:border-[var(--color-cta-primary)]"
                 >
-                  <div className="relative aspect-square w-full overflow-hidden rounded-[calc(var(--radius-card)-0.25rem)] bg-[var(--surface-card)]">
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.25rem)] bg-[var(--surface-blush)]">
                     <Image
                       src={relatedProduct.image}
                       alt={relatedProduct.name}
@@ -658,7 +666,7 @@ export function ProductDetailClient({
                     <h3 className="line-clamp-1 font-display text-base font-semibold text-[var(--text-primary)]">
                       {relatedProduct.name}
                     </h3>
-                    <span className="shrink-0 text-sm font-bold text-[var(--text-primary)] tabular-nums">
+                    <span className="shrink-0 text-sm font-bold text-[var(--text-accent-accessible)] tabular-nums">
                       {formatPEN(relatedProduct.priceCents)}
                     </span>
                   </div>
@@ -676,7 +684,7 @@ export function ProductDetailClient({
             type="button"
             onClick={() => setIsMobileVariantSheetOpen(true)}
             aria-label="Cambiar opciones o agregar nota"
-            className="flex min-h-12 max-w-[46%] min-w-0 cursor-pointer touch-manipulation flex-col justify-center rounded-2xl border border-[var(--border-on-dark)] bg-white/5 px-3 text-left"
+            className="flex min-h-12 max-w-[46%] min-w-0 cursor-pointer touch-manipulation flex-col justify-center rounded-2xl border border-[var(--border-on-dark)] bg-white/10 px-3 text-left"
           >
             <span className="inline-flex items-center gap-1 truncate text-[11px] text-[var(--text-muted-on-dark)]">
               <span className="truncate">
@@ -691,7 +699,7 @@ export function ProductDetailClient({
 
           <button
             type="button"
-            disabled={product.stock <= 0}
+            disabled={availableStock <= 0}
             onClick={handleAddToCart}
             className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-sm font-semibold text-[var(--color-cta-primary-ink)] disabled:opacity-50"
           >
@@ -735,7 +743,7 @@ export function ProductDetailClient({
             </button>
           </div>
 
-          {renderVariantSelectors("light")}
+          {renderVariantSelectors("mobile")}
 
           <button
             type="button"

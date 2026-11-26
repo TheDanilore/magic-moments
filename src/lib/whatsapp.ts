@@ -6,7 +6,7 @@ import {
 } from "@/lib/shipping"
 import type { Product, ProductSelectionOptions } from "@/types/catalog"
 
-const DEFAULT_WHATSAPP_NUMBER = "51936081881"
+const DEFAULT_WHATSAPP_NUMBER = "51979048693"
 
 export interface WhatsAppCartLine {
   product: Product
@@ -26,8 +26,8 @@ export function getWhatsAppNumber(): string {
  */
 export function getWhatsAppDisplayPhone(): string {
   const digits = getWhatsAppNumber()
-  if (digits === "51936081881") {
-    return "+51 936 081 881"
+  if (digits === "51979048693") {
+    return "+51 979 048 693"
   }
   if (digits.startsWith("51") && digits.length === 11) {
     return `+51 ${digits.slice(2, 5)} ${digits.slice(5, 8)} ${digits.slice(8, 11)}`

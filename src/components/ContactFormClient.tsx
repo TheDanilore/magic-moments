@@ -45,6 +45,8 @@ export function ContactFormClient() {
         <Label htmlFor="name">Nombre Completo</Label>
         <Input
           id="name"
+          name="name"
+          autoComplete="name"
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Tu nombre completo"
@@ -56,7 +58,9 @@ export function ContactFormClient() {
         <Label htmlFor="email">Correo Electrónico (opcional)</Label>
         <Input
           id="email"
+          name="email"
           type="email"
+          autoComplete="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="tu@email.com"
@@ -67,6 +71,8 @@ export function ContactFormClient() {
         <Label htmlFor="subject">Asunto</Label>
         <Input
           id="subject"
+          name="subject"
+          autoComplete="off"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
           placeholder="Asunto de tu consulta o pedido"
@@ -77,6 +83,7 @@ export function ContactFormClient() {
         <Label htmlFor="message">Mensaje</Label>
         <Textarea
           id="message"
+          name="message"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Cuéntanos qué detalle personalizado te gustaría cotizar..."

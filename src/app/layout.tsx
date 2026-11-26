@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google"
+import { Bricolage_Grotesque, Figtree } from "next/font/google"
 import "./globals.css"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
@@ -11,12 +11,12 @@ import { CartProvider } from "@/context/cart-context"
 
 const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["500", "600", "700"],
+  weight: ["500", "600", "700", "800"],
   variable: "--font-display",
   display: "swap",
 })
 
-const instrument = Instrument_Sans({
+const figtree = Figtree({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
@@ -32,14 +32,14 @@ export const metadata: Metadata = {
     template: "%s | Magic Moments",
   },
   description:
-    "Magic Moments - Boutique de detalles personalizados, cajas sorpresa, llaveros y kits de regalo en Perú.",
+    "En Magic Moments convertimos tus momentos especiales en recuerdos inolvidables. Cajas personalizadas, cuadros 3D con luces LED, ramos y llaveros en Chimbote y todo el Perú.",
   openGraph: {
     type: "website",
     locale: "es_PE",
     siteName: "Magic Moments",
     title: "Magic Moments | Detalles Personalizados",
     description:
-      "Boutique de detalles personalizados en Perú: cajas sorpresa, llaveros grabados, tarjetas 3D con lacre y kits de regalo.",
+      "Cajas personalizadas, cuadros 3D con luces LED, ramos temáticos y llaveros acrílicos en Chimbote y Nuevo Chimbote con envíos a todo el Perú.",
   },
 }
 
@@ -48,8 +48,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f6f2ef" },
-    { media: "(prefers-color-scheme: dark)", color: "#111114" },
+    { media: "(prefers-color-scheme: light)", color: "#fce6ee" },
+    { media: "(prefers-color-scheme: dark)", color: "#1c1016" },
   ],
 }
 
@@ -62,13 +62,19 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={`${bricolage.variable} ${instrument.variable}`}
+      className={`${bricolage.variable} ${figtree.variable}`}
     >
       <body className="min-h-screen bg-[var(--surface-page)] font-sans text-[var(--text-primary)] antialiased">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <CartProvider>
+            <a
+              href="#contenido-principal"
+              className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:inline-flex focus:min-h-11 focus:items-center focus:rounded-full focus:bg-[var(--color-cta-primary)] focus:px-4 focus:text-sm focus:font-semibold focus:text-[var(--color-cta-primary-ink)]"
+            >
+              Saltar al contenido
+            </a>
             <Header />
-            <main>{children}</main>
+            <main id="contenido-principal">{children}</main>
             <Footer />
             <LazyCartDrawer />
             <Toaster richColors position="bottom-right" />

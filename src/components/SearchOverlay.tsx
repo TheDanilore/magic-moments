@@ -80,7 +80,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Buscar cajas sorpresa, llaveros, tarjetas..."
+              placeholder="Buscar cajas, cuadros LED, ramos, llaveros..."
               aria-label="Buscar detalles en el catálogo"
               autoFocus
               className="h-12 w-full rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] pr-4 pl-10 text-sm text-[var(--text-primary)] placeholder:text-[var(--text-secondary)]"
@@ -95,7 +95,7 @@ export function SearchOverlay({ isOpen, onClose }: SearchOverlayProps) {
           </div>
 
           <div className="mt-3 flex flex-wrap gap-2">
-            {productCategories.map((category) => (
+            {productCategories.slice(0, 4).map((category) => (
               <Link
                 key={category.slug}
                 href={`/productos?categoria=${category.slug}`}

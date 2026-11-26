@@ -20,15 +20,15 @@ export default function FeaturedProducts() {
   } | null>(null)
 
   return (
-    <section className="w-full bg-[var(--surface-page)] py-14 md:py-20">
+    <section className="w-full bg-[var(--surface-blush)]/45 py-14 md:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
           <div className="max-w-xl">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] md:text-4xl">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
               Detalles Destacados
             </h2>
-            <p className="mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Piezas listas para personalizar con dedicatoria, empaque satinado y envío coordinado por WhatsApp.
+            <p className="text-pretty mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
+              Piezas listas para personalizar con tus fotos, colores, frase especial y envío coordinado por WhatsApp.
             </p>
           </div>
           <Link

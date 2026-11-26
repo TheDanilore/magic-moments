@@ -1,58 +1,63 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
-import { Calendar, Share2, Users } from "lucide-react"
+import { MessageCircle, Package, Sparkles, Truck } from "lucide-react"
 
-import { PromoShareButton, PromoWhatsAppButton } from "@/components/PromoActions"
+import { PromoWhatsAppButton } from "@/components/PromoActions"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 export const metadata: Metadata = {
-  title: "Promociones",
+  title: "Lotes y Pedidos a Medida",
 }
 
 export default function PromocionesPage() {
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section
-        data-surface="obsidian"
-        className="w-full bg-[var(--surface-obsidian)] py-12 text-[var(--text-on-dark)] md:py-20"
-      >
+      <section className="hero-atelier-gradient w-full border-b border-[var(--border-subtle)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
             <div className="flex flex-col justify-center space-y-5 lg:col-span-6">
+              <div className="inline-flex w-fit items-center gap-2 rounded-full bg-[var(--badge-discount-bg)] px-3.5 py-1.5 text-xs font-bold text-[var(--badge-discount-text)]">
+                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+                <span>Unidad · Lotes pequeños · Envíos Shalom</span>
+              </div>
               <div className="space-y-3">
-                <h1 className="font-display text-3xl leading-[0.96] font-bold tracking-[-0.04em] sm:text-5xl">
-                  Promociones y Sorteos
+                <h1 className="font-display text-3xl leading-[0.98] font-bold tracking-[-0.04em] text-balance sm:text-5xl">
+                  Pedidos Personalizados y Lotes para Eventos
                 </h1>
-                <p className="max-w-xl text-base text-[var(--text-secondary-on-dark)]">
-                  Descubre nuestras promociones vigentes y participa en el sorteo mensual de una caja sorpresa personalizada.
+                <p className="text-pretty max-w-xl text-base text-[var(--text-secondary)]">
+                  Cotiza detalles individuales o pequeños lotes por mayor (como 12 o más llaveros acrílicos) hechos a mano en Chimbote con envíos a todo el Perú.
                 </p>
               </div>
-              <div className="flex flex-wrap gap-3">
-                <PromoShareButton
-                  label="Compartir y Participar"
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <PromoWhatsAppButton
+                  promoTitle="Cotización de pedido / lote personalizado"
+                  promoDetails="Hola Magic Moments, quiero cotizar un pedido personalizado o un lote pequeño para evento."
+                  label="Cotizar por WhatsApp"
                   size="lg"
-                  className="min-h-12 rounded-full bg-[var(--color-cta-primary)] px-6 text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
+                  className="min-h-12 rounded-full bg-[var(--color-whatsapp)] px-6 text-sm font-semibold text-[var(--color-whatsapp-ink)] hover:bg-[var(--color-whatsapp-hover)]"
                 />
                 <Link
                   href="/productos"
-                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--border-on-dark)] bg-white/5 px-6 text-sm font-semibold text-[var(--text-on-dark)] hover:bg-white/10"
+                  className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
                 >
-                  Ver Productos
+                  Ver catálogo
                 </Link>
               </div>
             </div>
             <div className="lg:col-span-6">
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-on-dark)] bg-[var(--surface-obsidian-elevated)]">
-                <Image
-                  src="/images/promo-sorteo-caja.jpg"
-                  alt="Promociones y sorteos Magic Moments"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover"
-                />
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-stage)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2 shadow-sm">
+                <div className="relative h-full w-full overflow-hidden rounded-[calc(var(--radius-stage)-0.35rem)] bg-[var(--surface-blush)]">
+                  <Image
+                    src="/images/prod-llaveros-acrilicos.jpg"
+                    alt="Lote de 12 llaveros acrílicos personalizados Magic Moments"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -62,90 +67,11 @@ export default function PromocionesPage() {
       <section className="w-full py-12 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] md:text-4xl">
-              Sorteo Mensual
+            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
+              Opciones por Categoría y Cantidad
             </h2>
-            <p className="mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Comparte nuestra página en tus redes sociales y participa por una caja personalizada completamente gratis.
-            </p>
-          </div>
-          <div className="mx-auto mt-8 max-w-3xl">
-            <Card className="overflow-hidden border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-              <CardHeader className="pb-0">
-                <CardTitle className="font-display text-2xl">¡Gana una Caja Sorpresa!</CardTitle>
-                <CardDescription>Sorteo mensual entre todos los participantes</CardDescription>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="relative aspect-video overflow-hidden rounded-2xl bg-[var(--surface-card)]">
-                  <Image
-                    src="/images/promo-sorteo-caja.jpg"
-                    alt="Caja sorpresa de regalo"
-                    fill
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 768px) 100vw, 720px"
-                    className="studio-photo-adapt object-cover"
-                  />
-                </div>
-                <div className="mt-6 grid gap-6 md:grid-cols-3">
-                  <div className="flex flex-col items-center text-center">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface-card)] text-[var(--color-cta-primary)]">
-                      <Share2 className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <h3 className="mt-2.5 font-display font-semibold">Paso 1</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">
-                      Comparte nuestra web en tus redes sociales y etiquétanos
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center text-center">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface-card)] text-[var(--color-cta-primary)]">
-                      <Users className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <h3 className="mt-2.5 font-display font-semibold">Paso 2</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">
-                      Envíanos tus datos y captura por WhatsApp para confirmar
-                    </p>
-                  </div>
-                  <div className="flex flex-col items-center text-center">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[var(--surface-card)] text-[var(--color-cta-primary)]">
-                      <Calendar className="h-5 w-5" aria-hidden="true" />
-                    </div>
-                    <h3 className="mt-2.5 font-display font-semibold">Paso 3</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-[var(--text-secondary)]">
-                      Espera al sorteo el último día del mes
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter className="bg-[var(--surface-card)] p-6">
-                <div className="flex w-full flex-col gap-3 sm:flex-row">
-                  <PromoWhatsAppButton
-                    promoTitle="Sorteo Mensual Caja Sorpresa"
-                    promoDetails="Quiero registrar mi participación en el sorteo mensual de Magic Moments."
-                    label="Participar Ahora"
-                    className="min-h-12 w-full rounded-full bg-[var(--color-whatsapp)] text-sm font-semibold text-[var(--color-whatsapp-ink)] hover:bg-[var(--color-whatsapp-hover)]"
-                  />
-                  <PromoShareButton
-                    label="Compartir"
-                    variant="outline"
-                    size="lg"
-                    className="min-h-12 w-full rounded-full border-[var(--border-strong)] bg-[var(--surface-elevated)]"
-                  />
-                </div>
-              </CardFooter>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      <section className="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-card)] py-12 md:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] md:text-4xl">
-              Promociones Actuales
-            </h2>
-            <p className="mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Aprovecha nuestras campañas vigentes por tiempo limitado
+            <p className="text-pretty mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
+              Elige la modalidad que mejor se adapte a tu regalo o evento y coordínala directo con nuestro taller
             </p>
           </div>
 
@@ -153,10 +79,10 @@ export default function PromocionesPage() {
             <Tabs defaultValue="all" className="w-full">
               <TabsList className="mb-6 w-full justify-start overflow-auto">
                 <TabsTrigger value="all" className="min-h-10">Todas</TabsTrigger>
-                <TabsTrigger value="cajas" className="min-h-10">Cajas Sorpresa</TabsTrigger>
-                <TabsTrigger value="llaveros" className="min-h-10">Llaveros</TabsTrigger>
-                <TabsTrigger value="tarjetas" className="min-h-10">Tarjetas</TabsTrigger>
-                <TabsTrigger value="kits" className="min-h-10">Kits de Regalo</TabsTrigger>
+                <TabsTrigger value="llaveros" className="min-h-10">Llaveros en lote</TabsTrigger>
+                <TabsTrigger value="cajas" className="min-h-10">Cajas y Ramos</TabsTrigger>
+                <TabsTrigger value="cuadros" className="min-h-10">Cuadros 3D LED</TabsTrigger>
+                <TabsTrigger value="envios" className="min-h-10">Envíos Shalom</TabsTrigger>
               </TabsList>
 
               <TabsContent value="all" className="mt-0">
@@ -165,19 +91,19 @@ export default function PromocionesPage() {
                     <CardHeader className="pb-0">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <CardTitle className="font-display">2x1 en Llaveros</CardTitle>
-                          <CardDescription>Válido hasta fin de mes</CardDescription>
+                          <CardTitle className="font-display">Lotes de Llaveros Acrílicos</CardTitle>
+                          <CardDescription>Desde 6 o 12 unidades iguales o variadas</CardDescription>
                         </div>
-                        <span className="rounded-md bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-semibold text-[var(--badge-discount-text)]">
-                          2x1
+                        <span className="rounded-full bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-bold text-[var(--badge-discount-text)]">
+                          12+ u.
                         </span>
                       </div>
                     </CardHeader>
                     <CardContent className="pt-4">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-card)]">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-blush)]">
                         <Image
-                          src="/images/prod-llavero-cristal.jpg"
-                          alt="Promoción 2x1 en llaveros"
+                          src="/images/prod-llaveros-acrilicos.jpg"
+                          alt="Lote de llaveros acrílicos personalizados"
                           fill
                           loading="lazy"
                           decoding="async"
@@ -186,14 +112,14 @@ export default function PromocionesPage() {
                         />
                       </div>
                       <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        Lleva dos llaveros personalizados por el precio de uno. Aplica para todos los diseños.
+                        Ideales para cumpleaños, recuerdos escolares, parejas o eventos. Incluye diseño a medida y herraje dorado o plateado.
                       </p>
                     </CardContent>
                     <CardFooter>
                       <PromoWhatsAppButton
-                        promoTitle="2x1 en Llaveros"
-                        promoDetails="Me interesa llevar 2 llaveros personalizados al precio de 1."
-                        label="Aprovechar Oferta"
+                        promoTitle="Lote de Llaveros Acrílicos (12+ unidades)"
+                        promoDetails="Hola, quiero cotizar un lote de llaveros acrílicos personalizados."
+                        label="Cotizar lote por WhatsApp"
                         showGiftIcon
                         className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
                       />
@@ -204,19 +130,19 @@ export default function PromocionesPage() {
                     <CardHeader className="pb-0">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <CardTitle className="font-display">30% en Cajas Sorpresa</CardTitle>
-                          <CardDescription>En temáticas seleccionadas</CardDescription>
+                          <CardTitle className="font-display">Cuadros 3D con Luces LED</CardTitle>
+                          <CardDescription>Disponible en 2 modelos personalizables</CardDescription>
                         </div>
-                        <span className="rounded-md bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-semibold text-[var(--badge-discount-text)]">
-                          -30%
+                        <span className="rounded-full bg-[var(--surface-blush)] px-2.5 py-1 text-xs font-bold text-[var(--text-accent-accessible)]">
+                          2 modelos
                         </span>
                       </div>
                     </CardHeader>
                     <CardContent className="pt-4">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-card)]">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-blush)]">
                         <Image
-                          src="/images/prod-caja-cumpleanos.jpg"
-                          alt="Promoción de cajas sorpresa"
+                          src="/images/prod-cuadro-3d-led.jpg"
+                          alt="Cuadro 3D con luces LED"
                           fill
                           loading="lazy"
                           decoding="async"
@@ -225,14 +151,14 @@ export default function PromocionesPage() {
                         />
                       </div>
                       <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        30% de descuento en nuestras cajas sorpresa temáticas. ¡Sorprende a tus seres queridos!
+                        Marcos luminosos de girasoles, Snoopy, personajes o foto especial. Armados y embalados para viajar seguros a todo el Perú.
                       </p>
                     </CardContent>
                     <CardFooter>
                       <PromoWhatsAppButton
-                        promoTitle="30% en Cajas Sorpresa"
-                        promoDetails="Quiero coordinar una Caja Sorpresa con el 30% de descuento."
-                        label="Aprovechar Oferta"
+                        promoTitle="Cuadro 3D con Luces LED"
+                        promoDetails="Quiero elegir modelo y temática para un Cuadro 3D con luces LED."
+                        label="Personalizar Cuadro LED"
                         showGiftIcon
                         className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
                       />
@@ -243,19 +169,19 @@ export default function PromocionesPage() {
                     <CardHeader className="pb-0">
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <CardTitle className="font-display">Envío Gratis Shalom</CardTitle>
-                          <CardDescription>En compras mayores a S/ 150</CardDescription>
+                          <CardTitle className="font-display">Envíos Shalom y Delivery</CardTitle>
+                          <CardDescription>Gratis en pedidos mayores a S/ 150</CardDescription>
                         </div>
-                        <span className="rounded-md bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-semibold text-[var(--badge-discount-text)]">
-                          Gratis
+                        <span className="rounded-full bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-bold text-[var(--badge-discount-text)]">
+                          Desde S/ 8
                         </span>
                       </div>
                     </CardHeader>
                     <CardContent className="pt-4">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-card)]">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-blush)]">
                         <Image
-                          src="/images/prod-kit-amistad.jpg"
-                          alt="Promoción de envío gratis Shalom"
+                          src="/images/prod-ramo-eterno.jpg"
+                          alt="Ramo temático y envío Shalom"
                           fill
                           loading="lazy"
                           decoding="async"
@@ -264,7 +190,7 @@ export default function PromocionesPage() {
                         />
                       </div>
                       <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        Envío gratis vía Shalom a todo el Perú en compras superiores a S/ 150. Se aplica automáticamente en tu pedido.
+                        Entrega coordinada en Chimbote y Nuevo Chimbote, o envío nacional Shalom con cálculo automático desde el carrito.
                       </p>
                     </CardContent>
                     <CardFooter>
@@ -272,182 +198,96 @@ export default function PromocionesPage() {
                         href="/productos"
                         className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-cta-dark)] text-sm font-semibold text-[var(--color-cta-dark-ink)] transition-colors hover:opacity-90"
                       >
-                        Comprar Ahora
+                        Armar mi pedido
                       </Link>
-                    </CardFooter>
-                  </Card>
-                </div>
-              </TabsContent>
-
-              <TabsContent value="cajas" className="mt-0">
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-                    <CardHeader className="pb-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <CardTitle className="font-display">30% en Cajas Sorpresa</CardTitle>
-                          <CardDescription>En temáticas seleccionadas</CardDescription>
-                        </div>
-                        <span className="rounded-md bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-semibold text-[var(--badge-discount-text)]">
-                          -30%
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-4">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-card)]">
-                        <Image
-                          src="/images/prod-caja-cumpleanos.jpg"
-                          alt="Promoción de cajas sorpresa"
-                          fill
-                          loading="lazy"
-                          decoding="async"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="studio-photo-adapt object-cover"
-                        />
-                      </div>
-                      <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        30% de descuento en todas nuestras cajas sorpresa temáticas. ¡Sorprende a tus seres queridos!
-                      </p>
-                    </CardContent>
-                    <CardFooter>
-                      <PromoWhatsAppButton
-                        promoTitle="30% en Cajas Sorpresa"
-                        promoDetails="Quiero coordinar una Caja Sorpresa con el 30% de descuento."
-                        label="Aprovechar Oferta"
-                        showGiftIcon
-                        className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
-                      />
                     </CardFooter>
                   </Card>
                 </div>
               </TabsContent>
 
               <TabsContent value="llaveros" className="mt-0">
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-                    <CardHeader className="pb-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <CardTitle className="font-display">2x1 en Llaveros</CardTitle>
-                          <CardDescription>Válido hasta fin de mes</CardDescription>
-                        </div>
-                        <span className="rounded-md bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-semibold text-[var(--badge-discount-text)]">
-                          2x1
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-4">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-card)]">
-                        <Image
-                          src="/images/prod-llavero-cristal.jpg"
-                          alt="Promoción de llaveros"
-                          fill
-                          loading="lazy"
-                          decoding="async"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="studio-photo-adapt object-cover"
-                        />
-                      </div>
-                      <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        Lleva dos llaveros personalizados por el precio de uno. Aplica para todos los diseños.
-                      </p>
-                    </CardContent>
-                    <CardFooter>
-                      <PromoWhatsAppButton
-                        promoTitle="2x1 en Llaveros"
-                        promoDetails="Me interesa llevar 2 llaveros personalizados al precio de 1."
-                        label="Aprovechar Oferta"
-                        showGiftIcon
-                        className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
-                      />
-                    </CardFooter>
-                  </Card>
-                </div>
+                <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <CardHeader>
+                    <CardTitle className="font-display">Llaveros Acrílicos por Unidad o Docena</CardTitle>
+                    <CardDescription>Presupuestos a medida desde 1 hasta 12+ unidades</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-3 text-sm text-[var(--text-secondary)]">
+                    <p>
+                      Puedes combinar fotos, iniciales florales o temáticas de eventos en acrílico transparente circular o rectangular.
+                    </p>
+                    <div className="flex items-center gap-2 text-xs font-medium text-[var(--text-primary)]">
+                      <Package className="h-4 w-4 text-[var(--text-accent-accessible)]" aria-hidden="true" />
+                      <span>12 llaveros acrílicos caben fácilmente en Paquete XXS / XS Shalom.</span>
+                    </div>
+                  </CardContent>
+                  <CardFooter className="gap-3">
+                    <Link
+                      href="/productos/2"
+                      className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)]"
+                    >
+                      Configurar cantidad
+                    </Link>
+                  </CardFooter>
+                </Card>
               </TabsContent>
 
-              <TabsContent value="tarjetas" className="mt-0">
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-                    <CardHeader className="pb-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <CardTitle className="font-display">20% en Tarjetas 3D</CardTitle>
-                          <CardDescription>En paquetes de 3 o más tarjetas</CardDescription>
-                        </div>
-                        <span className="rounded-md bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-semibold text-[var(--badge-discount-text)]">
-                          -20%
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-4">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-card)]">
-                        <Image
-                          src="/images/prod-tarjeta-3d.jpg"
-                          alt="Promoción de tarjetas personalizadas"
-                          fill
-                          loading="lazy"
-                          decoding="async"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="studio-photo-adapt object-cover"
-                        />
-                      </div>
-                      <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        Personaliza tus tarjetas 3D y de felicitación con un 20% de descuento al llevar tres o más.
-                      </p>
-                    </CardContent>
-                    <CardFooter>
-                      <PromoWhatsAppButton
-                        promoTitle="20% en Tarjetas 3D"
-                        promoDetails="Quiero pedir un paquete de 3 o más tarjetas personalizadas con 20% de descuento."
-                        label="Aprovechar Oferta"
-                        showGiftIcon
-                        className="min-h-12 w-full rounded-full bg-[var(--color-cta-primary)] text-sm font-semibold text-[var(--color-cta-primary-ink)] hover:bg-[var(--color-cta-primary-hover)]"
-                      />
-                    </CardFooter>
-                  </Card>
-                </div>
+              <TabsContent value="cajas" className="mt-0">
+                <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <CardHeader>
+                    <CardTitle className="font-display">Cajas Temáticas y Ramos Eternos</CardTitle>
+                    <CardDescription>Hot Wheels, Flores Amarillas, Cumpleaños y Aniversarios</CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-sm text-[var(--text-secondary)]">
+                    Personalizamos la temática completa, la cinta de satén, las fotos instantáneas y la tarjeta con dedicatoria.
+                  </CardContent>
+                  <CardFooter>
+                    <Link
+                      href="/productos?categoria=cajas-sorpresa"
+                      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)]"
+                    >
+                      Ver Cajas Personalizadas
+                    </Link>
+                  </CardFooter>
+                </Card>
               </TabsContent>
 
-              <TabsContent value="kits" className="mt-0">
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
-                    <CardHeader className="pb-0">
-                      <div className="flex items-start justify-between gap-2">
-                        <div>
-                          <CardTitle className="font-display">Envío Gratis en Kits</CardTitle>
-                          <CardDescription>En compras mayores a S/ 150</CardDescription>
-                        </div>
-                        <span className="rounded-md bg-[var(--badge-discount-bg)] px-2.5 py-1 text-xs font-semibold text-[var(--badge-discount-text)]">
-                          Gratis
-                        </span>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="pt-4">
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-card)]">
-                        <Image
-                          src="/images/prod-kit-amistad.jpg"
-                          alt="Promoción de kits de regalo"
-                          fill
-                          loading="lazy"
-                          decoding="async"
-                          sizes="(max-width: 768px) 100vw, 33vw"
-                          className="studio-photo-adapt object-cover"
-                        />
-                      </div>
-                      <p className="mt-4 text-sm text-[var(--text-secondary)]">
-                        Combina tus kits de regalo favoritos y obtén envío gratis vía Shalom en pedidos superiores a S/ 150.
-                      </p>
-                    </CardContent>
-                    <CardFooter>
-                      <Link
-                        href="/productos?categoria=kits-regalo"
-                        className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-cta-dark)] text-sm font-semibold text-[var(--color-cta-dark-ink)] transition-colors hover:opacity-90"
-                      >
-                        Ver Kits de Regalo
-                      </Link>
-                    </CardFooter>
-                  </Card>
-                </div>
+              <TabsContent value="cuadros" className="mt-0">
+                <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <CardHeader>
+                    <CardTitle className="font-display">Cuadros 3D con Luces LED (2 Modelos)</CardTitle>
+                    <CardDescription>Iluminación cálida + diseño 3D + foto personalizada</CardDescription>
+                  </CardHeader>
+                  <CardContent className="text-sm text-[var(--text-secondary)]">
+                    Elige temática de girasoles, Snoopy, fútbol o pareja. Coordinamos tu boceto antes de armarlo.
+                  </CardContent>
+                  <CardFooter>
+                    <Link
+                      href="/productos/9"
+                      className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-[var(--color-cta-primary)] px-5 text-sm font-semibold text-[var(--color-cta-primary-ink)]"
+                    >
+                      Ver Cuadro 3D LED
+                    </Link>
+                  </CardFooter>
+                </Card>
+              </TabsContent>
+
+              <TabsContent value="envios" className="mt-0">
+                <Card className="max-w-xl border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
+                  <CardHeader>
+                    <CardTitle className="font-display">Cobertura Chimbote y Todo el Perú</CardTitle>
+                    <CardDescription>Tarifario referencial Shalom según peso y dimensiones</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-2 text-sm text-[var(--text-secondary)]">
+                    <p className="flex items-center gap-2">
+                      <Truck className="h-4 w-4 text-[var(--text-accent-accessible)]" aria-hidden="true" />
+                      <span>Entrega local en Chimbote y Nuevo Chimbote coordinada por WhatsApp.</span>
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <MessageCircle className="h-4 w-4 text-[var(--color-whatsapp)]" aria-hidden="true" />
+                      <span>Envíos agencia a agencia Shalom desde S/ 8.00 (gratis desde S/ 150.00).</span>
+                    </p>
+                  </CardContent>
+                </Card>
               </TabsContent>
             </Tabs>
           </div>

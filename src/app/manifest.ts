@@ -2,14 +2,14 @@ import type { MetadataRoute } from "next"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Magic Moments",
+    name: "Magic Moments | Detalles Personalizados",
     short_name: "Magic Moments",
     description:
-      "Boutique online de detalles personalizados en Perú: cajas sorpresa, llaveros grabados, tarjetas 3D con lacre y kits de regalo.",
+      "Cajas personalizadas, cuadros 3D con luces LED, ramos temáticos y llaveros acrílicos en Chimbote y Nuevo Chimbote con envíos a todo el Perú.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f6f2ef",
-    theme_color: "#111113",
+    background_color: "#fff7fa",
+    theme_color: "#6d1e3b",
     icons: [
       {
         src: "/icon.svg",

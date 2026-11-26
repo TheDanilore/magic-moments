@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import { Clock, Mail, MapPin, Phone } from "lucide-react"
+import { Clock, Instagram, MapPin, Phone } from "lucide-react"
 
 import { ContactFormClient } from "@/components/ContactFormClient"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -15,17 +15,14 @@ export default function ContactoPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section
-        data-surface="obsidian"
-        className="w-full bg-[var(--surface-obsidian)] py-12 text-[var(--text-on-dark)] md:py-20"
-      >
+      <section className="hero-atelier-gradient w-full border-b border-[var(--border-subtle)] pt-24 pb-12 text-[var(--text-primary)] md:pt-28 md:pb-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h1 className="font-display text-3xl leading-[0.96] font-bold tracking-[-0.04em] sm:text-5xl">
+            <h1 className="font-display text-3xl leading-[0.98] font-bold tracking-[-0.04em] text-balance sm:text-5xl">
               Contáctanos
             </h1>
-            <p className="mt-3 text-sm text-[var(--text-secondary-on-dark)] sm:text-base">
-              Estamos aquí para ayudarte. Envíanos un mensaje directo a WhatsApp y te responderemos lo antes posible.
+            <p className="text-pretty mt-3 text-sm text-[var(--text-secondary)] sm:text-base">
+              Atendemos desde Chimbote y Nuevo Chimbote para todo el Perú. Escríbenos por WhatsApp o Instagram y armamos tu detalle a medida.
             </p>
           </div>
         </div>
@@ -37,27 +34,27 @@ export default function ContactoPage() {
             <div className="space-y-6">
               <div>
                 <h2 className="font-display text-2xl font-bold text-[var(--text-primary)]">
-                  Información de Contacto
+                  Canales Directos
                 </h2>
                 <p className="mt-2 text-sm text-[var(--text-secondary)]">
-                  Puedes escribirnos directamente por WhatsApp, correo electrónico o usando el formulario.
+                  Coordina pedidos individuales, lotes de llaveros o envíos Shalom directamente con nosotros.
                 </p>
               </div>
               <div className="grid gap-4">
                 <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <CardContent className="flex items-start gap-4 p-5">
-                    <MapPin className="h-5 w-5 shrink-0 text-[var(--color-cta-primary)]" aria-hidden="true" />
+                    <MapPin className="h-5 w-5 shrink-0 text-[var(--text-accent-accessible)]" aria-hidden="true" />
                     <div>
                       <CardTitle className="font-display text-base">Ubicación y Envíos</CardTitle>
                       <CardDescription className="mt-1">
-                        Lima, Perú · Envíos a todo el país vía Shalom y delivery local
+                        Chimbote y Nuevo Chimbote, Áncash · Envíos a todo el Perú vía Shalom
                       </CardDescription>
                     </div>
                   </CardContent>
                 </Card>
                 <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <CardContent className="flex items-start gap-4 p-5">
-                    <Phone className="h-5 w-5 shrink-0 text-[var(--color-cta-primary)]" aria-hidden="true" />
+                    <Phone className="h-5 w-5 shrink-0 text-[var(--text-accent-accessible)]" aria-hidden="true" />
                     <div>
                       <CardTitle className="font-display text-base">WhatsApp / Pedidos</CardTitle>
                       <CardDescription className="mt-1">
@@ -75,15 +72,17 @@ export default function ContactoPage() {
                 </Card>
                 <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <CardContent className="flex items-start gap-4 p-5">
-                    <Mail className="h-5 w-5 shrink-0 text-[var(--color-cta-primary)]" aria-hidden="true" />
+                    <Instagram className="h-5 w-5 shrink-0 text-[var(--text-accent-accessible)]" aria-hidden="true" />
                     <div>
-                      <CardTitle className="font-display text-base">Email</CardTitle>
+                      <CardTitle className="font-display text-base">Instagram Oficial</CardTitle>
                       <CardDescription className="mt-1">
                         <a
-                          href="mailto:info@magicmoments.com"
-                          className="underline underline-offset-2 hover:text-[var(--text-primary)]"
+                          href="https://www.instagram.com/magic_moments050/"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-semibold text-[var(--text-accent-accessible)] underline underline-offset-2"
                         >
-                          info@magicmoments.com
+                          @magic_moments050
                         </a>
                       </CardDescription>
                     </div>
@@ -91,13 +90,11 @@ export default function ContactoPage() {
                 </Card>
                 <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
                   <CardContent className="flex items-start gap-4 p-5">
-                    <Clock className="h-5 w-5 shrink-0 text-[var(--color-cta-primary)]" aria-hidden="true" />
+                    <Clock className="h-5 w-5 shrink-0 text-[var(--text-accent-accessible)]" aria-hidden="true" />
                     <div>
                       <CardTitle className="font-display text-base">Horario de Atención</CardTitle>
                       <CardDescription className="mt-1">
-                        Lunes a Viernes: 9:00 AM - 6:00 PM
-                        <br />
-                        Sábados: 10:00 AM - 2:00 PM
+                        Lunes a Sábado: coordinación de pedidos y envíos por WhatsApp
                       </CardDescription>
                     </div>
                   </CardContent>
@@ -110,7 +107,7 @@ export default function ContactoPage() {
                 <CardHeader>
                   <CardTitle className="font-display">Envíanos un Mensaje</CardTitle>
                   <CardDescription>
-                    Completa el formulario y se abrirá WhatsApp con tu mensaje listo para enviar.
+                    Completa el formulario y se abrirá WhatsApp ({whatsappPhone}) con tu consulta lista para enviar.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -124,27 +121,27 @@ export default function ContactoPage() {
 
       <section
         id="preguntas-frecuentes"
-        className="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-card)] py-12 md:py-20"
+        className="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-blush)]/45 py-12 md:py-20"
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-[var(--text-primary)] md:text-4xl">
+            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
               Preguntas Frecuentes
             </h2>
             <p className="mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Encuentra respuestas a las consultas más habituales
+              Respuestas rápidas sobre personalización, lotes y envíos
             </p>
           </div>
           <div className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
               <CardHeader>
                 <CardTitle className="font-display text-lg">
-                  ¿Cuánto tiempo tarda en llegar mi pedido?
+                  ¿Hacen entregas locales y envíos a provincia?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Realizamos envíos nacionales vía Shalom (agencia a agencia) con entrega estimada de 2 a 4 días hábiles, y delivery local en Lima coordinado directamente por WhatsApp.
+                  Sí, entregamos en Chimbote y Nuevo Chimbote, y enviamos a todo el Perú vía Shalom (agencia a agencia) con tarifas referenciales desde S/ 8.00.
                 </p>
               </CardContent>
             </Card>
@@ -156,19 +153,19 @@ export default function ContactoPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  ¡Sí! Todos nuestros productos pueden personalizarse según tus preferencias: colores, tamaños, temáticas y dedicatorias.
+                  ¡Sí! Personalizamos cajas, cuadros 3D con luces LED, ramos y llaveros según tus fotos, temática favorita, colores y dedicatoria.
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
               <CardHeader>
                 <CardTitle className="font-display text-lg">
-                  ¿Cuál es la política de cambios?
+                  ¿Venden llaveros acrílicos por mayor?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Aceptamos cambios o reposiciones dentro de los 7 días posteriores a la recepción si el producto presenta defectos de fabricación o daños durante el envío.
+                  Sí, atendemos tanto pedidos unitarios como lotes pequeños (por ejemplo 12 llaveros o más para recuerdos y eventos). Cotiza tu cantidad por WhatsApp.
                 </p>
               </CardContent>
             </Card>
@@ -180,31 +177,31 @@ export default function ContactoPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Aceptamos pagos por Yape, Plin y transferencia bancaria (BCP, Interbank, BBVA). Al confirmar tu pedido por WhatsApp te enviamos los datos.
+                  Aceptamos Yape, Plin y transferencia bancaria. Al confirmar tu pedido por WhatsApp te enviamos los datos para separar tu elaboración.
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
               <CardHeader>
                 <CardTitle className="font-display text-lg">
-                  ¿Cómo puedo participar en los sorteos?
+                  ¿Dónde puedo ver trabajos ya entregados?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Comparte nuestra página en tus redes sociales, etiquétanos y envíanos tu captura desde el botón de WhatsApp en Promociones.
+                  En nuestro Instagram oficial @magic_moments050 puedes revisar reels, fotos recientes y las destacadas de Clientes, Llaveros y Envíos.
                 </p>
               </CardContent>
             </Card>
             <Card className="border-[var(--border-subtle)] bg-[var(--surface-elevated)]">
               <CardHeader>
                 <CardTitle className="font-display text-lg">
-                  ¿Ofrecen descuentos corporativos?
+                  ¿Con cuánta anticipación debo pedir?
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-[var(--text-secondary)]">
-                  Sí, ofrecemos tarifas especiales para eventos, bodas y regalos corporativos. Escríbenos por WhatsApp para cotizar.
+                  Como cada detalle se arma a mano, recomendamos escribirnos por WhatsApp unos días antes de tu fecha especial para asegurar disponibilidad y envío.
                 </p>
               </CardContent>
             </Card>

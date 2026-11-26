@@ -225,7 +225,7 @@ export function ProductsCatalogClient({
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section className="w-full py-10 md:py-14">
+      <section className="w-full pt-24 pb-12 md:pt-28 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="flex flex-col gap-4 border-b border-[var(--border-subtle)] pb-6 md:flex-row md:items-end md:justify-between">
             <div>
@@ -258,6 +258,8 @@ export function ProductsCatalogClient({
                   aria-hidden="true"
                 />
                 <input
+                  id="catalog-search"
+                  name="q"
                   type="search"
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}

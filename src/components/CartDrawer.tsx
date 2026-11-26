@@ -263,28 +263,28 @@ function CartDrawerContent() {
                 onClick={closeDrawer}
                 className="inline-flex min-h-11 items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] px-4 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)]"
               >
-                Cajas Sorpresa
+                Cajas Personalizadas
+              </Link>
+              <Link
+                href="/productos?categoria=cuadros-3d-led"
+                onClick={closeDrawer}
+                className="inline-flex min-h-11 items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] px-4 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)]"
+              >
+                Cuadros 3D LED
               </Link>
               <Link
                 href="/productos?categoria=llaveros"
                 onClick={closeDrawer}
                 className="inline-flex min-h-11 items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] px-4 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)]"
               >
-                Llaveros
-              </Link>
-              <Link
-                href="/productos?categoria=tarjetas"
-                onClick={closeDrawer}
-                className="inline-flex min-h-11 items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] px-4 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)]"
-              >
-                Tarjetas
+                Llaveros Acrílicos
               </Link>
               <Link
                 href="/promociones"
                 onClick={closeDrawer}
                 className="inline-flex min-h-11 items-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-card)] px-4 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)]"
               >
-                Promociones
+                Lotes y Pedidos
               </Link>
             </div>
 
@@ -299,7 +299,11 @@ function CartDrawerContent() {
         ) : (
           <ul className="space-y-4">
             {items.map((item) => {
-              const atStockMax = item.quantity >= item.product.stock
+              const otherLinesQty = items
+                .filter((line) => line.product.id === item.product.id && line.lineKey !== item.lineKey)
+                .reduce((sum, line) => sum + line.quantity, 0)
+              const maxForThisLine = Math.max(1, item.product.stock - otherLinesQty)
+              const atStockMax = item.quantity >= maxForThisLine
               return (
                 <li
                   key={item.lineKey}
@@ -351,7 +355,7 @@ function CartDrawerContent() {
                       <div className="flex items-center gap-2">
                         <QuantityStepper
                           quantity={item.quantity}
-                          maxStock={item.product.stock}
+                          maxStock={maxForThisLine}
                           itemName={item.product.name}
                           onDecrement={() => handleDecrementLine(item)}
                           onIncrement={() => {

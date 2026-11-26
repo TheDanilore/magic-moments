@@ -236,18 +236,19 @@ export function evaluateCartShipping(
         : "Todo cabe en Paquete XXS (S/ 8.00) · Límite exacto de 250 g"
   } else if (oversizedXXSProductNames.length > 0) {
     xxsBlockReason = "dimensions"
-    const sampleName = oversizedXXSProductNames[0]
-    const extraCount = oversizedXXSProductNames.length - 1
-    xxsStatusSummary =
-      extraCount > 0
-        ? `No entra en S/ 8.00: ${sampleName} y ${extraCount} más superan ${SHALOM_XXS_TIER.dimensionsLabel}`
-        : `No entra en S/ 8.00: ${sampleName} supera ${SHALOM_XXS_TIER.dimensionsLabel}`
+    xxsStatusSummary = selectedTier
+      ? `Empaque asignado: ${selectedTier.label} (${selectedTier.dimensionsLabel})`
+      : "Empaque especial por dimensiones: cotizar tramo en WhatsApp"
   } else if (totalWeightGrams > SHALOM_XXS_TIER.maxWeightGrams) {
     xxsBlockReason = "weight"
-    xxsStatusSummary = `No entra en S/ 8.00: pesa ${formatWeightLabel(totalWeightGrams)} (máx. 250 g en XXS)`
+    xxsStatusSummary = selectedTier
+      ? `Empaque asignado: ${selectedTier.label} · Peso total ${formatWeightLabel(totalWeightGrams)}`
+      : `Peso total ${formatWeightLabel(totalWeightGrams)} · Cotizar carga en WhatsApp`
   } else {
     xxsBlockReason = "volume"
-    xxsStatusSummary = `No entra en S/ 8.00: el volumen conjunto supera la caja XXS (${SHALOM_XXS_TIER.dimensionsLabel})`
+    xxsStatusSummary = selectedTier
+      ? `Empaque asignado: ${selectedTier.label} (${selectedTier.dimensionsLabel})`
+      : "Volumen combinado supera Paquete L · Cotizar en WhatsApp"
   }
 
   if (!selectedTier) {

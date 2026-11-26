@@ -1,56 +1,41 @@
-import type { Product, ProductCategory, ProductReview } from "@/types/catalog"
+import type { Product, ProductCategory } from "@/types/catalog"
 
 export const productCategories: ProductCategory[] = [
   {
     slug: "cajas-sorpresa",
-    name: "Cajas Sorpresa",
-    subtitle: "Cajas rígidas con dedicatoria, dulces y recuerdos curados.",
-    image: "/images/prod-caja-cumpleanos.jpg",
+    name: "Cajas Personalizadas",
+    subtitle: "Cajas temáticas y explosivas con fotos, dulces y lazos satinados.",
+    image: "/images/prod-caja-amor.jpg",
+  },
+  {
+    slug: "cuadros-3d-led",
+    name: "Cuadros 3D LED",
+    subtitle: "Marcos de madera en 2 modelos con luces LED cálidas y fotos.",
+    image: "/images/prod-cuadro-3d-led.jpg",
+  },
+  {
+    slug: "ramos-tematicos",
+    name: "Ramos Temáticos",
+    subtitle: "Rosas eternas satinadas con tarjetas, brillos y temática a elección.",
+    image: "/images/prod-ramo-eterno.jpg",
   },
   {
     slug: "llaveros",
-    name: "Llaveros",
-    subtitle: "Cristal óptico y acero inoxidable con grabado a medida.",
-    image: "/images/prod-llavero-cristal.jpg",
+    name: "Llaveros Acrílicos",
+    subtitle: "Personalizados con foto o diseño por unidad o lotes de 12+.",
+    image: "/images/prod-llaveros-acrilicos.jpg",
   },
   {
     slug: "tarjetas",
-    name: "Tarjetas",
-    subtitle: "Tarjetas 3D artesanales y papel algodón con sello de lacre.",
+    name: "Tarjetas 3D",
+    subtitle: "Papel algodón y cortes tridimensionales con sello de lacre.",
     image: "/images/prod-tarjeta-3d.jpg",
   },
   {
     slug: "kits-regalo",
     name: "Kits de Regalo",
-    subtitle: "Conjuntos listos para sorprender en momentos únicos.",
+    subtitle: "Conjuntos curados con taza, vela, recuerdos y dedicatoria.",
     image: "/images/prod-kit-amistad.jpg",
-  },
-]
-
-const defaultReviews: ProductReview[] = [
-  {
-    id: 1,
-    user: "María Fernanda Quispe",
-    rating: 5,
-    comment:
-      "La presentación con lazo rosa y tarjeta sellada superó todo lo que imaginaba. Llegó puntual por Shalom.",
-    date: "15/09/2025",
-  },
-  {
-    id: 2,
-    user: "Carlos Mendoza",
-    rating: 5,
-    comment:
-      "Coordiné la dedicatoria por WhatsApp y cuidaron cada detalle. Excelente acabado en el empaque.",
-    date: "02/10/2025",
-  },
-  {
-    id: 3,
-    user: "Lucía Paredes",
-    rating: 4,
-    comment:
-      "Muy buena calidad de materiales. Mi mejor amiga quedó fascinada con los recuerdos personalizados.",
-    date: "18/10/2025",
   },
 ]
 
@@ -58,28 +43,27 @@ export const products: Product[] = [
   {
     id: 1,
     sku: "MM-CS-001",
-    name: "Caja Sorpresa Cumpleaños",
-    subtitle: "Caja rígida · Taza, fotos instantáneas y dulces",
-    badge: "Más vendido",
+    name: "Caja Personalizada Temática",
+    subtitle: "Caja rígida · Fotos instantáneas, dulces y dedicatoria",
+    badge: "Favorito",
     description:
-      "Caja personalizada con regalos sorpresa para celebrar un cumpleaños especial.",
+      "Caja personalizada hecha a mano según tu temática favorita (Flores Amarillas, Hot Wheels, Cumpleaños o Amor).",
     longDescription: `
-      <p>Nuestra Caja Sorpresa de Cumpleaños es el regalo ideal para sorprender en su día. Cada caja se arma a mano y se personaliza según los gustos del destinatario.</p>
-      <p>Incluye una curaduría de detalles listos para emocionar:</p>
+      <p>Nuestra Caja Personalizada Temática se arma a mano en nuestro taller de Chimbote y se adapta al estilo de la persona que quieres sorprender.</p>
+      <p>Incluye una curaduría lista para emocionar:</p>
       <ul>
-        <li>Taza o accesorio personalizado con nombre o frase</li>
-        <li>Selección de dulces y chocolates artesanales</li>
-        <li>Tira de fotos instantáneas impresas en alta nitidez</li>
-        <li>Tarjeta con mensaje personalizado y sello de presentación</li>
+        <li>Diseño exterior e interior personalizado con frase y temática a elección</li>
+        <li>Selección de dulces y chocolates o detalle principal coordinado</li>
+        <li>Tira de fotos impresas y tarjeta dedicatoria</li>
+        <li>Acabado con cinta de satén y papel seda en los colores del pedido</li>
       </ul>
-      <p>Se entrega en caja rígida marfil con cinta de satén rosa atelier y papel seda.</p>
     `,
     priceCents: 5900,
     compareAtCents: 7200,
-    stock: 12,
+    stock: 15,
     weightGrams: 850,
     dimensionsCm: { length: 26, width: 18, height: 11 },
-    category: "Cajas Sorpresa",
+    category: "Cajas Personalizadas",
     categorySlug: "cajas-sorpresa",
     featured: true,
     image: "/images/prod-caja-cumpleanos.jpg",
@@ -87,50 +71,125 @@ export const products: Product[] = [
       "/images/prod-caja-cumpleanos.jpg",
       "/images/prod-caja-cumpleanos-detalle.jpg",
       "/images/prod-tarjeta-felicitacion.jpg",
-      "/images/promo-sorteo-caja.jpg",
+      "/images/prod-caja-amor.jpg",
     ],
     options: {
-      colors: ["Rosa Atelier", "Marfil", "Azul", "Lavanda"],
+      colors: ["Rosa Pétalo", "Amarillo Girasol", "Azul Rey", "Lila"],
       sizes: ["Pequeña", "Mediana", "Grande"],
-      themes: ["Cumpleaños", "Aniversario", "Graduación", "Amistad"],
+      themes: ["Cumpleaños", "Flores Amarillas", "Hot Wheels", "Aniversario"],
     },
-    reviews: defaultReviews,
+    reviews: [],
   },
   {
     id: 2,
     sku: "MM-LL-002",
-    name: "Llavero Personalizado",
-    subtitle: "Cristal óptico · Foto HD y argolla cepillada",
-    description: "Llavero con foto personalizada en cristal de alta calidad.",
+    name: "Llavero Acrílico Personalizado",
+    subtitle: "Acrílico cristalino · Unidad o lote para eventos (12+)",
+    badge: "Por unidad o lote",
+    description:
+      "Llavero acrílico personalizado con fotografía, ilustración o iniciales. Ideal para regalo individual o recuerdos en lote.",
     longDescription: `
-      <p>Un recuerdo duradero para llevar siempre contigo. Nuestro Llavero Personalizado combina cristal óptico de alta transparencia con impresión nítida de tu fotografía favorita.</p>
+      <p>Un recuerdo ligero, duradero y colorido para llevar a todas partes. Trabajamos tus llaveros acrílicos con impresión nítida y herraje dorado o plateado.</p>
       <ul>
-        <li>Cristal óptico resistente a rayaduras</li>
-        <li>Argolla metálica reforzada en acero cepillado</li>
-        <li>Grabado opcional en la parte posterior</li>
-        <li>Incluye cajita rígida de presentación Magic Moments</li>
+        <li>Acrílico transparente de alta nitidez (formato rectangular o circular)</li>
+        <li>Personalización con foto, pareja, mascota, nombre o logo de evento</li>
+        <li>Disponible por unidad o en lotes pequeños (6, 12 o más recuerdos)</li>
+        <li>Incluye borla decorativa a tono y presentación lista para entregar</li>
       </ul>
     `,
-    priceCents: 1800,
-    stock: 25,
-    weightGrams: 70,
-    dimensionsCm: { length: 10, width: 8, height: 3 },
-    category: "Llaveros",
+    priceCents: 1200,
+    stock: 60,
+    weightGrams: 35,
+    dimensionsCm: { length: 9, width: 6, height: 2 },
+    category: "Llaveros Acrílicos",
     categorySlug: "llaveros",
     featured: true,
-    image: "/images/prod-llavero-cristal.jpg",
+    image: "/images/prod-llaveros-acrilicos.jpg",
     images: [
+      "/images/prod-llaveros-acrilicos.jpg",
       "/images/prod-llavero-cristal.jpg",
       "/images/prod-llavero-pareja.jpg",
+    ],
+    options: {
+      colors: ["Rosa Pétalo", "Dorado", "Crema", "Celeste"],
+      sizes: ["Circular 5 cm", "Rectangular 4×6 cm"],
+      themes: ["Foto Pareja / Mascota", "Recuerdo Evento (Lote)", "Iniciales Florales", "Temática Libre"],
+    },
+    reviews: [],
+  },
+  {
+    id: 9,
+    sku: "MM-CL-009",
+    name: "Cuadro 3D con Luces LED",
+    subtitle: "Disponible en 2 modelos · Marco de madera y luz cálida",
+    badge: "2 modelos",
+    description:
+      "Cuadro tridimensional de madera iluminado con luces LED cálidas, lámina temática y fotografía personalizada.",
+    longDescription: `
+      <p>Uno de los detalles más pedidos en @magic_moments050. Combina profundidad 3D en papel arte, tu fotografía favorita y una guirnalda de luces LED cálidas en el interior.</p>
+      <ul>
+        <li>Disponible en 2 modelos de marco profundo en madera natural o clara</li>
+        <li>Iluminación LED cálida interior lista para encender</li>
+        <li>Personalizable con temáticas (Girasoles, Snoopy, Spider-Man, Fútbol, Parejas)</li>
+        <li>Empaque protegido para envío seguro por Shalom a todo el Perú</li>
+      </ul>
+    `,
+    priceCents: 5500,
+    compareAtCents: 6400,
+    stock: 14,
+    weightGrams: 680,
+    dimensionsCm: { length: 24, width: 19, height: 6 },
+    category: "Cuadros 3D LED",
+    categorySlug: "cuadros-3d-led",
+    featured: true,
+    image: "/images/prod-cuadro-3d-led.jpg",
+    images: [
+      "/images/prod-cuadro-3d-led.jpg",
       "/images/prod-caja-cumpleanos-detalle.jpg",
+      "/images/prod-tarjeta-3d.jpg",
+    ],
+    options: {
+      colors: ["Madera Natural", "Rosa Suave", "Blanco"],
+      sizes: ["Modelo Clásico (20×25 cm)", "Modelo Grande (25×30 cm)"],
+      themes: ["Girasoles / 21 Sept", "Pareja & Fotos", "Superhéroes / Fútbol", "Cumpleaños"],
+    },
+    reviews: [],
+  },
+  {
+    id: 10,
+    sku: "MM-RM-010",
+    name: "Ramo Temático Rosas Eternas",
+    subtitle: "Rosas de satén hechas a mano · Envoltura y tarjetas",
+    badge: "Hecho a mano",
+    description:
+      "Ramo personalizado elaborado con rosas eternas de cinta satinada, aplicaciones brillantes y temática a elección.",
+    longDescription: `
+      <p>Sorprende con flores que nunca se marchitan. Cada ramo se arma pétalo a pétalo con cinta satinada y se combina con detalles temáticos y tarjeta dedicatoria.</p>
+      <ul>
+        <li>Rosas eternas artesanales en paleta combinada a elección</li>
+        <li>Envoltura coreana mate con lazo de satén y toppers decorativos</li>
+        <li>Opcional: incorporación de autos de colección, fotos o peluche</li>
+      </ul>
+    `,
+    priceCents: 6800,
+    stock: 10,
+    weightGrams: 620,
+    dimensionsCm: { length: 34, width: 24, height: 14 },
+    category: "Ramos Temáticos",
+    categorySlug: "ramos-tematicos",
+    featured: true,
+    image: "/images/prod-ramo-eterno.jpg",
+    images: [
+      "/images/prod-ramo-eterno.jpg",
+      "/images/prod-caja-amor.jpg",
       "/images/prod-tarjeta-felicitacion.jpg",
     ],
     options: {
-      colors: ["Plateado", "Dorado", "Negro", "Rosa"],
-      sizes: ["Estándar", "Mediano", "Grande"],
-      themes: ["Amor", "Amistad", "Familia", "Minimalista"],
+      colors: ["Azul Rey & Rosa", "Rosa Pétalo", "Amarillo Girasol", "Rojo Pasión"],
+      sizes: ["6 Rosas", "12 Rosas", "Especial con Detalles"],
+      themes: ["Aniversario", "Hot Wheels", "Flores Amarillas", "Cumpleaños"],
     },
-    reviews: defaultReviews,
+    reviews: [],
   },
   {
     id: 3,
@@ -138,9 +197,9 @@ export const products: Product[] = [
     name: "Tarjeta 3D Aniversario",
     subtitle: "Papel algodón 300 g · Corte tridimensional y lacre",
     badge: "Artesanal",
-    description: "Tarjeta tridimensional con mensaje personalizado para aniversarios.",
+    description: "Tarjeta tridimensional con mensaje personalizado para aniversarios y fechas especiales.",
     longDescription: `
-      <p>Expresa tus sentimientos con nuestra Tarjeta 3D artesanal. Al abrirla, se despliega una escena tridimensional cortada con precisión sobre papel texturizado de alto gramaje.</p>
+      <p>Expresa tus sentimientos con nuestra Tarjeta 3D artesanal. Al abrirla, se despliega una escena tridimensional cortada con precisión sobre papel texturizado.</p>
       <ul>
         <li>Papel artístico de algodón de 300 g/m²</li>
         <li>Mensaje interior impreso o caligrafiado a elección</li>
@@ -151,9 +210,8 @@ export const products: Product[] = [
     stock: 30,
     weightGrams: 60,
     dimensionsCm: { length: 15, width: 10, height: 2 },
-    category: "Tarjetas",
+    category: "Tarjetas 3D",
     categorySlug: "tarjetas",
-    featured: true,
     image: "/images/prod-tarjeta-3d.jpg",
     images: [
       "/images/prod-tarjeta-3d.jpg",
@@ -162,11 +220,11 @@ export const products: Product[] = [
       "/images/nosotros-proceso.jpg",
     ],
     options: {
-      colors: ["Rojo", "Rosa Atelier", "Crema", "Dorado"],
+      colors: ["Rosa Pétalo", "Rojo", "Crema", "Dorado"],
       sizes: ["Clásica", "Grande"],
       themes: ["Aniversario", "Amor", "Cumpleaños", "Agradecimiento"],
     },
-    reviews: defaultReviews,
+    reviews: [],
   },
   {
     id: 4,
@@ -179,7 +237,7 @@ export const products: Product[] = [
       <ul>
         <li>Taza cerámica personalizada con frase o nombre</li>
         <li>Vela aromática en frasco ámbar artesanal</li>
-        <li>Llavero metálico temático y tarjeta dedicatoria</li>
+        <li>Llavero temático y tarjeta dedicatoria</li>
       </ul>
     `,
     priceCents: 4800,
@@ -188,20 +246,19 @@ export const products: Product[] = [
     dimensionsCm: { length: 24, width: 18, height: 10 },
     category: "Kits de Regalo",
     categorySlug: "kits-regalo",
-    featured: true,
     image: "/images/prod-kit-amistad.jpg",
     images: [
       "/images/prod-kit-amistad.jpg",
       "/images/prod-caja-cumpleanos-detalle.jpg",
       "/images/prod-tarjeta-felicitacion.jpg",
-      "/images/prod-llavero-cristal.jpg",
+      "/images/prod-llaveros-acrilicos.jpg",
     ],
     options: {
-      colors: ["Rosa Atelier", "Lavanda", "Menta", "Crema"],
+      colors: ["Rosa Pétalo", "Lavanda", "Menta", "Crema"],
       sizes: ["Estándar", "Deluxe"],
       themes: ["Amistad", "Cumpleaños", "Agradecimiento"],
     },
-    reviews: defaultReviews,
+    reviews: [],
   },
   {
     id: 5,
@@ -216,7 +273,7 @@ export const products: Product[] = [
         <li>Selección de trufas y chocolates artesanales</li>
         <li>Tira de fotos estilo instantáneo personalizadas</li>
         <li>Ramo mini de flores secas y tarjeta dedicatoria</li>
-        <li>Caja rígida en borgoña y rosa con cinta de satén</li>
+        <li>Caja rígida en frambuesa y rosa con cinta de satén</li>
       </ul>
     `,
     priceCents: 6500,
@@ -224,55 +281,54 @@ export const products: Product[] = [
     stock: 10,
     weightGrams: 950,
     dimensionsCm: { length: 28, width: 19, height: 11 },
-    category: "Cajas Sorpresa",
+    category: "Cajas Personalizadas",
     categorySlug: "cajas-sorpresa",
     image: "/images/prod-caja-amor.jpg",
     images: [
       "/images/prod-caja-amor.jpg",
       "/images/prod-caja-cumpleanos-detalle.jpg",
       "/images/prod-tarjeta-3d.jpg",
-      "/images/promo-sorteo-caja.jpg",
+      "/images/prod-ramo-eterno.jpg",
     ],
     options: {
-      colors: ["Borgoña", "Rosa Atelier", "Rojo", "Blanco"],
+      colors: ["Frambuesa", "Rosa Pétalo", "Rojo", "Blanco"],
       sizes: ["Mediana", "Grande", "Premium"],
       themes: ["Amor", "Aniversario", "San Valentín"],
     },
-    reviews: defaultReviews,
+    reviews: [],
   },
   {
     id: 6,
     sku: "MM-LL-006",
     name: "Llavero Pareja",
-    subtitle: "Set dúo acero · Estuche aterciopelado y grabado",
-    description: "Set de dos llaveros personalizados para parejas.",
+    subtitle: "Set dúo · Estuche de regalo y grabado a medida",
+    description: "Set de dos llaveros personalizados para parejas con iniciales o fechas.",
     longDescription: `
-      <p>Dos mitades que se complementan. Este set de llaveros para pareja en acero inoxidable puede personalizarse con iniciales, fechas especiales o coordenadas.</p>
+      <p>Dos mitades que se complementan. Este set de llaveros para pareja puede personalizarse con iniciales, fechas especiales o coordenadas.</p>
       <ul>
-        <li>Set de 2 llaveros en acero inoxidable cepillado</li>
-        <li>Grabado láser de alta precisión incluido</li>
-        <li>Presentación en estuche doble aterciopelado</li>
+        <li>Set de 2 llaveros personalizados con acabado cepillado</li>
+        <li>Grabado de alta precisión incluido</li>
+        <li>Presentación en estuche doble listo para regalar</li>
       </ul>
     `,
     priceCents: 2900,
     stock: 20,
     weightGrams: 110,
     dimensionsCm: { length: 12, width: 9, height: 3 },
-    category: "Llaveros",
+    category: "Llaveros Acrílicos",
     categorySlug: "llaveros",
     image: "/images/prod-llavero-pareja.jpg",
     images: [
       "/images/prod-llavero-pareja.jpg",
+      "/images/prod-llaveros-acrilicos.jpg",
       "/images/prod-llavero-cristal.jpg",
-      "/images/prod-caja-cumpleanos-detalle.jpg",
-      "/images/prod-tarjeta-3d.jpg",
     ],
     options: {
-      colors: ["Plateado", "Negro", "Oro Rosa"],
+      colors: ["Plateado", "Oro Rosa", "Dorado"],
       sizes: ["Estándar"],
       themes: ["Amor", "Aniversario", "Parejas"],
     },
-    reviews: defaultReviews,
+    reviews: [],
   },
   {
     id: 7,
@@ -292,7 +348,7 @@ export const products: Product[] = [
     stock: 35,
     weightGrams: 45,
     dimensionsCm: { length: 14, width: 10, height: 1 },
-    category: "Tarjetas",
+    category: "Tarjetas 3D",
     categorySlug: "tarjetas",
     image: "/images/prod-tarjeta-felicitacion.jpg",
     images: [
@@ -302,30 +358,30 @@ export const products: Product[] = [
       "/images/prod-caja-cumpleanos-detalle.jpg",
     ],
     options: {
-      colors: ["Marfil", "Rosa Atelier", "Dorado", "Verde Salvia"],
+      colors: ["Marfil", "Rosa Pétalo", "Dorado", "Verde Salvia"],
       sizes: ["Estándar", "Grande"],
       themes: ["Cumpleaños", "Agradecimiento", "Celebración", "Amistad"],
     },
-    reviews: defaultReviews,
+    reviews: [],
   },
   {
     id: 8,
     sku: "MM-KR-008",
     name: "Kit Regalo Graduación",
-    subtitle: "Termo mate · Libreta lino, llavero dorado y tarjeta",
+    subtitle: "Termo personalizado · Libreta, llavero y tarjeta",
     badge: "Nuevo",
-    description: "Kit completo para celebrar una graduación con estilo.",
+    description: "Kit completo para celebrar una graduación o logro profesional.",
     longDescription: `
-      <p>Celebra un gran logro académico con nuestro Kit Regalo Graduación en negro mate y champagne dorado, pensado para acompañar nuevos comienzos.</p>
+      <p>Celebra un gran logro académico con nuestro Kit Regalo Graduación con detalles dorados, pensado para acompañar nuevos comienzos.</p>
       <ul>
-        <li>Termo térmico negro mate personalizado con nombre</li>
-        <li>Libreta de tapa dura en lino con detalle dorado</li>
-        <li>Llavero metálico conmemorativo y tarjeta especial</li>
+        <li>Termo térmico personalizado con nombre</li>
+        <li>Libreta de tapa dura con detalle dorado</li>
+        <li>Llavero conmemorativo y tarjeta especial</li>
       </ul>
     `,
     priceCents: 5500,
     compareAtCents: 6500,
-    stock: 8,
+    stock: 12,
     weightGrams: 900,
     dimensionsCm: { length: 26, width: 19, height: 11 },
     category: "Kits de Regalo",
@@ -338,11 +394,11 @@ export const products: Product[] = [
       "/images/prod-llavero-pareja.jpg",
     ],
     options: {
-      colors: ["Negro Mate", "Azul Marino", "Champagne"],
+      colors: ["Azul Marino", "Champagne", "Frambuesa"],
       sizes: ["Estándar", "Deluxe"],
       themes: ["Graduación", "Logros", "Profesional"],
     },
-    reviews: defaultReviews,
+    reviews: [],
   },
 ]
 
