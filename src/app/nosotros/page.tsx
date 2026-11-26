@@ -4,6 +4,7 @@ import Image from "next/image"
 import { Gift, Heart, Instagram, MapPin, Package, Sparkles } from "lucide-react"
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import ClientsAndShippingSection from "@/components/ClientsAndShippingSection"
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -237,6 +238,8 @@ export default function NosotrosPage() {
           </div>
         </div>
       </section>
+
+      <ClientsAndShippingSection />
     </div>
   )
 }

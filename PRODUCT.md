@@ -53,8 +53,8 @@ Enfoque artesanal y colorido ("Convertimos tus momentos especiales en recuerdos 
 
 ## Evidence on Hand
 
-- **Datos reales confirmados del negocio (`@magic_moments050`):** Nombre, emblema ilustrado, eslogan, ubicación (Chimbote y Nuevo Chimbote), envíos a todo el Perú, categorías visibles (cajas personalizadas, cuadros 3D con luces LED en 2 modelos, ramos temáticos con rosas eternas, llaveros personalizados), WhatsApp `+51 979 048 693` e Instagram `@magic_moments050`.
-- **Material referencial / generado:** Los precios base en `S/` PEN, stock referencial en `src/data/catalog.ts` y las fotografías de estudio en `public/images/` sirven como presentación visual del catálogo. No se deben mostrar testimonios, reseñas ni sorteos ficticios presentados como reales.
+- **Datos reales confirmados del negocio (`@magic_moments050`):** Nombre, emblema ilustrado, eslogan, ubicación (Chimbote y Nuevo Chimbote), envíos a todo el Perú vía Shalom (destinos confirmados en historias: La Unión - Piura, Mala - Cañete, Callao, con embalaje protector en kraft, tecnopor y etiqueta FRÁGIL), reacciones reales de clientes en destacada `Clientes ❤️`, categorías visibles (cajas personalizadas, cuadros 3D con luces LED, ramos temáticos con rosas eternas, llaveros acrílicos con Catálogo 2026), WhatsApp `+51 979 048 693` e Instagram `@magic_moments050`.
+- **Material referencial:** Los precios base en `S/` PEN y stock referencial en `src/data/catalog.ts` sirven como guía antes de confirmar cotización por WhatsApp. No se deben mostrar testimonios, reseñas ni sorteos ficticios presentados como reales.
 
 ## Product Principles
 

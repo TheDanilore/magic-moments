@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, Clock, HeartHandshake, Instagram, MapPin, MessageCircle, Package, Sparkles, Truck } from "lucide-react"
 import FeaturedProducts from "@/components/FeaturedProducts"
+import ClientsAndShippingSection from "@/components/ClientsAndShippingSection"
 import ProductCategories from "@/components/ProductCategories"
 import PromoSection from "@/components/PromoSection"
 import { products } from "@/data/catalog"
@@ -317,6 +318,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ClientsAndShippingSection />
     </div>
   )
 }
