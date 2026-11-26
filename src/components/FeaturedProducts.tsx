@@ -4,7 +4,7 @@ import { lazy, Suspense, useState } from "react"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { ProductCard } from "@/components/ProductCard"
-import { featuredProducts } from "@/data/catalog"
+import { featuredProducts, products } from "@/data/catalog"
 import type { Product } from "@/types/catalog"
 
 const ProductQuickViewModal = lazy(() =>
@@ -40,7 +40,7 @@ export default function FeaturedProducts() {
           </Link>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {featuredProducts.map((product) => (
             <ProductCard
               key={product.id}
@@ -48,6 +48,16 @@ export default function FeaturedProducts() {
               onInspect={(prod, color) => setInspecting({ product: prod, color })}
             />
           ))}
+        </div>
+
+        <div className="mt-8 flex justify-center">
+          <Link
+            href="/productos"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-7 text-sm font-semibold text-[var(--text-primary)] shadow-sm transition-colors hover:border-[var(--color-cta-primary)] hover:text-[var(--text-accent-accessible)]"
+          >
+            <span>Explorar los {products.length} modelos del catálogo</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
       </div>
 

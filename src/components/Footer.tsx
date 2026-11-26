@@ -10,7 +10,7 @@ export default function Footer() {
   return (
     <footer
       data-surface="obsidian"
-      className="safe-bottom-pad w-full border-t border-[var(--border-on-dark)] bg-[var(--surface-obsidian)] py-12 text-[var(--text-secondary-on-dark)]"
+      className="safe-bottom-pad w-full border-t border-[var(--border-on-dark)] bg-[var(--surface-obsidian)] pt-12 pb-24 text-[var(--text-secondary-on-dark)] md:pb-12"
     >
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 sm:px-8 lg:flex-row lg:justify-between">
         {/* Brand Emblem & Location */}
@@ -21,6 +21,8 @@ export default function Footer() {
                 src="/images/logo-magic-moments.jpg"
                 alt="Logo Magic Moments"
                 fill
+                loading="lazy"
+                decoding="async"
                 sizes="48px"
                 className="object-cover"
               />

@@ -3,12 +3,13 @@
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { Check, MessageCircle, Plus, SlidersHorizontal } from "lucide-react"
+import { Check, Images, MessageCircle, Plus, SlidersHorizontal } from "lucide-react"
 import { toast } from "sonner"
+import { PriceTag } from "@/components/ui/PriceTag"
+import { VariantSwatches } from "@/components/ui/VariantSwatches"
 import { useCart } from "@/context/cart-context"
 import { usePointerCapabilities } from "@/hooks/use-pointer-capabilities"
-import { getColorSwatchHex, getDefaultProductOptions } from "@/lib/catalog"
-import { formatPEN } from "@/lib/format"
+import { buildCartLineKey, getDefaultProductOptions } from "@/lib/catalog"
 import { buildProductInquiryMessage, buildWhatsAppUrl } from "@/lib/whatsapp"
 import type { Product } from "@/types/catalog"
 
@@ -23,6 +24,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
 
   const defaultOptions = getDefaultProductOptions(product)
   const [selectedColor, setSelectedColor] = useState(defaultOptions.color)
+  const [showAlternateImage, setShowAlternateImage] = useState(false)
   const [addedFeedback, setAddedFeedback] = useState(false)
   const [lastAddedLineKey, setLastAddedLineKey] = useState<string | null>(null)
   const timerRef = useRef<number | null>(null)
@@ -42,7 +44,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
     color: selectedColor,
   }
 
-  const lineKey = `${product.id}::${selectedOptions.color}::${selectedOptions.size}::${selectedOptions.theme}`
+  const lineKey = buildCartLineKey(product.id, selectedOptions)
   const isOutOfStock = product.stock <= 0
   const isAtStockLimit = !isOutOfStock && inBagTotalQty >= product.stock
 
@@ -54,6 +56,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
 
   const primarySrc = product.image
   const hoverSrc = product.images.find((img) => img !== primarySrc)
+  const displayedSrc = showAlternateImage && hoverSrc ? hoverSrc : primarySrc
 
   const handleQuickAdd = () => {
     if (isOutOfStock || isAtStockLimit) {
@@ -99,12 +102,12 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
             className="relative block h-full w-full"
           >
             <Image
-              src={primarySrc}
+              src={displayedSrc}
               alt={product.name}
               fill
               loading="lazy"
               decoding="async"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
               className={`studio-photo-adapt object-cover ${
                 isOutOfStock ? "opacity-60" : ""
               } ${
@@ -113,7 +116,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
                   : ""
               }`}
             />
-            {canHoverFine && hoverSrc && !isOutOfStock ? (
+            {canHoverFine && hoverSrc && !isOutOfStock && !showAlternateImage ? (
               <Image
                 src={hoverSrc}
                 alt=""
@@ -121,7 +124,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
                 fill
                 loading="lazy"
                 decoding="async"
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                 className="studio-photo-adapt pointer-events-none object-cover opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
               />
             ) : null}
@@ -144,12 +147,29 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
             ) : null}
           </div>
 
+          {hoverSrc && !isOutOfStock ? (
+            <button
+              type="button"
+              onClick={() => setShowAlternateImage((prev) => !prev)}
+              aria-label={
+                showAlternateImage
+                  ? `Ver vista principal de ${product.name}`
+                  : `Ver otra vista de ${product.name}`
+              }
+              aria-pressed={showAlternateImage}
+              className="studio-light-pill absolute right-2 bottom-2 z-20 inline-flex min-h-11 cursor-pointer touch-manipulation items-center gap-1 rounded-full border border-[var(--border-subtle)] px-3 text-[11px] font-semibold text-[var(--text-primary)] tabular-nums shadow-sm transition-colors hover:border-[var(--color-cta-primary)] md:min-h-10"
+            >
+              <Images className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              <span>{showAlternateImage ? "2/2" : `${product.images.length} fotos`}</span>
+            </button>
+          ) : null}
+
           {inBagTotalQty > 0 ? (
             <button
               type="button"
               onClick={openDrawer}
               aria-label={`Abrir pedido: ${inBagTotalQty} unidades de ${product.name}`}
-              className="absolute top-2.5 right-2.5 z-20 min-h-9 cursor-pointer touch-manipulation rounded-full bg-[var(--surface-elevated)] px-3 py-1 text-xs font-semibold text-[var(--text-primary)] tabular-nums shadow-sm transition-colors hover:bg-[var(--color-cta-primary)] hover:text-[var(--color-cta-primary-ink)]"
+              className="absolute top-2.5 right-2.5 z-20 min-h-10 cursor-pointer touch-manipulation rounded-full bg-[var(--surface-elevated)] px-3 py-1 text-xs font-semibold text-[var(--text-primary)] tabular-nums shadow-sm transition-colors hover:bg-[var(--color-cta-primary)] hover:text-[var(--color-cta-primary-ink)]"
             >
               En pedido · {inBagTotalQty}
             </button>
@@ -179,69 +199,45 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
           {product.subtitle}
         </p>
 
-        <div className="mt-2.5 flex items-center gap-2">
-          <div className="flex items-baseline gap-1.5">
-            <span className="font-display text-lg font-bold tracking-tight text-[var(--text-accent-accessible)] tabular-nums">
-              {formatPEN(product.priceCents)}
-            </span>
-            <span className="text-[11px] font-medium text-[var(--text-secondary)]">
-              ref.
-            </span>
-            {hasDiscount ? (
-              <span className="text-xs text-[var(--text-secondary)] line-through tabular-nums">
-                {formatPEN(product.compareAtCents!)}
-              </span>
-            ) : null}
+        <div className="mt-1.5 flex items-center justify-between gap-2">
+          <div className="flex items-baseline gap-1">
+            <PriceTag priceCents={product.priceCents} size="md" />
+            <span className="text-[11px] font-medium text-[var(--text-secondary)]">ref.</span>
           </div>
 
-          <div
-            className="ml-auto flex items-center gap-1"
-            role="group"
-            aria-label={`Elegir color de ${product.name}`}
-          >
-            {product.options.colors.slice(0, 4).map((colorName) => {
-              const isSelected = selectedColor === colorName
-              return (
-                <button
-                  key={colorName}
-                  type="button"
-                  onClick={() => setSelectedColor(colorName)}
-                  aria-label={`Color ${colorName}`}
-                  aria-pressed={isSelected}
-                  title={colorName}
-                  className={`inline-flex h-6 w-6 cursor-pointer touch-manipulation items-center justify-center rounded-full transition-transform ${
-                    isSelected
-                      ? "ring-2 ring-[var(--color-cta-primary)] ring-offset-1 ring-offset-[var(--surface-elevated)]"
-                      : "hover:scale-110"
-                  }`}
-                >
-                  <span
-                    className="h-3.5 w-3.5 rounded-full border border-[var(--border-strong)]"
-                    style={{ backgroundColor: getColorSwatchHex(colorName) }}
-                  />
-                </button>
-              )
-            })}
-          </div>
+          <VariantSwatches
+            productName={product.name}
+            colors={product.options.colors}
+            selectedColor={selectedColor}
+            onSelect={setSelectedColor}
+          />
         </div>
 
-        <div className="mt-auto flex flex-col gap-2 pt-3.5">
+        <div className="mt-auto flex flex-col gap-2 pt-2.5">
           {isOutOfStock ? (
-            <a
-              href={soldOutWhatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-12 w-full items-center justify-center gap-1.5 rounded-full border border-[var(--border-strong)] bg-[var(--surface-card)] px-4 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)]"
-            >
-              <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
-              <span>Consultar por WhatsApp</span>
-            </a>
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/productos?categoria=${product.categorySlug}`}
+                className="touch-target-48 inline-flex flex-1 items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--surface-card)] px-3 text-xs font-semibold text-[var(--text-primary)] transition-colors hover:border-[var(--color-cta-primary)]"
+              >
+                Ver similares
+              </Link>
+              <a
+                href={soldOutWhatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Consultar reposición de ${product.name} por WhatsApp`}
+                className="touch-target-48 inline-flex shrink-0 items-center justify-center rounded-full bg-[var(--color-whatsapp)] px-3.5 text-xs font-semibold text-[var(--color-whatsapp-ink)] transition-colors hover:bg-[var(--color-whatsapp-hover)]"
+              >
+                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              </a>
+            </div>
           ) : isAtStockLimit ? (
             <a
               href={soldOutWhatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex min-h-12 w-full items-center justify-center gap-1.5 rounded-full bg-[var(--color-whatsapp)] px-4 text-xs font-semibold text-[var(--color-whatsapp-ink)] transition-colors hover:bg-[var(--color-whatsapp-hover)]"
+              className="touch-target-48 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-[var(--color-whatsapp)] px-4 text-xs font-semibold text-[var(--color-whatsapp-ink)] transition-colors hover:bg-[var(--color-whatsapp-hover)]"
             >
               <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Máx. {product.stock} · Cotizar lote</span>
@@ -251,7 +247,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
               <button
                 type="button"
                 onClick={openDrawer}
-                className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-xs font-semibold text-[var(--color-cta-primary-ink)]"
+                className="touch-target-48 inline-flex flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-xs font-semibold text-[var(--color-cta-primary-ink)]"
               >
                 <Check className="h-4 w-4" aria-hidden="true" />
                 <span>Ver pedido</span>
@@ -259,7 +255,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
               <button
                 type="button"
                 onClick={handleUndo}
-                className="inline-flex min-h-12 cursor-pointer touch-manipulation items-center justify-center rounded-full border border-[var(--border-strong)] px-3.5 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-card)]"
+                className="touch-target-48 inline-flex cursor-pointer touch-manipulation items-center justify-center rounded-full border border-[var(--border-strong)] px-3.5 text-xs font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-card)]"
               >
                 Deshacer
               </button>
@@ -270,7 +266,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
                 <button
                   type="button"
                   onClick={() => onInspect(product, selectedColor)}
-                  className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-xs font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)]"
+                  className="touch-target-48 inline-flex flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-xs font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)]"
                 >
                   <SlidersHorizontal className="h-3.5 w-3.5" aria-hidden="true" />
                   <span>Personalizar</span>
@@ -279,7 +275,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
                 <button
                   type="button"
                   onClick={handleQuickAdd}
-                  className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-xs font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)]"
+                  className="touch-target-48 inline-flex flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-xs font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)]"
                 >
                   <Plus className="h-3.5 w-3.5" aria-hidden="true" />
                   <span>Agregar</span>
@@ -291,7 +287,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Cotizar ${product.name} por WhatsApp`}
-                className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--surface-page)] text-[var(--text-whatsapp-accessible)] transition-colors hover:border-[var(--color-whatsapp)] hover:bg-[var(--color-whatsapp)] hover:text-[var(--color-whatsapp-ink)]"
+                className="touch-target-48 inline-flex shrink-0 items-center justify-center rounded-full border border-[var(--border-strong)] bg-[var(--surface-page)] text-[var(--text-whatsapp-accessible)] transition-colors hover:border-[var(--color-whatsapp)] hover:bg-[var(--color-whatsapp)] hover:text-[var(--color-whatsapp-ink)]"
               >
                 <MessageCircle className="h-4 w-4" aria-hidden="true" />
               </a>

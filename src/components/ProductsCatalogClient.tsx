@@ -1,6 +1,6 @@
 "use client"
 
-import { lazy, Suspense, useEffect, useMemo, useState, useTransition } from "react"
+import { lazy, Suspense, useDeferredValue, useEffect, useMemo, useState, useTransition } from "react"
 import { FileDown, Filter, Search, SlidersHorizontal, X } from "lucide-react"
 import { ProductCard } from "@/components/ProductCard"
 import { AdaptiveSheet } from "@/components/ui/AdaptiveSheet"
@@ -27,11 +27,13 @@ type SortOption = "featured" | "price-low" | "price-high" | "newest"
 
 const QUICK_THEMES = [
   "Hot Wheels",
+  "Dragon Ball",
+  "Clash Royale",
+  "Bob Esponja",
   "Flores Amarillas",
+  "Aniversario",
   "Spotify",
-  "Calendario",
   "Girasoles",
-  "Goku",
 ] as const
 
 const PRICE_RANGES: Array<{
@@ -58,6 +60,8 @@ export function ProductsCatalogClient({
   const [isFilterSheetOpen, setIsFilterSheetOpen] = useState(false)
   const [inspecting, setInspecting] = useState<{ product: Product; color?: string } | null>(null)
   const [isPending, startTransition] = useTransition()
+  const deferredQuery = useDeferredValue(query)
+  const isFiltering = isPending || deferredQuery !== query
 
   useEffect(() => {
     setSelectedCategory(getCategoryBySlug(initialCategory)?.slug ?? "all")
@@ -93,7 +97,7 @@ export function ProductsCatalogClient({
   }
 
   const filteredProducts = useMemo(() => {
-    const normalizedQuery = query.trim().toLowerCase()
+    const normalizedQuery = deferredQuery.trim().toLowerCase()
 
     const list = products.filter((product) => {
       if (selectedCategory !== "all" && product.categorySlug !== selectedCategory) {
@@ -133,7 +137,7 @@ export function ProductsCatalogClient({
     }
 
     return sorted
-  }, [selectedCategory, query, selectedPriceRanges, sortBy])
+  }, [selectedCategory, deferredQuery, selectedPriceRanges, sortBy])
 
   const hasActiveFilters =
     selectedCategory !== "all" || query.trim() !== "" || selectedPriceRanges.length > 0
@@ -246,7 +250,7 @@ export function ProductsCatalogClient({
 
             <div className="flex shrink-0 flex-wrap items-center gap-2 text-xs text-[var(--text-secondary)]">
               <span className="font-medium tabular-nums" aria-live="polite">
-                {isPending
+                {isFiltering
                   ? "Actualizando..."
                   : `Mostrando ${filteredProducts.length} de ${products.length} detalles`}
               </span>
@@ -264,8 +268,8 @@ export function ProductsCatalogClient({
           </div>
 
           {/* Quick theme tags + PDF Catalog banner for Llaveros */}
-          <div className="mt-3 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-medium text-[var(--text-secondary)]">
+          <div className="no-scrollbar -mx-4 mt-3 flex flex-nowrap items-center gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+            <span className="shrink-0 text-xs font-medium text-[var(--text-secondary)]">
               Temáticas:
             </span>
             {QUICK_THEMES.map((theme) => {
@@ -276,7 +280,7 @@ export function ProductsCatalogClient({
                   type="button"
                   onClick={() => setQuery(isActiveTheme ? "" : theme)}
                   aria-pressed={isActiveTheme}
-                  className={`inline-flex min-h-9 cursor-pointer touch-manipulation items-center rounded-full border px-3 text-xs font-medium transition-colors ${
+                  className={`inline-flex min-h-12 shrink-0 cursor-pointer touch-manipulation items-center rounded-full border px-3.5 text-xs font-medium whitespace-nowrap transition-colors md:min-h-10 ${
                     isActiveTheme
                       ? "border-[var(--color-cta-primary)] bg-[var(--surface-blush)] text-[var(--text-accent-accessible)]"
                       : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-secondary)] hover:border-[var(--color-cta-primary)] hover:text-[var(--text-primary)]"
@@ -311,7 +315,7 @@ export function ProductsCatalogClient({
           ) : null}
 
           {/* Product Grid */}
-          <div className="mt-6 sm:mt-8" aria-busy={isPending}>
+          <div className="mt-6 sm:mt-8" aria-busy={isFiltering}>
             {filteredProducts.length === 0 ? (
               <div className="flex flex-col items-center justify-center rounded-[var(--radius-stage)] border border-dashed border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 py-16 text-center">
                 <Filter className="h-8 w-8 text-[var(--text-secondary)]" aria-hidden="true" />
@@ -331,8 +335,8 @@ export function ProductsCatalogClient({
               </div>
             ) : (
               <div
-                className={`grid grid-cols-1 gap-6 transition-opacity duration-150 sm:grid-cols-2 lg:grid-cols-4 ${
-                  isPending ? "opacity-65" : "opacity-100"
+                className={`grid grid-cols-1 gap-6 transition-opacity duration-150 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ${
+                  isFiltering ? "opacity-65" : "opacity-100"
                 }`}
               >
                 {filteredProducts.map((product) => (

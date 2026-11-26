@@ -2,36 +2,64 @@ import { ProductCardSkeleton } from "@/components/ui/ProductCardSkeleton"
 
 export default function HomeLoading() {
   return (
-    <div className="min-h-screen bg-[var(--surface-page)]">
-      {/* Obsidian Hero Skeleton */}
-      <div
-        data-surface="obsidian"
-        className="bg-[var(--surface-obsidian)] pt-8 pb-14 md:pt-12 md:pb-20"
-      >
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 sm:px-8 lg:grid-cols-12 lg:gap-12">
-          <div className="space-y-4 lg:col-span-5 lg:pt-8">
-            <div className="h-14 w-3/4 rounded-2xl bg-white/10" />
-            <div className="h-14 w-2/3 rounded-2xl bg-white/10" />
-            <div className="mt-4 h-5 w-full max-w-sm rounded-full bg-white/8" />
-            <div className="h-12 w-48 rounded-full bg-[var(--color-cta-primary)]/40" />
+    <div className="min-h-screen bg-[var(--surface-page)]" aria-busy="true">
+      {/* Blush Hero Skeleton aligned 1:1 with Home Hero */}
+      <div className="w-full bg-[var(--surface-blush)] pt-21 pb-10 md:pt-28 md:pb-16">
+        <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 sm:px-8 md:grid-cols-12 md:gap-8 lg:gap-12">
+          <div className="space-y-4 md:col-span-6 lg:col-span-5">
+            <div className="skeleton-shimmer h-7 w-64 rounded-full" />
+            <div className="space-y-2.5">
+              <div className="skeleton-shimmer h-10 w-full rounded-2xl sm:h-12" />
+              <div className="skeleton-shimmer h-10 w-4/5 rounded-2xl sm:h-12" />
+              <div className="skeleton-shimmer h-5 w-full max-w-md rounded-full" />
+            </div>
+            <div className="flex flex-col gap-2.5 sm:flex-row">
+              <div className="skeleton-shimmer h-12 w-full rounded-full sm:w-44" />
+              <div className="skeleton-shimmer h-12 w-full rounded-full sm:w-44" />
+            </div>
+            <div className="flex gap-4 border-t border-[var(--border-subtle)] pt-3.5">
+              <div className="skeleton-shimmer h-4 w-28 rounded-full" />
+              <div className="skeleton-shimmer h-4 w-28 rounded-full" />
+              <div className="skeleton-shimmer h-4 w-28 rounded-full" />
+            </div>
           </div>
-          <div className="lg:col-span-7">
-            <div className="aspect-[4/3] w-full rounded-[var(--radius-stage)] bg-white/8" />
+          <div className="md:col-span-6 lg:col-span-7">
+            <div className="rounded-[var(--radius-stage)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2 sm:p-2.5">
+              <div className="skeleton-shimmer aspect-[4/3] w-full rounded-[calc(var(--radius-stage)-0.35rem)]" />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Category + Grid Skeleton matching ProductCard geometry */}
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-8">
-        <div className="mb-8 flex gap-2 overflow-hidden">
-          <div className="h-12 w-28 shrink-0 rounded-full bg-[var(--surface-card)]" />
-          <div className="h-12 w-28 shrink-0 rounded-full bg-[var(--surface-card)]" />
-          <div className="h-12 w-28 shrink-0 rounded-full bg-[var(--surface-card)]" />
+      {/* Categories Skeleton */}
+      <div className="border-y border-[var(--border-subtle)] bg-[var(--surface-page)] py-12 md:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="skeleton-shimmer h-8 w-56 rounded-xl" />
+          <div className="mt-6 grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+            {[0, 1, 2, 3, 4, 5].map((slot) => (
+              <div
+                key={slot}
+                className="rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2.5"
+              >
+                <div className="skeleton-shimmer aspect-[4/3] w-full rounded-[calc(var(--radius-card)-0.3rem)]" />
+                <div className="mt-2.5 space-y-1.5 px-0.5">
+                  <div className="skeleton-shimmer h-4 w-4/5 rounded-md" />
+                  <div className="skeleton-shimmer h-3 w-1/2 rounded-md" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {[0, 1, 2, 3].map((slot) => (
-            <ProductCardSkeleton key={slot} />
-          ))}
+      </div>
+
+      {/* Featured Grid Skeleton */}
+      <div className="bg-[var(--surface-blush)] py-12 md:py-18">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {[0, 1, 2, 3].map((slot) => (
+              <ProductCardSkeleton key={slot} />
+            ))}
+          </div>
         </div>
       </div>
     </div>

@@ -117,6 +117,148 @@ export const products: Product[] = [
     reviews: [],
   },
   {
+    id: 18,
+    sku: "MM-CS-018",
+    name: "Box Dragon Ball Z «6 Maneras de Amar»",
+    subtitle: "Tarjetas desplegables DBZ · QR Spotify, fotos polaroid y chocolates",
+    badge: "Anime · DBZ",
+    description:
+      "Box personalizada de Dragon Ball Z con tapa «Te amo de las 6 maneras de amar en DBZ», tarjetas desplegables de Vegeta, Piccolo y Goku, código Spotify, fotos y dulces.",
+    longDescription: `
+      <p>Ideal para fans de Dragon Ball Z. Combina una tapa llena de color con tarjetas desplegables interiores dedicadas con frases de la serie, chocolates y código QR de canción.</p>
+      <ul>
+        <li>Caja rígida blanca personalizada con lazo rojo satinado y broche dorado</li>
+        <li>Set desplegable de 3 tarjetas con frases de Vegeta, Piccolo y Goku</li>
+        <li>Tira de fotos estilo polaroid, tarjeta QR Spotify y carta dedicatoria interior</li>
+        <li>Cama de papel seda rojo y selección de dulces y snacks</li>
+      </ul>
+    `,
+    priceCents: 6800,
+    stock: 12,
+    weightGrams: 920,
+    dimensionsCm: { length: 28, width: 20, height: 11 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    featured: true,
+    image: "/images/productos/box-dragon-ball-abierta.jpg",
+    images: [
+      "/images/productos/box-dragon-ball-abierta.jpg",
+      "/images/productos/box-dragon-ball-cerrada.jpg",
+    ],
+    options: {
+      colors: ["Rojo Racing", "Azul Rey", "Negro", "Personalizado"],
+      sizes: ["Box Estándar + Dulces", "Box Completo + Llavero DBZ"],
+      themes: ["6 Maneras de Amar (DBZ)", "Goku & Milk", "Aniversario", "Cumpleaños"],
+    },
+    reviews: [],
+  },
+  {
+    id: 21,
+    sku: "MM-CS-021",
+    name: "Box Troquelada Clash Royale (Corona + Llavero)",
+    subtitle: "Caja en forma de corona · Tarjetas Clash, llavero acrílico y fotos",
+    badge: "Forma Corona",
+    description:
+      "Box artesanal troquelada con la forma exacta de la corona de Clash Royale, incluye llavero acrílico «Contigo cada batalla vale la pena», tarjetas temáticas, fotos y dulces.",
+    longDescription: `
+      <p>Una caja única diseñada a medida en forma de corona Clash Royale. Al abrirla despliega tarjetas temáticas con personajes y un llavero acrílico personalizado incluido.</p>
+      <ul>
+        <li>Estructura rígida troquelada en forma de escudo y corona Clash Royale</li>
+        <li>Incluye llavero acrílico en tarjeta «Llévame siempre contigo» con lazo azul rey</li>
+        <li>Tarjetas desplegables («Tú eres mi...»), fotos polaroid con ganchito de corazón</li>
+        <li>Relleno de papel seda amarillo, carta dedicatoria y chocolates</li>
+      </ul>
+    `,
+    priceCents: 7500,
+    stock: 10,
+    weightGrams: 950,
+    dimensionsCm: { length: 28, width: 24, height: 11 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    featured: true,
+    image: "/images/productos/box-clash-royale-abierta.jpg",
+    images: [
+      "/images/productos/box-clash-royale-abierta.jpg",
+      "/images/productos/box-clash-royale-cerrada.jpg",
+    ],
+    options: {
+      colors: ["Azul Rey", "Dorado", "Rojo Racing"],
+      sizes: ["Box Corona + Llavero", "Box Corona + 2 Llaveros Dúo"],
+      themes: ["Clash Royale", "Contigo cada batalla", "San Valentín", "Aniversario"],
+    },
+    reviews: [],
+  },
+  {
+    id: 19,
+    sku: "MM-CS-019",
+    name: "Box Bob Esponja & Arenita «Te Amo»",
+    subtitle: "Tarjetas desplegables · QR Spotify, fotos polaroid y snacks",
+    badge: "Personalizada",
+    description:
+      "Box personalizada con Bob Esponja y Arenita, lazo rojo satinado, tarjetas desplegables con mensajes de amor, código Spotify, fotos y dulces favoritos.",
+    longDescription: `
+      <p>Un detalle tierno y divertido con la pareja más icónica de Fondo de Bikini. Totalmente personalizable con tu carta dedicatoria, canción favorita en Spotify y fotografías.</p>
+      <ul>
+        <li>Tapa personalizada con Bob Esponja y Arenita, corazones y lazo rojo con broche</li>
+        <li>Tarjetas desplegables unidas con cinta roja («No hay otra persona que prefiera...»)</li>
+        <li>Carta extensa personalizada en el interior, tira polaroid y tarjeta QR Spotify</li>
+        <li>Cama de papel seda amarillo y surtido de galletas y chocolates</li>
+      </ul>
+    `,
+    priceCents: 6500,
+    stock: 12,
+    weightGrams: 900,
+    dimensionsCm: { length: 28, width: 20, height: 11 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    image: "/images/productos/box-bob-esponja-abierta.jpg",
+    images: [
+      "/images/productos/box-bob-esponja-abierta.jpg",
+      "/images/productos/box-bob-esponja-cerrada.jpg",
+    ],
+    options: {
+      colors: ["Rojo", "Amarillo Girasol", "Rosa Pétalo"],
+      sizes: ["Box Clásico + Dulces", "Box Completo + Llavero"],
+      themes: ["Bob Esponja & Arenita", "Amor / Reconciliación", "Aniversario"],
+    },
+    reviews: [],
+  },
+  {
+    id: 20,
+    sku: "MM-CS-020",
+    name: "Box Aniversario «Solo Queden las Fotografías»",
+    subtitle: "Ilustración pareja + cámara · Fotos, QR Spotify y tarjetas desplegables",
+    badge: "Aniversario",
+    description:
+      "Box romántica «Cuando nos falle la memoria y solo queden las fotografías» con ilustración de pareja, tarjetas desplegables, pila de fotos polaroid, QR Spotify y dulces.",
+    longDescription: `
+      <p>Diseñada para celebrar aniversarios y fechas inolvidables. Reúne sus fotografías favoritas junto a mensajes románticos desplegables y la canción que marca su historia.</p>
+      <ul>
+        <li>Tapa ilustrada con frase «Cuando nos falle la memoria y solo queden las fotografías»</li>
+        <li>Lazo rojo satinado con detalle brillante y tarjeta de aniversario interior</li>
+        <li>Acordeón de fotos estilo polaroid con ganchito de corazón y código QR Spotify</li>
+        <li>Tarjetas desplegables con la frase «Cuando los años nos pesen...» y dulces</li>
+      </ul>
+    `,
+    priceCents: 6500,
+    stock: 14,
+    weightGrams: 900,
+    dimensionsCm: { length: 28, width: 20, height: 11 },
+    category: "Cajas Personalizadas",
+    categorySlug: "cajas-sorpresa",
+    image: "/images/productos/box-fotografias-abierta.jpg",
+    images: [
+      "/images/productos/box-fotografias-abierta.jpg",
+      "/images/productos/box-fotografias-cerrada.jpg",
+    ],
+    options: {
+      colors: ["Rojo", "Rosa Pétalo", "Azul Rey", "Lila"],
+      sizes: ["Box Clásico + Fotos", "Box Completo + Llavero"],
+      themes: ["Aniversario", "Recuerdos & Fotos", "San Valentín", "Cásate Conmigo"],
+    },
+    reviews: [],
+  },
+  {
     id: 13,
     sku: "MM-RM-013",
     name: "Ramo Hot Wheels con Rosas Eternas",
@@ -213,7 +355,6 @@ export const products: Product[] = [
     dimensionsCm: { length: 25, width: 20, height: 6 },
     category: "Cuadros 3D LED",
     categorySlug: "cuadros-3d-led",
-    featured: true,
     image: "/images/productos/cuadro-3d-led-florecer.jpg",
     images: [
       "/images/productos/cuadro-3d-led-florecer.jpg",
@@ -326,7 +467,6 @@ export const products: Product[] = [
     dimensionsCm: { length: 12, width: 9, height: 2 },
     category: "Llaveros Acrílicos",
     categorySlug: "llaveros",
-    featured: true,
     image: "/images/productos/llavero-foto-calendario.jpg",
     images: [
       "/images/productos/llavero-foto-calendario.jpg",

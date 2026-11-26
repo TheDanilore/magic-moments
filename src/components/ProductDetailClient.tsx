@@ -20,9 +20,11 @@ import {
   Sparkles,
   Truck,
   X,
+  ZoomIn,
 } from "lucide-react"
 import { toast } from "sonner"
 import { AdaptiveSheet } from "@/components/ui/AdaptiveSheet"
+import { ImageLightbox } from "@/components/ui/ImageLightbox"
 import { PriceTag } from "@/components/ui/PriceTag"
 import { QuantityStepper } from "@/components/ui/QuantityStepper"
 import { ShortcutTooltip } from "@/components/ui/ShortcutTooltip"
@@ -63,6 +65,7 @@ export function ProductDetailClient({
 
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [showingVideo, setShowingVideo] = useState(false)
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
   const [selectedColor, setSelectedColor] = useState(defaultOptions.color)
   const [selectedSize, setSelectedSize] = useState(defaultOptions.size)
   const [selectedTheme, setSelectedTheme] = useState(defaultOptions.theme)
@@ -76,6 +79,7 @@ export function ProductDetailClient({
   useEffect(() => {
     setActiveImageIndex(0)
     setShowingVideo(false)
+    setIsLightboxOpen(false)
     setSelectedColor(defaultOptions.color)
     setSelectedSize(defaultOptions.size)
     setSelectedTheme(defaultOptions.theme)
@@ -159,7 +163,7 @@ export function ProductDetailClient({
   useHotkeys([
     {
       key: "a",
-      enabled: !isDrawerOpen && !isMobileVariantSheetOpen && availableStock > 0,
+      enabled: !isDrawerOpen && !isMobileVariantSheetOpen && !isLightboxOpen && availableStock > 0,
       handler: () => {
         if (document.querySelector('[role="dialog"]')) return
         handleAddToCart()
@@ -167,7 +171,8 @@ export function ProductDetailClient({
     },
     {
       key: "ArrowLeft",
-      enabled: !isDrawerOpen && !isMobileVariantSheetOpen && product.images.length > 1,
+      enabled:
+        !isDrawerOpen && !isMobileVariantSheetOpen && !isLightboxOpen && product.images.length > 1,
       handler: () => {
         if (document.querySelector('[role="dialog"]')) return
         setActiveImageIndex((idx) => (idx - 1 + product.images.length) % product.images.length)
@@ -175,7 +180,8 @@ export function ProductDetailClient({
     },
     {
       key: "ArrowRight",
-      enabled: !isDrawerOpen && !isMobileVariantSheetOpen && product.images.length > 1,
+      enabled:
+        !isDrawerOpen && !isMobileVariantSheetOpen && !isLightboxOpen && product.images.length > 1,
       handler: () => {
         if (document.querySelector('[role="dialog"]')) return
         setActiveImageIndex((idx) => (idx + 1) % product.images.length)
@@ -235,7 +241,7 @@ export function ProductDetailClient({
               type="button"
               onClick={() => setSelectedColor(color)}
               aria-pressed={selectedColor === color}
-              className={`inline-flex min-h-11 cursor-pointer touch-manipulation items-center gap-2 rounded-full border px-4 text-xs font-medium transition-colors ${
+              className={`inline-flex min-h-12 cursor-pointer touch-manipulation items-center gap-2 rounded-full border px-4 text-xs font-medium transition-colors md:min-h-11 ${
                 selectedColor === color
                   ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
                   : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
@@ -264,7 +270,7 @@ export function ProductDetailClient({
               type="button"
               onClick={() => setSelectedSize(size)}
               aria-pressed={selectedSize === size}
-              className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
+              className={`min-h-12 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors md:min-h-11 ${
                 selectedSize === size
                   ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
                   : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
@@ -287,7 +293,7 @@ export function ProductDetailClient({
               type="button"
               onClick={() => setSelectedTheme(theme)}
               aria-pressed={selectedTheme === theme}
-              className={`min-h-11 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors ${
+              className={`min-h-12 cursor-pointer touch-manipulation rounded-full border px-4 text-xs font-medium transition-colors md:min-h-11 ${
                 selectedTheme === theme
                   ? "border-[var(--color-cta-primary)] bg-[var(--color-cta-primary)] text-[var(--color-cta-primary-ink)]"
                   : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-primary)] hover:border-[var(--color-cta-primary)]"
@@ -378,14 +384,32 @@ export function ProductDetailClient({
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <Image
-                      src={product.images[activeImageIndex] || product.image}
-                      alt={product.name}
-                      fill
-                      priority
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="studio-photo-adapt object-cover"
-                    />
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => setIsLightboxOpen(true)}
+                        aria-label={`Ver imagen de ${product.name} en pantalla completa`}
+                        className="relative block h-full w-full cursor-zoom-in"
+                      >
+                        <Image
+                          src={product.images[activeImageIndex] || product.image}
+                          alt={product.name}
+                          fill
+                          priority
+                          sizes="(max-width: 768px) 100vw, 50vw"
+                          className="studio-photo-adapt object-cover"
+                        />
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setIsLightboxOpen(true)}
+                        aria-label={`Ampliar foto de ${product.name}`}
+                        className="studio-light-pill pointer-events-auto absolute right-3 bottom-3 z-10 inline-flex min-h-10 cursor-pointer touch-manipulation items-center gap-1.5 rounded-full border border-[var(--border-subtle)] px-3 text-xs font-semibold text-[var(--text-primary)] shadow-sm transition-colors hover:border-[var(--color-cta-primary)]"
+                      >
+                        <ZoomIn className="h-3.5 w-3.5" aria-hidden="true" />
+                        <span>Ampliar</span>
+                      </button>
+                    </>
                   )}
                 </div>
 
@@ -769,7 +793,7 @@ export function ProductDetailClient({
       </section>
 
       {/* Mobile Sticky Bottom Action Bar */}
-      <div className="safe-bottom-pad fixed inset-x-0 bottom-0 z-30 border-t border-[var(--border-on-dark)] bg-[var(--surface-obsidian)] px-4 pt-2.5 text-[var(--text-on-dark)] md:hidden">
+      <div className="sticky-thumb-bar fixed inset-x-0 bottom-0 z-30 border-t border-[var(--border-on-dark)] bg-[var(--surface-obsidian)] px-4 pt-2.5 text-[var(--text-on-dark)] md:hidden">
         <div className="mx-auto flex max-w-lg items-center gap-2.5">
           <button
             type="button"
@@ -788,24 +812,36 @@ export function ProductDetailClient({
             </span>
           </button>
 
-          <button
-            type="button"
-            disabled={availableStock <= 0}
-            onClick={handleAddToCart}
-            className="inline-flex min-h-12 flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-sm font-semibold text-[var(--color-cta-primary-ink)] disabled:opacity-50"
-          >
-            {added ? (
-              <>
-                <Check className="h-4 w-4" aria-hidden="true" />
-                <span>Añadido</span>
-              </>
-            ) : (
-              <>
-                <ShoppingBag className="h-4 w-4" aria-hidden="true" />
-                <span>Agregar</span>
-              </>
-            )}
-          </button>
+          {product.stock <= 0 ? (
+            <a
+              href={whatsappDirectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="touch-target-48 inline-flex flex-1 items-center justify-center gap-1.5 rounded-full bg-[var(--color-whatsapp)] px-4 text-sm font-semibold text-[var(--color-whatsapp-ink)]"
+            >
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              <span>Consultar stock</span>
+            </a>
+          ) : (
+            <button
+              type="button"
+              disabled={availableStock <= 0}
+              onClick={handleAddToCart}
+              className="touch-target-48 inline-flex flex-1 cursor-pointer touch-manipulation items-center justify-center gap-1.5 rounded-full bg-[var(--color-cta-primary)] px-4 text-sm font-semibold text-[var(--color-cta-primary-ink)] disabled:opacity-50"
+            >
+              {added ? (
+                <>
+                  <Check className="h-4 w-4" aria-hidden="true" />
+                  <span>Añadido</span>
+                </>
+              ) : (
+                <>
+                  <ShoppingBag className="h-4 w-4" aria-hidden="true" />
+                  <span>Agregar</span>
+                </>
+              )}
+            </button>
+          )}
         </div>
       </div>
 
@@ -845,6 +881,16 @@ export function ProductDetailClient({
           </button>
         </div>
       </AdaptiveSheet>
+
+      {/* Fullscreen Image Zoom Lightbox */}
+      <ImageLightbox
+        isOpen={isLightboxOpen}
+        images={product.images}
+        activeIndex={activeImageIndex}
+        title={product.name}
+        onChangeIndex={setActiveImageIndex}
+        onClose={() => setIsLightboxOpen(false)}
+      />
     </div>
   )
 }

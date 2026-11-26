@@ -66,8 +66,11 @@
     --color-whatsapp-hover: #0b6131;
     --color-whatsapp-ink: #ffffff;
     --text-whatsapp-accessible: #0c6b36;
-    --text-whatsapp-accessible: #0c6b36;
     --surface-badge-count: rgba(45, 24, 33, 0.22);
+    --surface-lightbox: rgba(21, 11, 16, 0.95);
+    --surface-lightbox-control: rgba(21, 11, 16, 0.8);
+    --shadow-stage: 0 22px 60px rgba(109, 30, 59, 0.12);
+    --shadow-sticky-bar: 0 -10px 30px rgba(45, 24, 33, 0.14);
 
     --badge-editorial-bg: #6d1e3b;
     --badge-editorial-text: #fff8fa;
@@ -144,8 +147,11 @@
     --color-whatsapp-hover: #128c4a;
     --color-whatsapp-ink: #ffffff;
     --text-whatsapp-accessible: #4ade80;
-    --text-whatsapp-accessible: #4ade80;
     --surface-badge-count: rgba(255, 248, 250, 0.2);
+    --surface-lightbox: rgba(16, 7, 12, 0.96);
+    --surface-lightbox-control: rgba(28, 16, 22, 0.88);
+    --shadow-stage: 0 22px 60px rgba(0, 0, 0, 0.45);
+    --shadow-sticky-bar: 0 -10px 30px rgba(0, 0, 0, 0.5);
 
     --badge-editorial-bg: #fce6ee;
     --badge-editorial-text: #2d1821;
@@ -259,6 +265,16 @@ textarea:focus-visible {
 
 .safe-bottom-pad {
   padding-bottom: max(0.875rem, env(safe-area-inset-bottom));
+}
+
+.sticky-thumb-bar {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  box-shadow: var(--shadow-sticky-bar);
+}
+
+.touch-target-48 {
+  min-width: 48px;
+  min-height: 48px;
 }
 
 .studio-pill {

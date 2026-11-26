@@ -61,18 +61,23 @@ export function QuantityStepper({
       </button>
 
       {allowDirectInput && onQuantityChange ? (
-        <input
-          name="quantity"
-          type="number"
-          inputMode="numeric"
-          min={minQuantity || 1}
-          max={maxStock > 0 ? maxStock : undefined}
-          value={quantity}
-          onChange={(e) => handleInputChange(e.target.value)}
-          aria-label={`Cantidad de ${itemName}`}
-          data-hotkey-ignore="true"
-          className="h-10 w-12 bg-transparent text-center text-sm font-semibold tabular-nums focus:outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-        />
+        <>
+          <input
+            name="quantity"
+            type="number"
+            inputMode="numeric"
+            min={minQuantity || 1}
+            max={maxStock > 0 ? maxStock : undefined}
+            value={quantity}
+            onChange={(e) => handleInputChange(e.target.value)}
+            aria-label={`Cantidad de ${itemName}`}
+            data-hotkey-ignore="true"
+            className="h-10 w-12 bg-transparent text-center text-sm font-semibold tabular-nums focus:outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+          />
+          <span className="sr-only" aria-live="polite">
+            Cantidad de {itemName}: {quantity}
+          </span>
+        </>
       ) : (
         <span
           className="min-w-8 text-center text-sm font-semibold tabular-nums"
