@@ -22,8 +22,8 @@ export const productCategories: ProductCategory[] = [
   {
     slug: "llaveros",
     name: "Llaveros Acrílicos",
-    subtitle: "Personalizados con foto o diseño por unidad o lotes de 12+.",
-    image: "/images/prod-llaveros-acrilicos.jpg",
+    subtitle: "Personalizados con foto, Spotify, calendario o personajes por unidad o lote.",
+    image: "/images/productos/llavero-duo-llevame-contigo.jpg",
   },
   {
     slug: "tarjetas",
@@ -230,18 +230,18 @@ export const products: Product[] = [
   {
     id: 2,
     sku: "MM-LL-002",
-    name: "Llavero Acrílico Personalizado",
-    subtitle: "Acrílico cristalino · Tarjeta temática y lote para eventos (12+)",
-    badge: "Por unidad o lote",
+    name: "Llavero Acrílico Spotify & Foto",
+    subtitle: "Tarjeta «Llévame siempre contigo» · Lazo satinado y unidad o lote (12+)",
+    badge: "Unidad o lote 12+",
     description:
-      "Llavero acrílico personalizado con fotografía, tarjeta temática y lazo a tono. Ideal para regalo individual o recuerdos en lote.",
+      "Llavero acrílico con tu foto y canción favorita en código Spotify, o diseño personalizado, presentado en tarjeta «Llévame siempre contigo» con lazo satinado.",
     longDescription: `
-      <p>Un recuerdo ligero, duradero y colorido para llevar a todas partes. Trabajamos tus llaveros acrílicos con impresión nítida y tarjeta personalizada opcional.</p>
+      <p>Un recuerdo duradero y lleno de significado para llevar a todas partes. Incluye presentación en tarjeta impresa con lazo de satén a elección.</p>
       <ul>
-        <li>Acrílico transparente de alta nitidez (formato rectangular o circular)</li>
-        <li>Personalización con foto, pareja, mascota, temática Hot Wheels o evento</li>
-        <li>Disponible por unidad o en lotes pequeños (6, 12 o más recuerdos)</li>
-        <li>Presentación con lazo satinado y tarjeta dedicatoria</li>
+        <li>Acrílico cristalino de alta nitidez (doble cara con foto, canción Spotify o frase)</li>
+        <li>Presentación en tarjeta «Llévame siempre contigo» con lazo azul rey o rojo</li>
+        <li>Disponible por unidad o en lotes pequeños (6, 12 o más recuerdos para eventos)</li>
+        <li>Consulta el Catálogo de Llaveros 2026 con decenas de plantillas disponibles</li>
       </ul>
     `,
     priceCents: 1200,
@@ -251,17 +251,133 @@ export const products: Product[] = [
     category: "Llaveros Acrílicos",
     categorySlug: "llaveros",
     featured: true,
-    image: "/images/productos/box-hot-wheels-detalle.jpg",
+    image: "/images/productos/llavero-spotify-azul.jpg",
     images: [
+      "/images/productos/llavero-spotify-azul.jpg",
+      "/images/productos/llavero-duo-llevame-contigo.jpg",
       "/images/productos/box-hot-wheels-detalle.jpg",
-      "/images/prod-llaveros-acrilicos.jpg",
-      "/images/prod-llavero-cristal.jpg",
-      "/images/prod-llavero-pareja.jpg",
+      "/images/productos/llavero-foto-calendario.jpg",
     ],
     options: {
-      colors: ["Azul Rey", "Rosa Pétalo", "Dorado", "Celeste"],
-      sizes: ["Rectangular 4×6 cm", "Circular 5 cm"],
-      themes: ["Foto Pareja / Mascota", "Hot Wheels", "Recuerdo Evento (Lote)", "Iniciales Florales"],
+      colors: ["Lazo Azul Rey", "Lazo Rojo", "Lazo Rosa", "Dorado"],
+      sizes: ["Individual + Tarjeta y Lazo", "Lote 6 u.", "Docena 12+ u."],
+      themes: ["Código Spotify + Foto", "Foto Polaroid", "Maneja con Cuidado", "Recuerdo Evento (Lote)"],
+    },
+    reviews: [],
+  },
+  {
+    id: 6,
+    sku: "MM-LL-006",
+    name: "Dúo de Llaveros «Llévame siempre contigo»",
+    subtitle: "Set 2 llaveros · Tarjeta doble, lazos rojos y bolsa kraft Magic Moments",
+    badge: "Pack Dúo",
+    description:
+      "Set de dos llaveros acrílicos con fotos de pareja o familia, doble lazo rojo satinado en tarjeta «Llévame siempre contigo» y bolsa de regalo kraft con logo.",
+    longDescription: `
+      <p>Nuestra presentación estrella para parejas, mamá, familia o mejores amigos. Dos llaveros acrílicos listos para regalar en empaque sellado y bolsita kraft Magic Moments.</p>
+      <ul>
+        <li>Set de 2 llaveros acrílicos rectangulares personalizados por ambas caras</li>
+        <li>Tarjeta dedicatoria «Llévame siempre contigo» con dos lazos de satén</li>
+        <li>Incluye bolsa kraft con sello de la marca lista para entregar</li>
+        <li>Personalizable con fotos, dedicatorias («Te amo», fechas) o ilustraciones</li>
+      </ul>
+    `,
+    priceCents: 2400,
+    stock: 25,
+    weightGrams: 95,
+    dimensionsCm: { length: 16, width: 12, height: 3 },
+    category: "Llaveros Acrílicos",
+    categorySlug: "llaveros",
+    featured: true,
+    image: "/images/productos/llavero-duo-llevame-contigo.jpg",
+    images: [
+      "/images/productos/llavero-duo-llevame-contigo.jpg",
+      "/images/productos/llavero-duo-familia-kraft.jpg",
+      "/images/productos/llavero-spotify-azul.jpg",
+      "/images/productos/llavero-foto-calendario.jpg",
+    ],
+    options: {
+      colors: ["Lazo Rojo", "Lazo Azul Rey", "Lazo Rosa"],
+      sizes: ["Dúo + Tarjeta + Bolsa Kraft", "Solo Tarjeta en Celofán"],
+      themes: ["Fotos de Pareja", "Mamá / Familia", "Aniversario / Fechas", "Amistad"],
+    },
+    reviews: [],
+  },
+  {
+    id: 16,
+    sku: "MM-LL-016",
+    name: "Llavero Dúo Foto + Calendario Especial",
+    subtitle: "Foto «Te Amo» + mes con fecha marcada · Diseño Spotify o Google",
+    badge: "Fecha Especial",
+    description:
+      "Llaveros acrílicos con tu fotografía favorita y el calendario del mes marcando con un corazón su fecha especial (aniversario, cumpleaños o mesversario).",
+    longDescription: `
+      <p>Guarda esa fecha inolvidable en un detalle diario. Combina tu foto favorita con el calendario personalizado del mes y el día señalado con un corazón rojo.</p>
+      <ul>
+        <li>Cara frontal con foto polaroid y frase («Te Amo» o dedicatoria corta)</li>
+        <li>Segundo llavero o reverso con calendario del mes y fecha destacada</li>
+        <li>También disponible en formato búsqueda Google o reproductor Spotify</li>
+        <li>Opción con tarjeta «Llévame siempre contigo» y lazo satinado</li>
+      </ul>
+    `,
+    priceCents: 2400,
+    stock: 30,
+    weightGrams: 80,
+    dimensionsCm: { length: 12, width: 9, height: 2 },
+    category: "Llaveros Acrílicos",
+    categorySlug: "llaveros",
+    featured: true,
+    image: "/images/productos/llavero-foto-calendario.jpg",
+    images: [
+      "/images/productos/llavero-foto-calendario.jpg",
+      "/images/productos/llavero-duo-llevame-contigo.jpg",
+      "/images/productos/llavero-spotify-azul.jpg",
+    ],
+    options: {
+      colors: ["Transparente", "Lazo Rojo", "Lazo Azul Rey", "Lazo Rosa"],
+      sizes: ["Set Dúo (Foto + Calendario)", "Individual (Doble Cara)"],
+      themes: ["Foto + Calendario", "Búsqueda Google + Foto", "Iniciales Spotify (I Love U)", "Día del Padre"],
+    },
+    reviews: [],
+  },
+  {
+    id: 17,
+    sku: "MM-LL-017",
+    name: "Dúo de Llaveros Personajes & Anime",
+    subtitle: "Goku & Milk, Spider-Man, Cars, Simpsons, Shrek y Superhéroes Chibi",
+    badge: "Catálogo 2026",
+    description:
+      "Llaveros dúo compartidos con tus personajes favoritos (Goku & Milk, Spider-Man & Gwen / Hello Kitty, Rayo McQueen & Sally, Homero & Marge, Shrek & Fiona).",
+    longDescription: `
+      <p>Diseños del Catálogo de Llaveros 2026 pensados para compartir «Uno para ti, uno para mí». Elige entre anime, películas, caricaturas o superhéroes chibi.</p>
+      <ul>
+        <li>Par de llaveros acrílicos con impresión a color de alta definición</li>
+        <li>Más de 20 temáticas en catálogo: Goku & Milk, Spider-Man, Cars, Simpsons, Shrek, La Princesa y el Sapo, Danny Phantom, Clash Royale y Superhéroes Chibi</li>
+        <li>Presentación en tarjeta temática «Feliz primer mes juntos» o «Uno para ti / Uno para mí»</li>
+        <li>Ideal para parejas, mejores amigos o recuerdos temáticos</li>
+      </ul>
+    `,
+    priceCents: 2200,
+    stock: 35,
+    weightGrams: 85,
+    dimensionsCm: { length: 14, width: 11, height: 2 },
+    category: "Llaveros Acrílicos",
+    categorySlug: "llaveros",
+    image: "/images/productos/llavero-duo-anime-goku.jpg",
+    images: [
+      "/images/productos/llavero-duo-anime-goku.jpg",
+      "/images/productos/llavero-duo-llevame-contigo.jpg",
+      "/images/productos/llavero-duo-familia-kraft.jpg",
+    ],
+    options: {
+      colors: ["Lazo Rojo", "Lazo Azul Rey", "Negro", "Lazo Rosa"],
+      sizes: ["Set Dúo + Tarjeta Temática", "Set Dúo + Bolsa Kraft"],
+      themes: [
+        "Goku & Milk (Dragon Ball)",
+        "Spider-Man & Gwen / Hello Kitty",
+        "Cars (McQueen & Sally)",
+        "Simpsons / Shrek / Superhéroes Chibi",
+      ],
     },
     reviews: [],
   },
@@ -286,7 +402,6 @@ export const products: Product[] = [
     dimensionsCm: { length: 15, width: 10, height: 2 },
     category: "Tarjetas 3D",
     categorySlug: "tarjetas",
-    featured: true,
     image: "/images/prod-tarjeta-3d.jpg",
     images: [
       "/images/prod-tarjeta-3d.jpg",
@@ -322,7 +437,6 @@ export const products: Product[] = [
     dimensionsCm: { length: 24, width: 18, height: 10 },
     category: "Kits de Regalo",
     categorySlug: "kits-regalo",
-    featured: true,
     image: "/images/prod-kit-amistad.jpg",
     images: [
       "/images/prod-kit-amistad.jpg",
@@ -479,39 +593,6 @@ export const products: Product[] = [
       colors: ["Frambuesa", "Rosa Pétalo", "Rojo", "Blanco"],
       sizes: ["Mediana", "Grande", "Premium"],
       themes: ["Amor", "Aniversario", "San Valentín"],
-    },
-    reviews: [],
-  },
-  {
-    id: 6,
-    sku: "MM-LL-006",
-    name: "Llavero Pareja",
-    subtitle: "Set dúo · Estuche de regalo y grabado a medida",
-    description: "Set de dos llaveros personalizados para parejas con iniciales o fechas.",
-    longDescription: `
-      <p>Dos mitades que se complementan. Este set de llaveros para pareja puede personalizarse con iniciales, fechas especiales o coordenadas.</p>
-      <ul>
-        <li>Set de 2 llaveros personalizados con acabado cepillado</li>
-        <li>Grabado de alta precisión incluido</li>
-        <li>Presentación en estuche doble listo para regalar</li>
-      </ul>
-    `,
-    priceCents: 2900,
-    stock: 20,
-    weightGrams: 110,
-    dimensionsCm: { length: 12, width: 9, height: 3 },
-    category: "Llaveros Acrílicos",
-    categorySlug: "llaveros",
-    image: "/images/prod-llavero-pareja.jpg",
-    images: [
-      "/images/prod-llavero-pareja.jpg",
-      "/images/prod-llaveros-acrilicos.jpg",
-      "/images/prod-llavero-cristal.jpg",
-    ],
-    options: {
-      colors: ["Plateado", "Oro Rosa", "Dorado"],
-      sizes: ["Estándar"],
-      themes: ["Amor", "Aniversario", "Parejas"],
     },
     reviews: [],
   },

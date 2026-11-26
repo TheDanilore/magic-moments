@@ -4,6 +4,7 @@ import { ArrowRight, Clock, HeartHandshake, Instagram, MapPin, MessageCircle, Pa
 import FeaturedProducts from "@/components/FeaturedProducts"
 import ProductCategories from "@/components/ProductCategories"
 import PromoSection from "@/components/PromoSection"
+import { products } from "@/data/catalog"
 import { buildWhatsAppUrl } from "@/lib/whatsapp"
 
 const PROCESS_STEPS = [
@@ -51,6 +52,18 @@ const REAL_GALLERY_HIGHLIGHTS = [
     title: "Cuadro 3D LED",
     subtitle: "Girasoles, Snoopy y luz cálida",
     image: "/images/productos/cuadro-3d-led-girasoles-osito.jpg",
+  },
+  {
+    id: 2,
+    title: "Llavero Spotify",
+    subtitle: "Con tarjeta «Llévame contigo»",
+    image: "/images/productos/llavero-spotify-azul.jpg",
+  },
+  {
+    id: 6,
+    title: "Dúo Llaveros Kraft",
+    subtitle: "Lazos satinados + bolsa kraft",
+    image: "/images/productos/llavero-duo-familia-kraft.jpg",
   },
 ] as const
 
@@ -246,7 +259,7 @@ export default function Home() {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                   {REAL_GALLERY_HIGHLIGHTS.map((item) => (
                     <Link
                       key={item.id}
@@ -296,7 +309,7 @@ export default function Home() {
                     className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-[var(--border-strong)] bg-[var(--surface-elevated)] px-6 text-sm font-semibold text-[var(--text-primary)] transition-colors hover:bg-[var(--surface-page)]"
                   >
                     <Package className="h-4 w-4 shrink-0 text-[var(--text-accent-accessible)]" aria-hidden="true" />
-                    <span>Ver 15 modelos</span>
+                    <span>Ver {products.length} modelos</span>
                   </Link>
                 </div>
               </div>

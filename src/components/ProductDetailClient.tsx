@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
+  FileDown,
   Heart,
   Instagram,
   MessageCircle,
@@ -629,6 +630,28 @@ export function ProductDetailClient({
                   <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
                   <span>Cotizar o pedir por WhatsApp ({getWhatsAppDisplayPhone()})</span>
                 </a>
+
+                {product.categorySlug === "llaveros" ? (
+                  <div className="flex flex-col justify-between gap-2 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-3.5 sm:flex-row sm:items-center">
+                    <div>
+                      <p className="font-display text-xs font-bold text-[var(--text-primary)]">
+                        Catálogo completo de Llaveros 2026 (PDF)
+                      </p>
+                      <p className="text-xs text-[var(--text-secondary)]">
+                        Mira 16 páginas de diseños de anime, parejas, Spotify y calendario.
+                      </p>
+                    </div>
+                    <a
+                      href="/catalogos/catalogo-llaveros-2026.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-11 shrink-0 items-center justify-center gap-1.5 rounded-full border border-[var(--border-strong)] bg-[var(--surface-blush)] px-4 text-xs font-semibold text-[var(--text-accent-accessible)] transition-colors hover:border-[var(--color-cta-primary)]"
+                    >
+                      <FileDown className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      <span>Ver PDF</span>
+                    </a>
+                  </div>
+                ) : null}
 
                 <ul
                   aria-label="Beneficios y métodos de pago"

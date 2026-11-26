@@ -1,7 +1,7 @@
 "use client"
 
 import { lazy, Suspense, useEffect, useMemo, useState, useTransition } from "react"
-import { Filter, Search, SlidersHorizontal, X } from "lucide-react"
+import { FileDown, Filter, Search, SlidersHorizontal, X } from "lucide-react"
 import { ProductCard } from "@/components/ProductCard"
 import { AdaptiveSheet } from "@/components/ui/AdaptiveSheet"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -24,6 +24,15 @@ interface ProductsCatalogClientProps {
 
 type PriceRangeId = "under-20" | "20-40" | "40-60" | "over-60"
 type SortOption = "featured" | "price-low" | "price-high" | "newest"
+
+const QUICK_THEMES = [
+  "Hot Wheels",
+  "Flores Amarillas",
+  "Spotify",
+  "Calendario",
+  "Girasoles",
+  "Goku",
+] as const
 
 const PRICE_RANGES: Array<{
   id: PriceRangeId
@@ -253,6 +262,53 @@ export function ProductsCatalogClient({
               ) : null}
             </div>
           </div>
+
+          {/* Quick theme tags + PDF Catalog banner for Llaveros */}
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <span className="text-xs font-medium text-[var(--text-secondary)]">
+              Temáticas:
+            </span>
+            {QUICK_THEMES.map((theme) => {
+              const isActiveTheme = query.trim().toLowerCase() === theme.toLowerCase()
+              return (
+                <button
+                  key={theme}
+                  type="button"
+                  onClick={() => setQuery(isActiveTheme ? "" : theme)}
+                  aria-pressed={isActiveTheme}
+                  className={`inline-flex min-h-9 cursor-pointer touch-manipulation items-center rounded-full border px-3 text-xs font-medium transition-colors ${
+                    isActiveTheme
+                      ? "border-[var(--color-cta-primary)] bg-[var(--surface-blush)] text-[var(--text-accent-accessible)]"
+                      : "border-[var(--border-subtle)] bg-[var(--surface-elevated)] text-[var(--text-secondary)] hover:border-[var(--color-cta-primary)] hover:text-[var(--text-primary)]"
+                  }`}
+                >
+                  {theme}
+                </button>
+              )
+            })}
+          </div>
+
+          {selectedCategory === "all" || selectedCategory === "llaveros" ? (
+            <div className="mt-4 flex flex-col items-start justify-between gap-3 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-blush)] px-4 py-3 sm:flex-row sm:items-center">
+              <div>
+                <p className="font-display text-sm font-bold text-[var(--text-primary)]">
+                  Catálogo de Llaveros 2026 (16 páginas en PDF)
+                </p>
+                <p className="text-pretty text-xs text-[var(--text-secondary)]">
+                  Explora todas las plantillas: Spotify, Calendario, Google, Goku & Milk, Spider-Man, Cars, Simpsons y más.
+                </p>
+              </div>
+              <a
+                href="/catalogos/catalogo-llaveros-2026.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-[var(--color-cta-primary)] px-4 text-xs font-semibold text-[var(--color-cta-primary-ink)] transition-colors hover:bg-[var(--color-cta-primary-hover)]"
+              >
+                <FileDown className="h-4 w-4 shrink-0" aria-hidden="true" />
+                <span>Ver Catálogo PDF</span>
+              </a>
+            </div>
+          ) : null}
 
           {/* Product Grid */}
           <div className="mt-6 sm:mt-8" aria-busy={isPending}>

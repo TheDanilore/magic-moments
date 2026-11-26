@@ -196,16 +196,32 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
 
           <div
             className="ml-auto flex items-center gap-1"
-            aria-label={`Colores disponibles: ${product.options.colors.join(", ")}`}
-            title={product.options.colors.join(" · ")}
+            role="group"
+            aria-label={`Elegir color de ${product.name}`}
           >
-            {product.options.colors.slice(0, 4).map((colorName) => (
-              <span
-                key={colorName}
-                className="h-3.5 w-3.5 rounded-full border border-[var(--border-strong)]"
-                style={{ backgroundColor: getColorSwatchHex(colorName) }}
-              />
-            ))}
+            {product.options.colors.slice(0, 4).map((colorName) => {
+              const isSelected = selectedColor === colorName
+              return (
+                <button
+                  key={colorName}
+                  type="button"
+                  onClick={() => setSelectedColor(colorName)}
+                  aria-label={`Color ${colorName}`}
+                  aria-pressed={isSelected}
+                  title={colorName}
+                  className={`inline-flex h-6 w-6 cursor-pointer touch-manipulation items-center justify-center rounded-full transition-transform ${
+                    isSelected
+                      ? "ring-2 ring-[var(--color-cta-primary)] ring-offset-1 ring-offset-[var(--surface-elevated)]"
+                      : "hover:scale-110"
+                  }`}
+                >
+                  <span
+                    className="h-3.5 w-3.5 rounded-full border border-[var(--border-strong)]"
+                    style={{ backgroundColor: getColorSwatchHex(colorName) }}
+                  />
+                </button>
+              )
+            })}
           </div>
         </div>
 

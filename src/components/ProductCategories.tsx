@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight, ArrowUpRight } from "lucide-react"
-import { productCategories } from "@/data/catalog"
+import { productCategories, products } from "@/data/catalog"
 
 export default function ProductCategories() {
   return (
@@ -26,34 +26,42 @@ export default function ProductCategories() {
         </div>
 
         <div className="mt-6 grid grid-cols-2 gap-3.5 sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
-          {productCategories.map((category) => (
-            <article key={category.slug} className="group flex flex-col">
-              <Link
-                href={`/productos?categoria=${category.slug}`}
-                className="flex flex-1 flex-col rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2.5 shadow-sm transition-all hover:border-[var(--color-cta-primary)] hover:shadow-md"
-              >
-                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.3rem)] bg-[var(--surface-blush)]">
-                  <Image
-                    src={category.image}
-                    alt={category.name}
-                    fill
-                    loading="lazy"
-                    decoding="async"
-                    sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 16vw"
-                    className="studio-photo-adapt object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-                  />
-                </div>
-                <div className="mt-2.5 flex flex-1 items-center justify-between gap-1.5 px-0.5 pb-0.5">
-                  <h3 className="line-clamp-2 font-display text-sm leading-tight font-bold tracking-tight text-[var(--text-primary)]">
-                    {category.name}
-                  </h3>
-                  <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--surface-blush)] text-[var(--text-accent-accessible)] transition-colors group-hover:bg-[var(--color-cta-primary)] group-hover:text-[var(--color-cta-primary-ink)]">
-                    <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
-                  </span>
-                </div>
-              </Link>
-            </article>
-          ))}
+          {productCategories.map((category) => {
+            const count = products.filter((p) => p.categorySlug === category.slug).length
+            return (
+              <article key={category.slug} className="group flex flex-col">
+                <Link
+                  href={`/productos?categoria=${category.slug}`}
+                  className="flex flex-1 flex-col rounded-[var(--radius-card)] border border-[var(--border-subtle)] bg-[var(--surface-elevated)] p-2.5 shadow-sm transition-all hover:border-[var(--color-cta-primary)] hover:shadow-md"
+                >
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.3rem)] bg-[var(--surface-blush)]">
+                    <Image
+                      src={category.image}
+                      alt={category.name}
+                      fill
+                      loading="lazy"
+                      decoding="async"
+                      sizes="(max-width: 640px) 46vw, (max-width: 1024px) 30vw, 16vw"
+                      className="studio-photo-adapt object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                  </div>
+                  <div className="mt-2.5 flex flex-1 items-center justify-between gap-1.5 px-0.5 pb-0.5">
+                    <div className="min-w-0">
+                      <h3 className="line-clamp-2 font-display text-sm leading-tight font-bold tracking-tight text-[var(--text-primary)]">
+                        {category.name}
+                      </h3>
+                      <span className="mt-0.5 block text-[11px] font-medium text-[var(--text-secondary)] tabular-nums">
+                        {count} {count === 1 ? "modelo" : "modelos"}
+                      </span>
+                    </div>
+                    <span className="inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[var(--surface-blush)] text-[var(--text-accent-accessible)] transition-colors group-hover:bg-[var(--color-cta-primary)] group-hover:text-[var(--color-cta-primary-ink)]">
+                      <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+                    </span>
+                  </div>
+                </Link>
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>

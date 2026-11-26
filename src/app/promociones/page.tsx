@@ -140,7 +140,7 @@ export default function PromocionesPage() {
                     <CardContent className="pt-4">
                       <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-[var(--surface-blush)]">
                         <Image
-                          src="/images/productos/box-hot-wheels-detalle.jpg"
+                          src="/images/productos/llavero-duo-llevame-contigo.jpg"
                           alt="Promoción por docena en llaveros acrílicos personalizados"
                           fill
                           loading="lazy"
@@ -247,6 +247,14 @@ export default function PromocionesPage() {
                     >
                       Configurar 12 llaveros
                     </Link>
+                    <a
+                      href="/catalogos/catalogo-llaveros-2026.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-12 items-center justify-center rounded-full border border-[var(--border-strong)] px-4 text-sm font-semibold text-[var(--text-primary)] hover:bg-[var(--surface-blush)]"
+                    >
+                      Ver PDF 2026
+                    </a>
                   </CardFooter>
                 </Card>
               </TabsContent>
