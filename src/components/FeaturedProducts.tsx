@@ -20,24 +20,15 @@ export default function FeaturedProducts() {
   } | null>(null)
 
   return (
-    <section className="w-full bg-[var(--surface-blush)] py-12 md:py-18">
+    <section className="w-full bg-[var(--surface-blush)] py-12 md:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
-        <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">
-          <div className="max-w-xl">
-            <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
-              Creaciones Destacadas
-            </h2>
-            <p className="text-pretty mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
-              Fotografías reales de entregas en @magic_moments050. Precios referenciales personalizables con tus fotos y frase.
-            </p>
-          </div>
-          <Link
-            href="/productos"
-            className="inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-[var(--text-accent-accessible)] underline underline-offset-4 hover:opacity-80"
-          >
-            <span>Ver todo el catálogo</span>
-            <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </Link>
+        <div className="max-w-xl">
+          <h2 className="font-display text-3xl font-bold tracking-[-0.03em] text-balance text-[var(--text-primary)] md:text-4xl">
+            Creaciones Destacadas
+          </h2>
+          <p className="text-pretty mt-2 text-sm text-[var(--text-secondary)] sm:text-base">
+            Fotografías reales de entregas en @magic_moments050. Precios referenciales personalizables con tus fotos y frase.
+          </p>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

@@ -73,7 +73,7 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
     setLastAddedLineKey(lineKey)
     setAddedFeedback(true)
     if (timerRef.current !== null) window.clearTimeout(timerRef.current)
-    timerRef.current = window.setTimeout(() => setAddedFeedback(false), 2400)
+    timerRef.current = window.setTimeout(() => setAddedFeedback(false), 6000)
   }
 
   const handleUndo = () => {
@@ -98,12 +98,13 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
         <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-card)] bg-[var(--surface-blush)]">
           <Link
             href={`/productos/${product.id}`}
-            aria-label={`Ver detalles de ${product.name}`}
+            tabIndex={-1}
+            aria-hidden="true"
             className="relative block h-full w-full"
           >
             <Image
               src={displayedSrc}
-              alt={product.name}
+              alt=""
               fill
               loading="lazy"
               decoding="async"
@@ -199,10 +200,10 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
           {product.subtitle}
         </p>
 
-        <div className="mt-1.5 flex items-center justify-between gap-2">
+        <div className="mt-2 flex items-center justify-between gap-2">
           <div className="flex items-baseline gap-1">
             <PriceTag priceCents={product.priceCents} size="md" />
-            <span className="text-[11px] font-medium text-[var(--text-secondary)]">ref.</span>
+            <span className="text-[11px] font-medium text-[var(--text-secondary)]">Precio ref.</span>
           </div>
 
           <VariantSwatches
@@ -212,6 +213,9 @@ export function ProductCard({ product, onInspect }: ProductCardProps) {
             onSelect={setSelectedColor}
           />
         </div>
+        <p className="mt-1 truncate text-xs font-medium text-[var(--text-secondary)]">
+          Color elegido: <span className="text-[var(--text-primary)]">{selectedColor}</span>
+        </p>
 
         <div className="mt-auto flex flex-col gap-2 pt-2.5">
           {isOutOfStock ? (

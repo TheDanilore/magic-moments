@@ -4,7 +4,7 @@ export default function HomeLoading() {
   return (
     <div className="min-h-screen bg-[var(--surface-page)]" aria-busy="true">
       {/* Blush Hero Skeleton aligned 1:1 with Home Hero */}
-      <div className="w-full bg-[var(--surface-blush)] pt-21 pb-10 md:pt-28 md:pb-16">
+      <div className="w-full bg-[var(--surface-blush)] pt-24 pb-10 md:pt-28 md:pb-16">
         <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 sm:px-8 md:grid-cols-12 md:gap-8 lg:gap-12">
           <div className="space-y-4 md:col-span-6 lg:col-span-5">
             <div className="skeleton-shimmer h-7 w-64 rounded-full" />
@@ -53,7 +53,7 @@ export default function HomeLoading() {
       </div>
 
       {/* Featured Grid Skeleton */}
-      <div className="bg-[var(--surface-blush)] py-12 md:py-18">
+      <div className="bg-[var(--surface-blush)] py-12 md:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {[0, 1, 2, 3].map((slot) => (

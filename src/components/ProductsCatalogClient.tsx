@@ -144,7 +144,7 @@ export function ProductsCatalogClient({
 
   return (
     <div className="flex min-h-screen flex-col bg-[var(--surface-page)]">
-      <section className="w-full pt-22 pb-16 md:pt-28">
+      <section className="w-full pt-24 pb-16 md:pt-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="flex flex-col gap-4 border-b border-[var(--border-subtle)] pb-5 lg:flex-row lg:items-end lg:justify-between">
             <div>
@@ -254,6 +254,17 @@ export function ProductsCatalogClient({
                   ? "Actualizando..."
                   : `Mostrando ${filteredProducts.length} de ${products.length} detalles`}
               </span>
+              {selectedCategory === "all" ? (
+                <a
+                  href="/catalogos/catalogo-llaveros-2026.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-10 items-center gap-1.5 rounded-full border border-[var(--border-subtle)] bg-[var(--surface-blush)] px-3 font-semibold text-[var(--text-accent-accessible)] transition-colors hover:border-[var(--color-cta-primary)]"
+                >
+                  <FileDown className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                  <span>PDF Llaveros 2026</span>
+                </a>
+              ) : null}
               {hasActiveFilters ? (
                 <button
                   type="button"
@@ -292,7 +303,7 @@ export function ProductsCatalogClient({
             })}
           </div>
 
-          {selectedCategory === "all" || selectedCategory === "llaveros" ? (
+          {selectedCategory === "llaveros" ? (
             <div className="mt-4 flex flex-col items-start justify-between gap-3 rounded-2xl border border-[var(--border-subtle)] bg-[var(--surface-blush)] px-4 py-3 sm:flex-row sm:items-center">
               <div>
                 <p className="font-display text-sm font-bold text-[var(--text-primary)]">

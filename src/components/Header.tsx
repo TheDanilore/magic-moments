@@ -174,7 +174,7 @@ export default function Header() {
               >
                 <ShoppingBag className="h-4 w-4 shrink-0" aria-hidden="true" />
                 <span className="hidden sm:inline">Pedido</span>
-                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[var(--surface-obsidian)]/30 px-1.5 text-[11px] font-bold tabular-nums dark:bg-black/35">
+                <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-[var(--surface-badge-count)] px-1.5 text-[11px] font-bold tabular-nums">
                   {totalCount}
                 </span>
               </button>

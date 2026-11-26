@@ -56,7 +56,7 @@ export default function ClientsAndShippingSection() {
   return (
     <section
       aria-labelledby="clientes-envios-heading"
-      className="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-blush)] py-12 md:py-18"
+      className="w-full border-t border-[var(--border-subtle)] bg-[var(--surface-blush)] py-12 md:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-8">
         <div className="flex flex-col justify-between gap-4 md:flex-row md:items-end">

@@ -37,7 +37,7 @@ export default function ProductCategories() {
                   <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[calc(var(--radius-card)-0.3rem)] bg-[var(--surface-blush)]">
                     <Image
                       src={category.image}
-                      alt={category.name}
+                      alt=""
                       fill
                       loading="lazy"
                       decoding="async"

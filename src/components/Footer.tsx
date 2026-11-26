@@ -103,10 +103,18 @@ export default function Footer() {
               </li>
               <li>
                 <Link
+                  href="/productos?categoria=tarjetas"
+                  className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
+                >
+                  Tarjetas 3D
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/productos?categoria=kits-regalo"
                   className="inline-flex min-h-10 items-center text-[var(--text-muted-on-dark)] transition-colors hover:text-[var(--text-on-dark)]"
                 >
-                  Tarjetas y Kits
+                  Kits de Regalo
                 </Link>
               </li>
             </ul>
@@ -167,7 +175,7 @@ export default function Footer() {
             </a>
 
             <p className="text-pretty text-xs leading-relaxed text-[var(--text-muted-on-dark)]">
-              También estamos en Facebook y TikTok (enlaces directos&nbsp;próximamente).
+              Entregas diarias, clientes y envíos reales en nuestras historias destacadas.
             </p>
           </div>
         </div>
